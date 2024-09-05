@@ -1,9 +1,10 @@
 import React from "react";
 import Heading from "./ui/Heading";
 import dynamic from "next/dynamic";
-import { BackgroundGradientAnimation } from "./ui/background-gradient-animation";
 import Image from "next/image";
-// import { PinContainer, PinPerspective } from "";
+import { projects } from "@/data";
+import { FaLocationArrow } from "react-icons/fa6";
+import { RecentProjectTabs } from "./ui/recent-project-tab";
 const PinPerspective = dynamic(
   () => import("./ui/pin").then((mod) => mod.PinPerspective),
   { ssr: false }
@@ -18,53 +19,52 @@ const RecentProjects: React.FC = () => {
   return (
     <section className="py-20" id="recentprojects">
       <Heading normal={"A small selection of"} purble={"recent projects"} />
-      <div className="flex flex-wrap items-center justify-center p-4 gap-x-24 gap-y-8 mt-10">
-
-        <div className=" sm:h-[41rem] h-[32rem] lg:min-h-[32.5rem] flex items-center justify-center sm:w-[570px] w-[80vw]">
-          <PinContainer href="http://placeholder.com" title="this is link">
-            <div className="relative flex items-center flex-col justify-center sm:w-96 w-[80vw] overflow-hidden  mb-10">
-              <Image
-                src="/Gericht.png"
-                className=" object-cover"
-                alt={"test"}
-                width={500}
-                height={500}
-              />
-              <div className=" p-4">
-                <h2 className=" font-bold text-2xl ">
-                  3D Solar System Planets to Explore
-                </h2>
-                <p className=" opacity-50 text-sm">
-                  Explore the wonders of our solar system with this captivating
-                  3D simulation of the planets using Three.js
-                </p>
+      <RecentProjectTabs />
+      {/* <div className="grid grid-cols-1 md:grid-cols-2  gap-8 md:gap-10 lg:gap-14 mt-10 justify-between">
+        {projects.map((item) => (
+          <div key={item.id} className="w-full">
+            <PinContainer title={item.pinTitle ?? ""} href={item.link}>
+              <div className="w-full h-full">
+                <Image
+                  src={item.img}
+                  className="object-cover rounded-lg"
+                  alt={"test"}
+                  width={600}
+                  height={550}
+                />
+                <div className="p-4">
+                  <h2 className="font-bold lg:text-2xl md:text-xl text-base line-clamp-1">
+                    {item.title}
+                  </h2>
+                  <p className="lg:text-xl lg:font-normal font-light text-sm line-clamp-2 text-[#BEC1DD] mt-3">
+                    {item.des}
+                  </p>
+                </div>
+                <div className="p-4 w-full flex items-center justify-between">
+                  <div className="mt-3 flex -space-x-2 overflow-hidden">
+                    {item.iconLists.map((icon, idx) => (
+                      <Image
+                        key={idx + 1}
+                        width={35}
+                        height={24}
+                        className="border border-white/[.2] rounded-full bg-black lg:w-10 lg:h-10 w-8 h-8 flex justify-center items-center"
+                        src={icon}
+                        alt={icon}
+                      />
+                    ))}
+                  </div>
+                  <div className="flex justify-center items-center">
+                    <p className="flex lg:text-xl md:text-xs text-sm text-purple">
+                      Check Live Site
+                    </p>
+                    <FaLocationArrow className="ms-3" color="#CBACF9" />
+                  </div>
+                </div>
               </div>
-            </div>
-          </PinContainer>
-        </div>
-        <div className=" sm:h-[41rem] h-[32rem] lg:min-h-[32.5rem] flex items-center justify-center sm:w-[570px] w-[80vw]">
-          <PinContainer href="http://placeholder.com" title="this is link">
-            <div className="relative flex items-center flex-col justify-center sm:w-96 w-[80vw] overflow-hidden  mb-10">
-              <Image
-                src="/Gericht.png"
-                className=" object-cover"
-                alt={"test"}
-                width={500}
-                height={500}
-              />
-              <div className=" p-4">
-                <h2 className=" font-bold text-2xl ">
-                  3D Solar System Planets to Explore
-                </h2>
-                <p className=" opacity-50 text-sm">
-                  Explore the wonders of our solar system with this captivating
-                  3D simulation of the planets using Three.js
-                </p>
-              </div>
-            </div>
-          </PinContainer>
-        </div>
-      </div>
+            </PinContainer>
+          </div>
+        ))}
+      </div> */}
     </section>
   );
 };

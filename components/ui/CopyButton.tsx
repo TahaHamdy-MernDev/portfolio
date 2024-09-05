@@ -48,7 +48,7 @@ const CopyButton: React.FC = () => {
       {/* <button onClick={} className="focus:outline-none"> */}
         <MagicButton
         handleClick={handleCopy}
-          title={copied ? "Email Copied!" : "Copy my email address"}
+          title={copied ? "Email Copied!" : "Copy my email"}
           icon={<IoCopyOutline />}
           position="left"
           otherClasses="!bg-[#161A31]"
