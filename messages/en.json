@@ -1,0 +1,219 @@
+{
+	"Common": {
+		"brandTitle": "Taha Hamdy",
+		"brandSubtitle": "/ Full-Stack",
+		"statusAvailable": "Available for Select Engineering Contracts",
+		"statusBadge": "AVAILABLE FOR CONTRACTS",
+		"location": "LOC: Alexandria, Egypt",
+		"systemArchitecture": "FULL_STACK_ARCH"
+	},
+	"Nav": {
+		"work": "Work",
+		"skills": "Skills",
+		"process": "Process",
+		"about": "About",
+		"contact": "Contact",
+		"systemNavigation": "System Navigation",
+		"quickAction": "Start a Conversation ↗"
+	},
+	"Hero": {
+		"headline_line1": "Turning complex problems",
+		"headline_line2": "into reliable systems.",
+		"subtitle": "Full-Stack Developer and Systems Architect with 3+ years designing and delivering SaaS platforms, e-commerce infrastructure, and enterprise business workflows — from interface design to distributed backend architecture.",
+		"cta_primary": "View Case Studies ↗",
+		"cta_secondary": "Get in Touch →",
+		"layers": {
+			"client": "01 / Interface",
+			"client_tag": "[CLIENT]",
+			"client_stack": "React · Next.js 16 · TypeScript · Tailwind",
+			"service": "02 / Service",
+			"service_tag": "[API_CORE]",
+			"service_stack": "NestJS · Node.js · GraphQL · BullMQ",
+			"data": "03 / Data",
+			"data_tag": "[PERSISTENCE]",
+			"data_stack": "PostgreSQL · Prisma · Redis · TypeORM",
+			"infra": "04 / Infra",
+			"infra_tag": "[DEVOPS]",
+			"infra_stack": "Docker · Turborepo · CI/CD · Vercel"
+		},
+		"stats": {
+			"years_exp": "Years of Experience",
+			"shipped_products": "Products Shipped",
+			"live_products": "Products in Production",
+			"production_ready": "Production-Grade"
+		}
+	},
+	"Projects": {
+		"section_num": "01 //",
+		"section_title": "Featured Work & Case Studies",
+		"section_tag": "WORK",
+		"tabs": {
+			"all": "All Projects",
+			"saas": "SaaS Platforms",
+			"ecommerce": "E-Commerce Systems",
+			"realtime": "Real-Time & Communications"
+		},
+		"systems_loaded": "Showing {count} of 6",
+		"metrics": {
+			"qps": "Throughput",
+			"latency": "Latency",
+			"uptime": "Uptime",
+			"nodes": "Nodes",
+			"users": "Active Users",
+			"orders": "Daily Orders",
+			"cache_hit": "Cache Hit Rate",
+			"socket_events": "Socket Events"
+		},
+		"card": {
+			"architecture": "Architecture Overview",
+			"key_features": "Key Capabilities",
+			"explore": "Live Preview",
+			"source": "Source Code"
+		},
+		"items": {
+			"nazam": {
+				"title": "Nazam",
+				"arabicTitle": "نظّم",
+				"role": "Full-Stack · Solo",
+				"status": "Private repository",
+				"link_text": "GitHub ↗",
+				"desc": "A commerce-operations platform that helps merchants organize, combine, and follow every part of their business in one place."
+			},
+			"egapy": {
+				"title": "Egapy",
+				"arabicTitle": "إيجابي",
+				"role": "Full-Stack · Team of 2",
+				"status": "Live product",
+				"link_text": "Visit site ↗",
+				"desc": "A modern ERP solution designed to help businesses of all sizes streamline their operations and grow efficiently."
+			},
+			"labaik": {
+				"title": "Labaik",
+				"arabicTitle": "لبيك",
+				"role": "Full-Stack · Solo",
+				"status": "Live landing · private dashboard",
+				"link_text": "Visit site ↗",
+				"desc": "A platform that makes \"Umrah al-Badal\" easier and more reliable — letting people dedicate the reward of Umrah to loved ones, like the elderly, ill, or deceased, who can't make the trip themselves, by connecting them with vetted individuals who perform it on their behalf. Built the landing site plus a private dashboard managing data and backend for the promotional site, dashboard, and mobile app."
+			},
+			"buy_from_egypt": {
+				"title": "Buy From Egypt",
+				"arabicTitle": "اشتري من مصر",
+				"role": "Front-End",
+				"status": "Private · unpublished",
+				"disabled_link": "Not public",
+				"desc": "A B2B export platform connecting Egyptian exporters with global buyers through business profiles, product listings, and communication workflows — integrated with a custom-built machine learning model that chats with and answers users."
+			},
+			"coldwell_banker": {
+				"title": "Coldwell Banker — New Alex",
+				"arabicTitle": "كولدويل بانكر - نيو أليكس",
+				"role": "Full-Stack · Solo",
+				"status": "Formerly live · now offline",
+				"link_text": "GitHub (partial) ↗",
+				"desc": "A real estate platform in the spirit of Nawy, with property discovery, advanced filtering, interactive maps, multilingual support, and SEO-focused pages. Hosted for the client for six months; no longer maintained."
+			},
+			"gedo": {
+				"title": "GEDO",
+				"arabicTitle": "جدو",
+				"role": "Backend Developer",
+				"status": "Case study",
+				"disabled_link": "No public link",
+				"desc": "An Alzheimer's care management system helping caregivers and family members manage medication, health tracking, communication, and daily activity monitoring for patients."
+			}
+		}
+	},
+	"Skills": {
+		"section_num": "02 //",
+		"section_title": "Technical Skills & Stack",
+		"section_tag": "SKILLS",
+		"categories": {
+			"frontend": "01 / Frontend & Client Systems",
+			"backend": "02 / Backend & Microservices",
+			"database": "03 / Data & Caching",
+			"devops": "04 / Infrastructure & Tooling"
+		}
+	},
+	"Process": {
+		"section_num": "03 //",
+		"section_title": "How I Work",
+		"section_tag": "PROCESS",
+		"steps": {
+			"discovery": {
+				"num": "01",
+				"title": "Discovery & Architecture",
+				"desc": "Mapping domain requirements, data models, and performance targets before any production code is written."
+			},
+			"development": {
+				"num": "02",
+				"title": "Iterative Development",
+				"desc": "Building features end-to-end with strict TypeScript contracts, clear domain boundaries, and automated CI checks."
+			},
+			"testing": {
+				"num": "03",
+				"title": "Load & Reliability Testing",
+				"desc": "Validating behavior under load, network failures, connection pool exhaustion, and memory pressure."
+			},
+			"deployment": {
+				"num": "04",
+				"title": "Deployment & Observability",
+				"desc": "Shipping to production with zero-downtime releases, health checks, dashboards, and alerting."
+			}
+		}
+	},
+	"About": {
+		"section_num": "04 //",
+		"section_title": "About Me",
+		"section_tag": "ABOUT",
+		"bio_lead": "I design and build reliable software that keeps high-traffic business operations running smoothly.",
+		"bio_body": "Over the past 3+ years, I've architected and shipped full-stack web applications, distributed background workers, and enterprise e-commerce systems. My approach centers on clean architectural boundaries, predictable database performance, and interfaces that are fast and pleasant to use.",
+		"principles": {
+			"p1_title": "Predictable Performance",
+			"p1_desc": "Bounded query execution, proper indexing, and offloading heavy work to asynchronous queues.",
+			"p2_title": "Type-Safe by Design",
+			"p2_desc": "End-to-end type safety, from database models to frontend components.",
+			"p3_title": "Built for Production",
+			"p3_desc": "Defensive error handling, structured logging, idempotent APIs, and zero-downtime deployments."
+		}
+	},
+	"Faq": {
+		"section_num": "05 //",
+		"section_title": "Frequently Asked Questions",
+		"section_tag": "FAQ",
+		"items": {
+			"q1": "What's your primary stack for new projects?",
+			"a1": "For most modern products, I use Next.js 16 (React 19, TypeScript, Tailwind) on the frontend, paired with NestJS/Node.js services, PostgreSQL via Prisma/TypeORM, Redis for caching and queues, and Docker for reproducible deployments.",
+			"q2": "Do you handle projects from the ground up?",
+			"a2": "Yes. I lead projects from initial architecture and database design through frontend implementation, API development, and deployment with CI/CD.",
+			"q3": "How do you ensure performance under load?",
+			"a3": "By offloading heavy work to background queues (BullMQ/Redis), optimizing query execution with proper indexing, applying targeted caching, and load-testing endpoints before they ship.",
+			"q4": "Are you available for contract or full-time work?",
+			"a4": "Yes — I'm currently available for select engineering contracts, consulting, and full-stack development roles."
+		}
+	},
+	"Contact": {
+		"section_num": "06 //",
+		"section_title": "Get in Touch",
+		"section_tag": "CONTACT",
+		"banner_badge": "LET'S WORK TOGETHER",
+		"banner_title": "Your vision, engineered with rigor. Let's build something exceptional.",
+		"banner_subtitle": "Whether you're scaling an existing platform, launching something new, or need architectural guidance, my inbox is open.",
+		"response_time": "Typical Response Time:",
+		"response_time_val": "Under 12 Hours",
+		"email_label": "EMAIL",
+		"copy_email": "Copy Email",
+		"copied": "Copied to Clipboard!",
+		"send_direct": "Send an Email",
+		"github_label": "GITHUB",
+		"linkedin_label": "LINKEDIN",
+		"whatsapp_label": "WHATSAPP"
+	},
+	"Footer": {
+		"copyright": "© 2026 Taha Hamdy · Full-Stack Systems",
+		"built_with": "Built with Next.js 16 · Turbopack · TypeScript · Tailwind",
+		"loc_badge": "LOC: Alexandria, Egypt"
+	},
+	"LocaleSwitcher": {
+		"en": "EN",
+		"ar": "عربي",
+		"toggle": "Switch language"
+	}
+}

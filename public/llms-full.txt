@@ -1,0 +1,127 @@
+# Taha Hamdy — Full-Stack Developer & Systems Architect (Full Context)
+
+> Complete portfolio, architectural documentation, project case studies, and engineering philosophy for Taha Hamdy.
+
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Key Systems & Case Studies](#key-systems--case-studies)
+- [Technical Architecture & Stack Matrix](#technical-architecture--stack-matrix)
+- [Engineering Methodology & Lifecycle](#engineering-methodology--lifecycle)
+- [Core Principles](#core-principles)
+- [Frequently Asked Questions](#frequently-asked-questions)
+- [Contact & Professional Profiles](#contact--professional-profiles)
+
+---
+
+## Introduction
+
+Taha Hamdy is a Full-Stack Developer and Systems Architect with 3+ years of experience engineering high-performance SaaS platforms, distributed backend systems, and modern web applications. Based in Alexandria, Egypt, he works with clients and engineering teams worldwide.
+
+- **Primary Focus**: SaaS Platforms, E-Commerce Systems, Distributed Architectures, Real-Time Messaging.
+- **Languages**: TypeScript, JavaScript, SQL, HTML5, CSS3.
+- **Frameworks**: Next.js 16 (Turbopack, App Router), React 19, NestJS, Node.js, Express.
+- **Databases**: PostgreSQL, Redis, MongoDB.
+- **Website**: [https://taha-hamdy.vercel.app](https://taha-hamdy.vercel.app)
+- **GitHub**: [https://github.com/TahaHamdy-MernDev](https://github.com/TahaHamdy-MernDev)
+- **LinkedIn**: [https://www.linkedin.com/in/taha-hamdy](https://www.linkedin.com/in/taha-hamdy)
+
+---
+
+## Key Systems & Case Studies
+
+### 1. Egapy ERP
+- **Website**: [https://egapy.com](https://egapy.com)
+- **Role**: Full-Stack Developer (Team of 2)
+- **Status**: Live Product in Production
+- **Description**: Enterprise Resource Planning solution designed to help businesses of all sizes streamline operations, manage multi-branch inventory, handle invoicing, and monitor business analytics.
+- **Architecture**: Next.js (App Router) + NestJS + PostgreSQL + Redis Cache.
+- **Key Features**: Multi-tenant authorization, real-time inventory ledger, automated PDF invoicing, audit logging.
+
+### 2. Labaik Umrah Platform
+- **Website**: [https://labaik-al-umrah.com](https://labaik-al-umrah.com)
+- **Role**: Full-Stack Developer (Solo)
+- **Status**: Live Landing & Private Administrative Dashboard
+- **Description**: A platform that facilitates "Umrah al-Badal" by connecting individuals with verified delegates who perform Umrah on behalf of loved ones (elderly, ill, or deceased).
+- **Architecture**: Next.js + NestJS + PostgreSQL + Redis + WebSocket pipeline.
+- **Key Features**: Live video/photo proof of execution, administrative dashboard, mobile app backend API, payment processing.
+
+### 3. Nazam Commerce Platform
+- **Repository**: [https://github.com/TahaHamdy-MernDev](https://github.com/TahaHamdy-MernDev)
+- **Role**: Full-Stack Developer (Solo)
+- **Status**: Private Repository
+- **Description**: Commerce-operations platform unifying multi-channel inventory, automated catalog synchronization, and distributed order processing.
+- **Architecture**: Next.js + Node.js + BullMQ + PostgreSQL.
+
+### 4. Buy From Egypt
+- **Repository**: [https://github.com/TahaHamdy-MernDev](https://github.com/TahaHamdy-MernDev)
+- **Role**: Full-Stack Developer
+- **Status**: Open Source Showcase
+- **Description**: Cross-border e-commerce platform allowing international customers to discover and purchase authentic Egyptian products with localized currencies and multi-language support.
+- **Architecture**: React + Express + PostgreSQL + Stripe/PayPal.
+
+### 5. FastChat Real-Time Infrastructure
+- **Repository**: [https://github.com/TahaHamdy-MernDev](https://github.com/TahaHamdy-MernDev)
+- **Role**: Backend & Systems Architect
+- **Status**: Open Source Showcase
+- **Description**: Low-latency chat and communication server built with Socket.IO, Redis PubSub, and MongoDB, handling high concurrent socket connections with minimal memory overhead.
+
+---
+
+## Technical Architecture & Stack Matrix
+
+### Layer 1: Client & User Interface
+- **Core Technologies**: React 19, Next.js 16, TypeScript, Tailwind CSS v4.
+- **Animation & Motion**: GSAP (GreenSock), Framer Motion, CSS Transforms.
+- **Internationalization**: next-intl with full Arabic (RTL) & English (LTR) bidirectional rendering.
+- **State & Data Fetching**: TanStack Query, React Server Components (RSC), Server Actions.
+
+### Layer 2: API & Application Services
+- **Core Frameworks**: NestJS, Node.js, Express.
+- **APIs**: RESTful APIs, GraphQL (Apollo/Yoga), WebSockets (Socket.IO).
+- **Background Jobs & Queues**: BullMQ, Redis-backed workers, cron schedulers.
+- **Authentication**: JWT, Session Management, OAuth2, Role-Based Access Control (RBAC).
+
+### Layer 3: Data & Persistence
+- **Relational Databases**: PostgreSQL, MySQL.
+- **ORMs & Query Builders**: Prisma ORM, TypeORM, Drizzle ORM.
+- **Caching & Key-Value**: Redis (In-memory caching, rate-limiting, PubSub messaging).
+- **NoSQL**: MongoDB, Mongoose.
+
+### Layer 4: Infrastructure & DevOps
+- **Containerization**: Docker, Docker Compose.
+- **Deployment & Hosting**: Vercel, Railway, DigitalOcean, VPS Linux Server Setup.
+- **CI/CD**: GitHub Actions automated linting, testing, and deployment pipelines.
+- **Tooling**: Biome, Turborepo, TypeScript Compiler, Turbopack.
+
+---
+
+## Engineering Methodology & Lifecycle
+
+1. **Stage 01 // Blueprint & Topology**: Deconstructing requirements into data models, API contracts, and architecture diagrams.
+2. **Stage 02 // Core Foundation**: Establishing database migrations, auth middleware, and validation schemas.
+3. **Stage 03 // Production Assembly**: Building optimized user interfaces and connecting business logic.
+4. **Stage 04 // Hardening & Telemetry**: Profiling query performance, caching frequently accessed resources, and ensuring 99.9% uptime.
+
+---
+
+## Frequently Asked Questions
+
+**Q: What is your primary tech stack for new projects?**
+A: Next.js 16 with TypeScript and Tailwind CSS on the frontend, combined with NestJS/Node.js and PostgreSQL on the backend, using Redis for caching and job queues.
+
+**Q: Are you available for contract or freelance engineering work?**
+A: Yes, Taha Hamdy is available for select full-stack engineering contracts, SaaS platform consulting, and technical advisory.
+
+**Q: Where are you located?**
+A: Alexandria, Egypt (UTC+2 / UTC+3 timezone), with extensive experience collaborating across European, North American, and GCC timezones.
+
+---
+
+## Contact & Professional Profiles
+
+- **Email**: [tahahamdy.dev@gmail.com](mailto:tahahamdy.dev@gmail.com)
+- **WhatsApp**: [+20 10 13745260](https://wa.me/201013745260)
+- **GitHub**: [https://github.com/TahaHamdy-MernDev](https://github.com/TahaHamdy-MernDev)
+- **LinkedIn**: [https://www.linkedin.com/in/taha-hamdy](https://www.linkedin.com/in/taha-hamdy)
+- **Website**: [https://taha-hamdy.vercel.app](https://taha-hamdy.vercel.app)

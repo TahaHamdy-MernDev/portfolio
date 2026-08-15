@@ -1,9 +1,12 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useCallback, useRef } from "react";
 import { useCountUp } from "@/hooks/use-count-up";
 
 export function Hero() {
+	const t = useTranslations("Hero");
+
 	const magnetBtnRef = useRef<HTMLAnchorElement>(null);
 
 	const handlePointerMove = useCallback(
@@ -45,7 +48,7 @@ export function Hero() {
 								className="inline-block"
 								style={{ animationDelay: "0.12s" }}
 							>
-								I build the systems
+								{t("headline_line1")}
 							</span>
 						</span>
 						<span className="line block overflow-hidden">
@@ -53,7 +56,7 @@ export function Hero() {
 								className="inline-block gradient-heading"
 								style={{ animationDelay: "0.22s" }}
 							>
-								businesses run on.
+								{t("headline_line2")}
 							</span>
 						</span>
 					</h1>
@@ -63,10 +66,7 @@ export function Hero() {
 						className="hero-sub load-in mt-6 sm:mt-7 w-full max-w-[66ch] mx-auto text-center text-muted text-[1.04rem] sm:text-[1.15rem] md:text-[1.24rem] leading-relaxed font-normal"
 						style={{ animationDelay: "0.35s" }}
 					>
-						Full-Stack Developer & Systems Architect with 3+ years delivering
-						high-throughput SaaS platforms, e-commerce infrastructure, and
-						enterprise business workflows — from interactive UI design to
-						distributed backend pipelines.
+						{t("subtitle")}
 					</p>
 
 					{/* CTA Buttons */}
@@ -82,76 +82,76 @@ export function Hero() {
 							onPointerLeave={handlePointerLeave}
 							className="btn btn-primary w-full sm:w-auto text-center"
 						>
-							Explore Case Studies ↗
+							{t("cta_primary")}
 						</a>
 						<a
 							href="#contact"
 							className="btn btn-ghost w-full sm:w-auto text-center"
 						>
-							Initialize Connection →
+							{t("cta_secondary")}
 						</a>
 					</div>
 				</div>
 
 				{/* Full-Stack Architecture Layer Strip */}
 				<div
-					className="stack-strip load-in mt-10 sm:mt-14 border border-line rounded-[var(--radius)] bg-line overflow-hidden"
+					className="stack-strip load-in mt-10 sm:mt-14 border border-line rounded-(--radius) bg-line overflow-hidden"
 					style={{ animationDelay: "0.55s" }}
 				>
 					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px">
 						<div className="stack-layer bg-surface p-4 sm:p-5 transition-all duration-200 hover:bg-surface-hover group">
 							<div className="flex items-center justify-between mb-2 sm:mb-3">
 								<span className="mono text-[0.7rem] uppercase font-semibold text-ink tracking-wider group-hover:text-accent-ink transition-colors">
-									01 / Interface
+									{t("layers.client")}
 								</span>
 								<span className="mono text-[0.68rem] text-muted-2">
-									[CLIENT]
+									{t("layers.client_tag")}
 								</span>
 							</div>
 							<span className="mono text-[0.78rem] sm:text-[0.82rem] text-muted block leading-relaxed">
-								React · Next.js 16 · TypeScript · Tailwind
+								{t("layers.client_stack")}
 							</span>
 						</div>
 
 						<div className="stack-layer bg-surface p-4 sm:p-5 transition-all duration-200 hover:bg-surface-hover group">
 							<div className="flex items-center justify-between mb-2 sm:mb-3">
 								<span className="mono text-[0.7rem] uppercase font-semibold text-ink tracking-wider group-hover:text-accent-ink transition-colors">
-									02 / Service
+									{t("layers.service")}
 								</span>
 								<span className="mono text-[0.68rem] text-muted-2">
-									[API_CORE]
+									{t("layers.service_tag")}
 								</span>
 							</div>
 							<span className="mono text-[0.78rem] sm:text-[0.82rem] text-muted block leading-relaxed">
-								NestJS · Node.js · GraphQL · BullMQ
+								{t("layers.service_stack")}
 							</span>
 						</div>
 
 						<div className="stack-layer bg-surface p-4 sm:p-5 transition-all duration-200 hover:bg-surface-hover group">
 							<div className="flex items-center justify-between mb-2 sm:mb-3">
 								<span className="mono text-[0.7rem] uppercase font-semibold text-ink tracking-wider group-hover:text-accent-ink transition-colors">
-									03 / Data
+									{t("layers.data")}
 								</span>
 								<span className="mono text-[0.68rem] text-muted-2">
-									[PERSISTENCE]
+									{t("layers.data_tag")}
 								</span>
 							</div>
 							<span className="mono text-[0.78rem] sm:text-[0.82rem] text-muted block leading-relaxed">
-								PostgreSQL · Prisma · Redis · TypeORM
+								{t("layers.data_stack")}
 							</span>
 						</div>
 
 						<div className="stack-layer bg-surface p-4 sm:p-5 transition-all duration-200 hover:bg-surface-hover group">
 							<div className="flex items-center justify-between mb-2 sm:mb-3">
 								<span className="mono text-[0.7rem] uppercase font-semibold text-ink tracking-wider group-hover:text-accent-ink transition-colors">
-									04 / Infra
+									{t("layers.infra")}
 								</span>
 								<span className="mono text-[0.68rem] text-muted-2">
-									[DEVOPS]
+									{t("layers.infra_tag")}
 								</span>
 							</div>
 							<span className="mono text-[0.78rem] sm:text-[0.82rem] text-muted block leading-relaxed">
-								Docker · Turborepo · CI/CD · Vercel
+								{t("layers.infra_stack")}
 							</span>
 						</div>
 					</div>
@@ -159,7 +159,7 @@ export function Hero() {
 
 				{/* Telemetry Stats Grid */}
 				<div
-					className="stats-row load-in mt-4 sm:mt-6 grid grid-cols-2 lg:grid-cols-4 gap-px border border-line rounded-[var(--radius)] bg-line overflow-hidden"
+					className="stats-row load-in mt-4 sm:mt-6 grid grid-cols-2 lg:grid-cols-4 gap-px border border-line rounded-(--radius) bg-line overflow-hidden"
 					style={{ animationDelay: "0.65s" }}
 				>
 					<div className="stat bg-surface p-4 sm:p-6 transition-colors duration-150 hover:bg-surface-hover">
@@ -170,7 +170,7 @@ export function Hero() {
 							{stat1.value}
 						</span>
 						<span className="stat-label block mt-2 text-[0.72rem] sm:text-[0.78rem] uppercase tracking-wider text-muted">
-							Years Experience
+							{t("stats.years_exp")}
 						</span>
 					</div>
 
@@ -182,7 +182,7 @@ export function Hero() {
 							{stat2.value}+
 						</span>
 						<span className="stat-label block mt-2 text-[0.72rem] sm:text-[0.78rem] uppercase tracking-wider text-muted">
-							Shipped Products
+							{t("stats.shipped_products")}
 						</span>
 					</div>
 
@@ -194,7 +194,7 @@ export function Hero() {
 							{stat3.value}
 						</span>
 						<span className="stat-label block mt-2 text-[0.72rem] sm:text-[0.78rem] uppercase tracking-wider text-muted">
-							Live Products
+							{t("stats.live_products")}
 						</span>
 					</div>
 
@@ -206,7 +206,7 @@ export function Hero() {
 							{stat4.value}
 						</span>
 						<span className="stat-label block mt-2 text-[0.72rem] sm:text-[0.78rem] uppercase tracking-wider text-muted">
-							Production Ready
+							{t("stats.production_ready")}
 						</span>
 					</div>
 				</div>

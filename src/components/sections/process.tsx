@@ -1,60 +1,41 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { SectionHead } from "@/components/ui/section-head";
 
-interface ProcessStep {
-	num: string;
-	title: string;
-	tagline: string;
-	description: string;
-	deliverables: string[];
-}
-
-const PROCESS_STEPS: ProcessStep[] = [
-	{
-		num: "01",
-		title: "Architecture & Schema Modeling",
-		tagline:
-			"Laying the structural blueprint before writing a single line of business logic.",
-		description:
-			"I translate product requirements into normalized database schemas, type-safe API contracts, and scalable service boundaries to prevent structural tech debt.",
-		deliverables: [
-			"Normalized PostgreSQL ERD & Prisma Schema",
-			"REST / GraphQL Type Contracts & Validation DTOs",
-			"Role-Based Access Control (RBAC) Hierarchy",
-		],
-	},
-	{
-		num: "02",
-		title: "Full-Stack Implementation",
-		tagline:
-			"High-throughput service engineering paired with high-performance UI.",
-		description:
-			"I build out modular NestJS microservices, event-driven async queues (BullMQ/Redis), and fluid Next.js 16 user interfaces with strict TypeScript hygiene.",
-		deliverables: [
-			"Modular NestJS Service & Controller Layers",
-			"Asynchronous Worker Queues for Heavy Jobs",
-			"Low-Latency Responsive Data Grids & Dashboards",
-		],
-	},
-	{
-		num: "03",
-		title: "Cloud Deployment & Observability",
-		tagline: "Zero-drift CI/CD, containerization, and production hardening.",
-		description:
-			"From Dockerizing environments to automating deployment pipelines and setting up query telemetry, I ensure systems launch reliably and stay resilient.",
-		deliverables: [
-			"Dockerized Multi-Stage Production Builds",
-			"Automated GitHub Actions CI/CD Pipelines",
-			"Database Query Indexing & Performance Tuning",
-		],
-	},
-];
-
 export function Process() {
+	const t = useTranslations("Process");
+
 	const [isInView, setIsInView] = useState(false);
 	const sectionRef = useRef<HTMLDivElement>(null);
+
+	const steps = [
+		{
+			num: t("steps.discovery.num"),
+			title: t("steps.discovery.title"),
+			desc: t("steps.discovery.desc"),
+			tag: "ANALYSIS",
+		},
+		{
+			num: t("steps.development.num"),
+			title: t("steps.development.title"),
+			desc: t("steps.development.desc"),
+			tag: "EXECUTION",
+		},
+		{
+			num: t("steps.testing.num"),
+			title: t("steps.testing.title"),
+			desc: t("steps.testing.desc"),
+			tag: "QA / STRESS",
+		},
+		{
+			num: t("steps.deployment.num"),
+			title: t("steps.deployment.title"),
+			desc: t("steps.deployment.desc"),
+			tag: "PRODUCTION",
+		},
+	];
 
 	useEffect(() => {
 		const el = sectionRef.current;
@@ -65,7 +46,6 @@ export function Process() {
 				entries.forEach((entry) => {
 					if (entry.isIntersecting) {
 						setIsInView(true);
-						observer.unobserve(entry.target);
 					}
 				});
 			},
@@ -73,7 +53,6 @@ export function Process() {
 		);
 
 		observer.observe(el);
-
 		return () => observer.disconnect();
 	}, []);
 
@@ -81,67 +60,56 @@ export function Process() {
 		<section id="process" className="py-24 border-t border-line/80 relative">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<SectionHead
-					title="Engineering Methodology & Workflow"
-					num="03 //"
-					tag="PROCESS"
+					title={t("section_title")}
+					num={t("section_num")}
+					tag={t("section_tag")}
 				/>
 
 				<div
 					ref={sectionRef}
-					className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6"
+					className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 relative"
 				>
-					{PROCESS_STEPS.map((step, idx) => (
-						<div
+					{steps.map((step, idx) => (
+						<article
 							key={step.num}
-							className={`relative bg-surface/90 backdrop-blur-md border border-line hover:border-accent/50 rounded-[var(--radius)] p-5 sm:p-8 flex flex-col justify-between overflow-hidden transition-all duration-300 group ${
+							className={`process-card p-5 sm:p-6 rounded-(--radius) border bg-surface/50 border-line hover:border-accent hover:bg-surface transition-all duration-300 relative overflow-hidden flex flex-col justify-between min-h-65 group ${
 								isInView
 									? "opacity-100 translate-y-0"
 									: "opacity-0 translate-y-4"
 							}`}
-							style={{ transitionDelay: `${idx * 100}ms` }}
+							style={{
+								transitionProperty:
+									"opacity, transform, border-color, background-color",
+								transitionDuration: "400ms, 400ms, 250ms, 250ms",
+								transitionDelay: `${idx * 80}ms, ${idx * 80}ms, 0ms, 0ms`,
+							}}
 						>
-							{/* Background Watermark Numeral */}
-							<span className="absolute -bottom-3 -right-2 text-[5rem] sm:text-[6.5rem] font-bold font-mono text-white/[0.03] select-none pointer-events-none group-hover:text-accent/[0.08] transition-colors duration-300">
+							{/* Step Watermark Number */}
+							<div className="absolute top-2 inset-e-3 text-[3.2rem] sm:text-[4rem] font-bold font-mono text-line/40 select-none pointer-events-none group-hover:text-line/60 transition-colors">
 								{step.num}
-							</span>
+							</div>
 
-							<div>
-								<div className="flex items-center justify-between mb-4 sm:mb-6">
-									<span className="mono text-lg sm:text-xl font-bold text-accent-ink bg-accent-soft border border-accent-border px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-md">
-										{step.num}
+							{/* Step Top Header */}
+							<div className="relative z-10">
+								<div className="flex items-center justify-between mb-4">
+									<span className="mono text-[0.72rem] font-bold px-2 py-0.5 rounded bg-paper text-muted-2 border border-line group-hover:bg-accent-soft group-hover:text-accent-ink group-hover:border-accent-border transition-colors">
+										PHASE {step.num}
 									</span>
-									<span className="mono text-[0.68rem] text-muted-2 uppercase tracking-wider">
-										PHASE_{step.num}
+									<span className="mono text-[0.66rem] text-muted-2 tracking-wider">
+										{step.tag}
 									</span>
 								</div>
 
-								<h3 className="font-sans font-bold text-[1.12rem] sm:text-[1.2rem] text-ink tracking-tight mb-2 group-hover:text-white transition-colors">
+								<h3 className="font-sans text-[1.1rem] sm:text-[1.18rem] font-bold text-ink mb-2 leading-snug group-hover:text-accent-ink transition-colors">
 									{step.title}
 								</h3>
-
-								<p className="text-accent-ink text-[0.8rem] sm:text-[0.82rem] font-medium leading-snug mb-2.5 sm:mb-3">
-									{step.tagline}
-								</p>
-
-								<p className="text-muted text-[0.85rem] sm:text-[0.88rem] leading-relaxed mb-5 sm:mb-6">
-									{step.description}
-								</p>
 							</div>
 
-							{/* Key Deliverables */}
-							<div className="pt-3.5 sm:pt-4 border-t border-line/60">
-								<span className="mono text-[0.68rem] uppercase font-semibold text-muted-2 tracking-wider block mb-2">
-									Core Milestones
-								</span>
-								<ul className="m-0 p-0 pl-4 list-disc text-[0.8rem] sm:text-[0.82rem] text-muted space-y-1">
-									{step.deliverables.map((item) => (
-										<li key={item} className="leading-snug">
-											{item}
-										</li>
-									))}
-								</ul>
-							</div>
-						</div>
+							{/* Step Narrative */}
+							<p className="relative z-10 text-muted text-[0.84rem] sm:text-[0.88rem] leading-relaxed mt-4">
+								{step.desc}
+							</p>
+						</article>
 					))}
 				</div>
 			</div>

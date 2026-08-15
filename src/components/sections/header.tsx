@@ -1,17 +1,23 @@
 "use client";
 
 import { ArrowRight, ArrowUpRight, Menu, X } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 
-const NAV_ITEMS = [
-	{ id: "work", num: "01", label: "Work" },
-	{ id: "skills", num: "02", label: "Skills" },
-	{ id: "process", num: "03", label: "Process" },
-	{ id: "about", num: "04", label: "About" },
-	{ id: "contact", num: "05", label: "Contact" },
-];
+const SECTION_IDS = ["work", "skills", "process", "about", "contact"];
 
 export function Header() {
+	const tNav = useTranslations("Nav");
+	const tCommon = useTranslations("Common");
+
+	const navItems = [
+		{ id: "work", num: "01", label: tNav("work") },
+		{ id: "skills", num: "02", label: tNav("skills") },
+		{ id: "process", num: "03", label: tNav("process") },
+		{ id: "about", num: "04", label: tNav("about") },
+		{ id: "contact", num: "05", label: tNav("contact") },
+	];
+
 	const [activeSection, setActiveSection] = useState<string>("work");
 	const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 	const [indicatorStyle, setIndicatorStyle] = useState<{
@@ -22,29 +28,61 @@ export function Header() {
 
 	const navContainerRef = useRef<HTMLDivElement>(null);
 	const itemRefs = useRef<Map<string, HTMLAnchorElement>>(new Map());
+	const isManualScroll = useRef(false);
+	const manualScrollTimeout = useRef<NodeJS.Timeout | null>(null);
 
-	// Scroll spy with IntersectionObserver
+	// Deterministic scroll spy
 	useEffect(() => {
-		const sections = NAV_ITEMS.map((item) =>
-			document.getElementById(item.id),
-		).filter(Boolean) as HTMLElement[];
+		let rafId: number | null = null;
 
-		const observer = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						setActiveSection(entry.target.id);
+		const handleScroll = () => {
+			if (isManualScroll.current) return;
+
+			if (rafId) cancelAnimationFrame(rafId);
+			rafId = requestAnimationFrame(() => {
+				const scrollY = window.scrollY;
+				const windowHeight = window.innerHeight;
+				const documentHeight = document.documentElement.scrollHeight;
+
+				// 1. Bottom of page lock (e.g. over footer/contact)
+				if (scrollY + windowHeight >= documentHeight - 80) {
+					setActiveSection("contact");
+					return;
+				}
+
+				// 2. Near top (Hero area) default to first section
+				const firstSection = document.getElementById(SECTION_IDS[0]);
+				if (firstSection && scrollY < firstSection.offsetTop - 200) {
+					setActiveSection(SECTION_IDS[0]);
+					return;
+				}
+
+				// 3. Scan sections top-to-bottom with consistent offset threshold
+				const triggerOffset = 140;
+				let current = SECTION_IDS[0];
+
+				for (const id of SECTION_IDS) {
+					const el = document.getElementById(id);
+					if (!el) continue;
+					const rect = el.getBoundingClientRect();
+					if (rect.top <= triggerOffset) {
+						current = id;
 					}
-				});
-			},
-			{ rootMargin: "-35% 0px -35% 0px" },
-		);
+				}
 
-		sections.forEach((s) => {
-			observer.observe(s);
-		});
+				setActiveSection(current);
+			});
+		};
 
-		return () => observer.disconnect();
+		window.addEventListener("scroll", handleScroll, { passive: true });
+		handleScroll();
+
+		return () => {
+			window.removeEventListener("scroll", handleScroll);
+			if (rafId) cancelAnimationFrame(rafId);
+			if (manualScrollTimeout.current)
+				clearTimeout(manualScrollTimeout.current);
+		};
 	}, []);
 
 	// Smoothly position active sliding pill on desktop
@@ -83,9 +121,28 @@ export function Header() {
 		};
 	}, [isMobileMenuOpen]);
 
-	const handleNavClick = (id: string) => {
+	const handleNavClick = (id: string, e?: React.MouseEvent) => {
+		if (e) {
+			e.preventDefault();
+		}
 		setActiveSection(id);
 		setIsMobileMenuOpen(false);
+
+		isManualScroll.current = true;
+		if (manualScrollTimeout.current) clearTimeout(manualScrollTimeout.current);
+
+		const el = document.getElementById(id);
+		if (el) {
+			const headerEl = document.querySelector("header");
+			const headerHeight = headerEl ? headerEl.offsetHeight : 64;
+			const targetY =
+				el.getBoundingClientRect().top + window.scrollY - headerHeight;
+			window.scrollTo({ top: targetY, behavior: "smooth" });
+		}
+
+		manualScrollTimeout.current = setTimeout(() => {
+			isManualScroll.current = false;
+		}, 750);
 	};
 
 	return (
@@ -98,10 +155,10 @@ export function Header() {
 					className="brand flex items-center gap-2.5 font-sans font-bold text-[0.92rem] sm:text-[0.95rem] text-ink no-underline tracking-tight group"
 				>
 					<span className="group-hover:text-accent-ink transition-colors duration-200">
-						TAHA HAMDY
+						{tCommon("brandTitle")}
 					</span>
 					<span className="mono hidden sm:inline-block text-[0.7rem] text-muted-2 font-normal">
-						/ FULL-STACK ARCH
+						{tCommon("brandSubtitle")}
 					</span>
 				</a>
 
@@ -111,17 +168,17 @@ export function Header() {
 						ref={navContainerRef}
 						className="navlinks relative flex gap-1 text-[0.85rem] p-1"
 					>
-						{/* Smooth Sliding Active Pill */}
+						{/* Smooth Sliding Active Pill (100% GPU Composited) */}
 						<span
-							className="absolute top-1 bottom-1 rounded-full bg-surface border border-accent transition-all duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] pointer-events-none"
+							className="absolute top-1 bottom-1 left-0 rounded-full bg-surface border border-accent transition-[transform,opacity] duration-300 ease-[cubic-bezier(0.2,0.8,0.2,1)] will-change-transform pointer-events-none"
 							style={{
-								left: `${indicatorStyle.left}px`,
+								transform: `translate3d(${indicatorStyle.left}px, 0, 0)`,
 								width: `${indicatorStyle.width}px`,
 								opacity: indicatorStyle.opacity,
 							}}
 						/>
 
-						{NAV_ITEMS.map((item) => {
+						{navItems.map((item) => {
 							const isActive = activeSection === item.id;
 							return (
 								<a
@@ -131,7 +188,7 @@ export function Header() {
 										else itemRefs.current.delete(item.id);
 									}}
 									href={`#${item.id}`}
-									onClick={() => handleNavClick(item.id)}
+									onClick={(e) => handleNavClick(item.id, e)}
 									className={`mono relative z-10 no-underline px-3.5 py-1.5 rounded-full transition-colors duration-200 flex items-center gap-1.5 select-none ${
 										isActive
 											? "text-ink font-medium"
@@ -154,8 +211,8 @@ export function Header() {
 					</div>
 				</div>
 
-				{/* Mobile Hamburger Button with Lucide Icons */}
-				<div className="flex md:hidden items-center gap-2">
+				{/* Mobile Hamburger Toggle */}
+				<div className="flex md:hidden items-center">
 					<button
 						type="button"
 						onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -182,16 +239,16 @@ export function Header() {
 					{/* Navigation Links List */}
 					<div className="flex flex-col gap-2.5">
 						<div className="mono text-[0.68rem] text-muted-2 uppercase tracking-wider px-2 font-semibold">
-							System Navigation
+							{tNav("systemNavigation")}
 						</div>
 
-						{NAV_ITEMS.map((item) => {
+						{navItems.map((item) => {
 							const isActive = activeSection === item.id;
 							return (
 								<a
 									key={item.id}
 									href={`#${item.id}`}
-									onClick={() => handleNavClick(item.id)}
+									onClick={(e) => handleNavClick(item.id, e)}
 									className={`flex items-center justify-between p-3.5 rounded-xl border transition-all duration-150 no-underline ${
 										isActive
 											? "bg-surface border-accent text-ink font-semibold"
@@ -214,7 +271,7 @@ export function Header() {
 									</div>
 
 									<ArrowRight
-										className={`size-4 transition-colors ${
+										className={`size-4 rtl:rotate-180 transition-colors ${
 											isActive ? "text-accent" : "text-muted-2"
 										}`}
 									/>
@@ -227,28 +284,23 @@ export function Header() {
 					<div className="pt-6 border-t border-line/80 flex flex-col gap-3.5 mt-6">
 						<div className="flex items-center justify-between p-3.5 rounded-xl bg-surface/70 border border-line">
 							<div className="flex items-center gap-2">
-								{/* <span className="" /> */}
+								<span className="size-2 rounded-full bg-status-live animate-pulse" />
 								<span className="mono text-[0.74rem] text-muted">
-									LOC: CAIRO (UTC+2)
+									{tCommon("location")}
 								</span>
 							</div>
 							<span className="mono text-[0.74rem] text-accent-ink font-medium">
-								AVAILABLE
+								{tCommon("statusBadge")}
 							</span>
 						</div>
 
 						<button
 							type="button"
-							onClick={() => {
-								handleNavClick("contact");
-								document
-									.getElementById("contact")
-									?.scrollIntoView({ behavior: "smooth" });
-							}}
+							onClick={(e) => handleNavClick("contact", e)}
 							className="btn btn-primary w-full text-center py-3 cursor-pointer flex items-center justify-center gap-2"
 						>
-							<span>Initialize Connection</span>
-							<ArrowUpRight className="size-4" />
+							<span>{tNav("quickAction")}</span>
+							<ArrowUpRight className="size-4 rtl:-rotate-90" />
 						</button>
 					</div>
 				</div>

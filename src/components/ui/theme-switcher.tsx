@@ -116,7 +116,7 @@ export function ThemeSwitcher() {
 
 			{/* Dropdown Menu */}
 			{isOpen && (
-				<div className="absolute right-0 mt-2 w-64 rounded-[var(--radius)] bg-surface border border-line p-1.5 shadow-2xl z-50 animate-in fade-in zoom-in-95 duration-100">
+				<div className="absolute right-0 mt-2 w-64 rounded-(--radius) bg-surface border border-line p-1.5 shadow-2xl z-50 animate-in fade-in zoom-in-95 duration-100">
 					<div className="px-2.5 py-1.5 mono text-[0.68rem] font-semibold text-muted-2 uppercase tracking-wider border-b border-line/60 mb-1">
 						Background Canvas Tone
 					</div>

@@ -58,7 +58,6 @@ html {
 	* {
 		animation-duration: 0.001ms;
 		animation-iteration-count: 1;
-		transition-duration: 0.001ms;
 	}
 }
 
@@ -89,6 +88,34 @@ h4 {
 
 a {
 	color: inherit;
+}
+
+/* Enhanced Arabic RTL Typography */
+html[dir="rtl"] {
+	letter-spacing: 0;
+}
+
+html[dir="rtl"] body {
+	font-family: var(--font-arabic), "Cairo", system-ui, sans-serif;
+	letter-spacing: 0;
+	line-height: 1.75;
+}
+
+html[dir="rtl"] h1,
+html[dir="rtl"] h2,
+html[dir="rtl"] h3,
+html[dir="rtl"] h4,
+html[dir="rtl"] .font-sans,
+html[dir="rtl"] .font-display,
+html[dir="rtl"] .section-title,
+html[dir="rtl"] .split-lines {
+	font-family: var(--font-arabic), "Cairo", system-ui, sans-serif;
+	letter-spacing: 0;
+	line-height: 1.25;
+}
+
+html[dir="rtl"] .hero-sub {
+	line-height: 1.85;
 }
 
 /* Clean Mathematical Blueprint Grid */
@@ -142,6 +169,23 @@ button:focus-visible {
 	}
 }
 
+@keyframes marqueeScrollRtl {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(33.333%);
+	}
+}
+
+.marquee-track {
+	animation: marqueeScroll 40s linear infinite;
+}
+
+html[dir="rtl"] .marquee-track {
+	animation-name: marqueeScrollRtl;
+}
+
 .load-in {
 	opacity: 0;
 	transform: translateY(12px);
@@ -171,42 +215,31 @@ button:focus-visible {
 .btn-primary {
 	background: var(--accent);
 	color: #ffffff;
-	font-weight: 600;
 }
 
 .btn-primary:hover {
-	transform: translateY(-1px);
 	background: var(--accent-hover);
-	color: #ffffff;
 }
 
 .btn-ghost {
+	background: transparent;
+	color: var(--muted);
+	border-color: var(--line);
+}
+
+.btn-ghost:hover {
+	background: var(--surface);
+	color: var(--ink);
+	border-color: var(--line-active);
+}
+
+.btn-secondary {
 	background: var(--surface);
 	color: var(--ink);
 	border-color: var(--line);
 }
 
-.btn-ghost:hover {
+.btn-secondary:hover {
 	background: var(--surface-hover);
 	border-color: var(--line-active);
-	transform: translateY(-1px);
-}
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-	width: 8px;
-	height: 8px;
-}
-
-::-webkit-scrollbar-track {
-	background: var(--paper);
-}
-
-::-webkit-scrollbar-thumb {
-	background: var(--line);
-	border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-	background: var(--line-active);
 }

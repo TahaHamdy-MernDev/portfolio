@@ -1,0 +1,38 @@
+# Taha Hamdy — Full-Stack Developer & Systems Architect
+
+> Full-Stack Developer and Systems Architect with 3+ years of experience designing and delivering resilient SaaS platforms, high-throughput e-commerce infrastructure, and real-time business workflows.
+
+## Overview
+
+Taha Hamdy is a full-stack engineer and systems architect based in Alexandria, Egypt. He specializes in TypeScript, Next.js, React, Node.js, NestJS, PostgreSQL, Redis, and distributed backend architectures.
+
+- [Home Page](https://taha-hamdy.vercel.app/en): Interactive portfolio showcasing engineering projects, technical telemetry, architecture topologies, and system capabilities.
+- [Arabic Edition](https://taha-hamdy.vercel.app/ar): Complete localized portfolio with bidirectional RTL layout and native typography.
+
+## Featured Projects & Case Studies
+
+- [Egapy ERP](https://egapy.com): Enterprise Resource Planning solution for operational automation, multi-branch inventory, invoicing, and real-time analytics. Built with Next.js, NestJS, PostgreSQL, and Redis.
+- [Labaik Platform](https://labaik-al-umrah.com): Digital service connecting individuals with verified delegates for Umrah-al-Badal. Includes a public portal, administrative dashboard, and real-time notification pipeline.
+- [Nazam Commerce Platform](https://github.com/TahaHamdy-MernDev): Commerce operations suite unifying multi-channel inventory, automated catalog synchronization, and distributed order processing.
+- [Buy From Egypt](https://github.com/TahaHamdy-MernDev): Global cross-border marketplace enabling international customers to purchase authentic Egyptian products with multi-currency checkout and localization.
+- [FastChat Real-Time System](https://github.com/TahaHamdy-MernDev): Low-latency WebSocket chat infrastructure featuring encrypted messaging, presence telemetry, and optimistic UI rendering.
+- [DevTrack System Monitor](https://github.com/TahaHamdy-MernDev): Developer activity telemetry and uptime monitoring engine with automated SLA alerting.
+
+## Technical Skills & Architecture
+
+- [Frontend Capabilities](https://taha-hamdy.vercel.app/en#skills): TypeScript, React 19, Next.js 16 (App Router), Tailwind CSS v4, GSAP, State Management, Responsive & Adaptive UI.
+- [Backend Engineering](https://taha-hamdy.vercel.app/en#skills): Node.js, NestJS, Express, GraphQL, REST APIs, BullMQ Job Queues, Event-Driven Architecture.
+- [Data & Storage](https://taha-hamdy.vercel.app/en#skills): PostgreSQL, Prisma ORM, TypeORM, Redis (Caching & PubSub), MongoDB.
+- [Infrastructure & DevOps](https://taha-hamdy.vercel.app/en#skills): Docker, CI/CD Pipelines, Linux Server Administration, Turborepo, Vercel, Turbopack.
+
+## Contact & Professional Channels
+
+- [GitHub Profile](https://github.com/TahaHamdy-MernDev): Open-source repositories, architectural blueprints, and engineering contributions.
+- [LinkedIn Profile](https://www.linkedin.com/in/taha-hamdy): Professional background, recommendations, and experience history.
+- [WhatsApp Instant Chat](https://wa.me/201013745260): Direct messaging for contract inquiries and technical consulting.
+- [Direct Email Outreach](mailto:tahahamdy.dev@gmail.com): Inquiries for full-stack contracts, SaaS architecture consulting, and engineering advisory.
+
+## Optional Resources
+
+- [Full LLMs Context](https://taha-hamdy.vercel.app/llms-full.txt): Comprehensive text dataset and deep project documentation optimized for AI ingestion.
+- [Sitemap](https://taha-hamdy.vercel.app/sitemap.xml): XML sitemap listing canonical routes and localized endpoints.

@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { SectionHead } from "@/components/ui/section-head";
 
@@ -99,6 +100,8 @@ const SKILL_CATEGORIES: SkillCategory[] = [
 ];
 
 export function Skills() {
+	const t = useTranslations("Skills");
+
 	const [isInView, setIsInView] = useState(false);
 	const gridRef = useRef<HTMLDivElement>(null);
 
@@ -127,15 +130,15 @@ export function Skills() {
 		<section id="skills" className="py-24 border-t border-line/80 relative">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<SectionHead
-					title="Technical Capabilities & Stack"
-					num="02 //"
-					tag="SKILLS"
+					title={t("section_title")}
+					num={t("section_num")}
+					tag={t("section_tag")}
 				/>
 
 				<div
 					ref={gridRef}
 					id="skillsGrid"
-					className="skills-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-line rounded-[var(--radius)] overflow-hidden"
+					className="skills-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-line rounded-(--radius) overflow-hidden"
 				>
 					{SKILL_CATEGORIES.map((category, idx) => (
 						<div

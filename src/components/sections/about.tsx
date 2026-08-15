@@ -1,11 +1,32 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
 import { SectionHead } from "@/components/ui/section-head";
 
 export function About() {
+	const t = useTranslations("About");
+
 	const [isInView, setIsInView] = useState(false);
 	const containerRef = useRef<HTMLDivElement>(null);
+
+	const principles = [
+		{
+			title: t("principles.p1_title"),
+			desc: t("principles.p1_desc"),
+			badge: "SCALABILITY",
+		},
+		{
+			title: t("principles.p2_title"),
+			desc: t("principles.p2_desc"),
+			badge: "INTEGRITY",
+		},
+		{
+			title: t("principles.p3_title"),
+			desc: t("principles.p3_desc"),
+			badge: "RESILIENCE",
+		},
+	];
 
 	useEffect(() => {
 		const el = containerRef.current;
@@ -16,15 +37,13 @@ export function About() {
 				entries.forEach((entry) => {
 					if (entry.isIntersecting) {
 						setIsInView(true);
-						observer.unobserve(entry.target);
 					}
 				});
 			},
-			{ threshold: 0.08 },
+			{ threshold: 0.1 },
 		);
 
 		observer.observe(el);
-
 		return () => observer.disconnect();
 	}, []);
 
@@ -32,109 +51,75 @@ export function About() {
 		<section id="about" className="py-24 border-t border-line/80 relative">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<SectionHead
-					title="Engineering Philosophy & Background"
-					num="04 //"
-					tag="ABOUT"
+					title={t("section_title")}
+					num={t("section_num")}
+					tag={t("section_tag")}
 				/>
 
 				<div
 					ref={containerRef}
 					id="aboutGrid"
-					className="about-grid grid grid-cols-1 lg:grid-cols-[1.3fr_1.1fr] gap-8 items-start"
+					className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start"
 				>
-					{/* Narrative text */}
-					<div className="flex flex-col gap-4 sm:gap-5">
-						<p
-							className={`text-ink text-[0.98rem] sm:text-[1.05rem] md:text-[1.12rem] leading-relaxed font-normal transition-all duration-500 ease-out ${
-								isInView
-									? "opacity-100 translate-y-0"
-									: "opacity-0 translate-y-3"
-							}`}
-							style={{ transitionDelay: "0ms" }}
-						>
-							I&apos;m a Full-Stack Developer with 3+ years of hands-on
-							experience designing, building, and deploying production web
-							applications. I operate across the full software lifecycle — from
-							engineering fluid, responsive interfaces to architecting scalable
-							APIs, databases, asynchronous job queues, and cloud deployments.
+					{/* Narrative Column */}
+					<div
+						className={`lg:col-span-6 transition-all duration-500 ease-out ${
+							isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
+						}`}
+					>
+						<p className="text-[1.14rem] sm:text-[1.26rem] font-sans font-semibold text-ink leading-relaxed mb-6">
+							{t("bio_lead")}
 						</p>
 
-						<p
-							className={`text-muted text-[0.92rem] sm:text-[0.98rem] leading-relaxed transition-all duration-500 ease-out ${
-								isInView
-									? "opacity-100 translate-y-0"
-									: "opacity-0 translate-y-3"
-							}`}
-							style={{ transitionDelay: "70ms" }}
-						>
-							I specialize in mission-critical business systems: commerce
-							engines, ERP backbones, real-time messaging, logistics pipelines,
-							and administrative dashboards. I build software that solves
-							tangible operational bottlenecks and runs with predictable
-							reliability under high concurrency.
+						<p className="text-muted text-[0.96rem] sm:text-[1.02rem] leading-relaxed mb-8">
+							{t("bio_body")}
 						</p>
 
-						<p
-							className={`text-muted text-[0.92rem] sm:text-[0.98rem] leading-relaxed transition-all duration-500 ease-out ${
-								isInView
-									? "opacity-100 translate-y-0"
-									: "opacity-0 translate-y-3"
-							}`}
-							style={{ transitionDelay: "140ms" }}
-						>
-							Beyond shipping features, I prioritize system ergonomics: strict
-							TypeScript typings, modular database schemas, zero-drift CI/CD,
-							and clean architectural boundaries that make codebases a joy to
-							maintain and scale.
-						</p>
+						<div className="flex flex-wrap items-center gap-3">
+							<a
+								href="#contact"
+								className="btn btn-primary text-[0.84rem] sm:text-[0.88rem]"
+							>
+								{t("section_tag")} →
+							</a>
+							<a
+								href="https://github.com/TahaHamdy-MernDev"
+								target="_blank"
+								rel="noreferrer"
+								className="btn btn-ghost text-[0.84rem] sm:text-[0.88rem]"
+							>
+								GitHub Profile ↗
+							</a>
+						</div>
 					</div>
 
-					{/* Architectural Pillars / Telemetry Block */}
+					{/* Core Principles Column */}
 					<div
-						className={`grid grid-cols-1 gap-px bg-line rounded-[var(--radius)] overflow-hidden transition-all duration-500 ease-out ${
-							isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
+						className={`lg:col-span-6 flex flex-col gap-4 transition-all duration-500 ease-out delay-100 ${
+							isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
 						}`}
-						style={{ transitionDelay: "180ms" }}
 					>
-						<div className="bg-surface/90 backdrop-blur-md p-4 sm:p-6 transition-all duration-200 hover:bg-surface-hover group">
-							<div className="mono text-[0.72rem] sm:text-[0.74rem] uppercase font-semibold text-accent-ink mb-1 group-hover:text-white transition-colors">
-								[01] Full-Cycle Architecture
+						{principles.map((item, idx) => (
+							<div
+								key={item.title}
+								className="p-5 sm:p-6 rounded-(--radius) bg-surface border border-line hover:border-accent/40 transition-all duration-200 group"
+							>
+								<div className="flex items-center justify-between mb-2 sm:mb-3">
+									<span className="mono text-[0.72rem] font-bold text-accent-ink tracking-wider">
+										0{idx + 1} {"//"}
+									</span>
+									<span className="mono text-[0.66rem] text-muted-2 uppercase tracking-wider px-2 py-0.5 rounded bg-surface-hover border border-line">
+										{item.badge}
+									</span>
+								</div>
+								<h3 className="font-sans text-[1.05rem] sm:text-[1.12rem] font-bold text-ink mb-1.5 group-hover:text-accent-ink transition-colors">
+									{item.title}
+								</h3>
+								<p className="text-muted text-[0.86rem] sm:text-[0.9rem] leading-relaxed">
+									{item.desc}
+								</p>
 							</div>
-							<div className="text-[0.82rem] sm:text-[0.86rem] text-muted leading-relaxed">
-								End-to-end ownership: Product Specs $\rightarrow$ Next.js 16 UI
-								$\rightarrow$ NestJS Services $\rightarrow$ PostgreSQL Storage.
-							</div>
-						</div>
-
-						<div className="bg-surface/90 backdrop-blur-md p-4 sm:p-6 transition-all duration-200 hover:bg-surface-hover group">
-							<div className="mono text-[0.72rem] sm:text-[0.74rem] uppercase font-semibold text-accent-ink mb-1 group-hover:text-white transition-colors">
-								[02] Async Queues & Concurrency
-							</div>
-							<div className="text-[0.82rem] sm:text-[0.86rem] text-muted leading-relaxed">
-								Heavy workload offloading via BullMQ, Redis, and event-driven
-								workers to guarantee rapid HTTP response times.
-							</div>
-						</div>
-
-						<div className="bg-surface/90 backdrop-blur-md p-4 sm:p-6 transition-all duration-200 hover:bg-surface-hover group">
-							<div className="mono text-[0.72rem] sm:text-[0.74rem] uppercase font-semibold text-accent-ink mb-1 group-hover:text-white transition-colors">
-								[03] Real-Time Systems & State
-							</div>
-							<div className="text-[0.82rem] sm:text-[0.86rem] text-muted leading-relaxed">
-								WebSocket synchronization, instant notifications (FCM), and live
-								multitenant state management.
-							</div>
-						</div>
-
-						<div className="bg-surface/90 backdrop-blur-md p-4 sm:p-6 transition-all duration-200 hover:bg-surface-hover group">
-							<div className="mono text-[0.72rem] sm:text-[0.74rem] uppercase font-semibold text-accent-ink mb-1 group-hover:text-white transition-colors">
-								[04] Database Integrity & Scaling
-							</div>
-							<div className="text-[0.82rem] sm:text-[0.86rem] text-muted leading-relaxed">
-								Structured relational schemas, query indexing strategies, and
-								ORM hygiene with Prisma and TypeORM.
-							</div>
-						</div>
+						))}
 					</div>
 				</div>
 			</div>

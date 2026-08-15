@@ -25,7 +25,7 @@ export function ScrollProgress() {
 			id="scrollProgress"
 			aria-hidden="true"
 			style={{ width: `${progress}%` }}
-			className="fixed top-0 left-0 h-[2px] bg-accent z-[100] transition-[width] duration-75 ease-linear pointer-events-none"
+			className="fixed top-0 left-0 h-0.5 bg-accent z-100 transition-[width] duration-75 ease-linear pointer-events-none"
 		/>
 	);
 }
