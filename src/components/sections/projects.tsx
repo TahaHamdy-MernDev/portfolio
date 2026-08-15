@@ -253,17 +253,17 @@ export function Projects() {
 	}, [activeFilter]);
 
 	return (
-		<section id="work" className="py-20 border-t border-line">
-			<div className="wrap">
+		<section id="work" className="py-24 border-t border-line/80 relative">
+			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<SectionHead
-					title="Selected Systems & Case Studies"
-					num="03 //"
-					tag="PORTFOLIO"
+					title="Featured Systems & Case Studies"
+					num="01 //"
+					tag="WORK"
 				/>
 
 				{/* Filter Tabs & System Telemetry Bar */}
-				<div className="flex flex-wrap items-center justify-between gap-4 mb-8">
-					<div className="flex items-center gap-1.5 p-1 bg-surface border border-line rounded-[var(--radius)] overflow-x-auto max-w-full">
+				<div className="flex flex-wrap items-center justify-between gap-4 mb-8 sm:mb-10">
+					<div className="flex items-center gap-1.5 p-1 sm:p-1.5 bg-surface/90 backdrop-blur-md border border-line rounded-full overflow-x-auto max-w-full [scrollbar-width:none] [-ms-overflow-style:none]">
 						{FILTER_TABS.map((tab) => {
 							const isActive = activeFilter === tab.id;
 							return (
@@ -271,17 +271,17 @@ export function Projects() {
 									key={tab.id}
 									type="button"
 									onClick={() => setActiveFilter(tab.id)}
-									className={`mono text-[0.76rem] px-3 py-1.5 rounded-[2px] transition-colors duration-150 whitespace-nowrap cursor-pointer flex items-center gap-1.5 ${
+									className={`mono text-[0.72rem] sm:text-[0.76rem] px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full transition-all duration-200 whitespace-nowrap cursor-pointer flex items-center gap-1.5 sm:gap-2 ${
 										isActive
 											? "bg-accent text-white font-semibold"
-											: "text-muted hover:text-ink hover:bg-surface-hover"
+											: "text-muted hover:text-ink hover:bg-surface-hover/80"
 									}`}
 								>
 									<span>{tab.label}</span>
 									<span
-										className={`text-[0.68rem] px-1 rounded-[2px] ${
+										className={`text-[0.65rem] sm:text-[0.68rem] px-1.5 py-0.2 rounded-full ${
 											isActive
-												? "bg-black/20 text-white"
+												? "bg-white/20 text-white font-bold"
 												: "bg-paper text-muted-2"
 										}`}
 									>
@@ -292,35 +292,35 @@ export function Projects() {
 						})}
 					</div>
 
-					<div className="mono text-[0.72rem] text-muted-2 hidden md:flex items-center gap-2">
-						<span className="size-1.5 rounded-full bg-status-live" />
+					<div className="mono text-[0.72rem] text-muted-2 hidden md:flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-surface/50 border border-line">
+						{/* <span className="" /> */}
 						<span>SYSTEMS_LOADED: {filteredProjects.length} / 6</span>
 					</div>
 				</div>
 
 				{/* Modular Bento Work Cards Grid */}
-				<div ref={listRef} className="grid grid-cols-1 gap-6">
+				<div ref={listRef} className="grid grid-cols-1 gap-6 sm:gap-8">
 					{filteredProjects.map((project, idx) => (
 						<article
 							key={project.id}
-							className={`project-card bg-surface border border-line hover:border-line-active rounded-[var(--radius)] overflow-hidden transition-all duration-200 group ${
+							className={`project-card bg-surface/90 backdrop-blur-md border border-line hover:border-accent/50 rounded-[var(--radius)] overflow-hidden transition-all duration-300 group ${
 								isInView
 									? "opacity-100 translate-y-0"
 									: "opacity-0 translate-y-3"
 							}`}
 							style={{
 								transitionProperty: "opacity, transform, border-color",
-								transitionDuration: "400ms, 400ms, 150ms",
+								transitionDuration: "400ms, 400ms, 250ms",
 								transitionDelay: `${idx * 60}ms, ${idx * 60}ms, 0ms`,
 							}}
 						>
 							{/* Card Top Header Terminal Bar */}
-							<div className="p-4 sm:p-5 border-b border-line bg-surface-card flex flex-wrap items-center justify-between gap-3">
-								<div className="flex items-center gap-3">
-									<span className="mono text-[0.76rem] font-bold text-accent bg-accent-soft border border-accent-border px-2 py-0.5 rounded-[2px]">
+							<div className="p-3.5 sm:p-5 border-b border-line bg-surface-card/95 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+								<div className="flex items-center gap-2.5 sm:gap-3 flex-wrap">
+									<span className="mono text-[0.72rem] sm:text-[0.74rem] font-bold text-accent-ink bg-accent-soft border border-accent-border px-2 sm:px-2.5 py-0.5 rounded-md shrink-0">
 										SYS.0{PROJECTS.findIndex((p) => p.id === project.id) + 1}
 									</span>
-									<h3 className="font-sans text-[1.25rem] sm:text-[1.38rem] font-bold text-ink tracking-tight m-0 flex items-center gap-2">
+									<h3 className="font-sans text-[1.12rem] sm:text-[1.38rem] font-bold text-ink tracking-tight m-0 flex items-center gap-2">
 										<span>{project.title}</span>
 										{project.arabicTitle && (
 											<span className="mono text-[0.72em] font-normal text-muted">
@@ -337,10 +337,10 @@ export function Projects() {
 								</div>
 
 								{/* Top Right Status & Action Link */}
-								<div className="flex items-center gap-3">
-									<span className="mono text-[0.72rem] px-2 py-0.5 rounded-[2px] bg-paper border border-line text-muted flex items-center gap-1.5">
+								<div className="flex items-center gap-2.5 sm:gap-3 justify-between sm:justify-end w-full sm:w-auto pt-1 sm:pt-0 border-t sm:border-t-0 border-line/40">
+									<span className="mono text-[0.7rem] sm:text-[0.72rem] px-2 sm:px-2.5 py-1 rounded-full bg-paper border border-line text-muted flex items-center gap-1.5 sm:gap-2">
 										{project.isLive && (
-											<span className="size-1.5 rounded-full bg-status-live" />
+											<span className="size-1.5 rounded-full bg-status-live animate-pulse" />
 										)}
 										{project.status}
 									</span>
@@ -350,12 +350,12 @@ export function Projects() {
 											href={project.link.url}
 											target="_blank"
 											rel="noopener noreferrer"
-											className="mono text-[0.78rem] font-semibold text-ink bg-paper border border-line px-3 py-1 rounded-[2px] transition-colors duration-150 hover:bg-accent hover:text-white hover:border-accent no-underline"
+											className="mono text-[0.76rem] sm:text-[0.78rem] font-semibold text-ink bg-paper border border-line px-3 sm:px-3.5 py-1 rounded-md transition-all duration-150 hover:bg-accent hover:text-white hover:border-accent no-underline"
 										>
 											{project.link.text}
 										</a>
 									) : (
-										<span className="mono text-[0.74rem] text-muted-2 border border-dashed border-line px-2.5 py-1 rounded-[2px] cursor-default">
+										<span className="mono text-[0.72rem] sm:text-[0.74rem] text-muted-2 border border-dashed border-line px-2 sm:px-2.5 py-1 rounded-md cursor-default">
 											{project.disabledLinkText}
 										</span>
 									)}
@@ -363,22 +363,22 @@ export function Projects() {
 							</div>
 
 							{/* Card Body — 2-Column Engineered Split */}
-							<div className="p-5 sm:p-7 grid grid-cols-1 lg:grid-cols-[1.2fr_1.1fr] gap-6 lg:gap-8 items-start">
+							<div className="p-4 sm:p-7 grid grid-cols-1 lg:grid-cols-[1.2fr_1.1fr] gap-5 sm:gap-8 items-start">
 								{/* Left: Narrative & Key Architectural Challenges */}
-								<div className="flex flex-col gap-4">
-									<p className="m-0 text-ink text-[0.96rem] leading-relaxed font-normal">
+								<div className="flex flex-col gap-3.5 sm:gap-4">
+									<p className="m-0 text-ink text-[0.92rem] sm:text-[0.96rem] leading-relaxed font-normal">
 										{project.description}
 									</p>
 
 									{/* Key Technical Highlights */}
-									<div className="bg-paper border border-line rounded-[2px] p-3.5 flex flex-col gap-2">
+									<div className="bg-paper/80 border border-line rounded-[var(--radius)] p-3.5 sm:p-4 flex flex-col gap-2">
 										<div className="mono text-[0.68rem] uppercase font-semibold text-accent-ink tracking-wider flex items-center gap-1.5">
 											<span>⚡</span>
 											<span>Technical Architecture Highlights</span>
 										</div>
-										<ul className="m-0 p-0 pl-4 list-disc text-[0.84rem] text-muted space-y-1">
+										<ul className="m-0 p-0 pl-4 list-disc text-[0.82rem] sm:text-[0.84rem] text-muted space-y-1">
 											{project.highlights.map((highlight) => (
-												<li key={highlight} className="leading-snug">
+												<li key={highlight} className="leading-relaxed">
 													{highlight}
 												</li>
 											))}
@@ -389,30 +389,30 @@ export function Projects() {
 								{/* Right: Topology Pipeline & Stack Matrix */}
 								<div className="flex flex-col gap-4">
 									{/* Interactive Visual Topology Flow */}
-									<div className="bg-paper border border-line rounded-[2px] p-3.5">
-										<div className="mono text-[0.66rem] uppercase tracking-wider text-muted-2 mb-2 font-semibold flex justify-between items-center">
+									<div className="bg-paper/80 border border-line rounded-[var(--radius)] p-4">
+										<div className="mono text-[0.66rem] uppercase tracking-wider text-muted-2 mb-3 font-semibold flex justify-between items-center">
 											<span>System Topology Pipeline</span>
-											<span className="text-[0.6rem] text-muted-2">
+											<span className="text-[0.6rem] text-accent-ink">
 												[FLOW: CLIENT ➔ DATA]
 											</span>
 										</div>
 
-										<div className="flex items-center gap-1.5 flex-wrap">
+										<div className="flex items-center gap-2 flex-wrap">
 											{project.topology.map((node, nIdx) => (
 												<span
 													key={node.label}
-													className="flex items-center gap-1.5"
+													className="flex items-center gap-2"
 												>
 													<span
-														className={`mono text-[0.72rem] px-2 py-0.5 rounded-[2px] border transition-colors duration-150 ${
+														className={`mono text-[0.72rem] px-2.5 py-1 rounded-md border transition-all duration-150 ${
 															node.type === "client"
 																? "bg-surface text-ink border-line"
 																: node.type === "service"
-																	? "bg-surface-hover text-ink border-line-active"
+																	? "bg-surface-hover text-ink border-accent/40 font-medium"
 																	: node.type === "queue"
-																		? "bg-accent-soft text-accent-ink border-accent-border"
+																		? "bg-accent-soft text-accent-ink border-accent-border font-semibold"
 																		: node.type === "db"
-																			? "bg-surface text-ink border-line"
+																			? "bg-surface text-ink border-line font-medium"
 																			: "bg-surface-card text-muted border-line"
 														}`}
 													>
@@ -429,7 +429,7 @@ export function Projects() {
 									</div>
 
 									{/* Technologies Tag Array */}
-									<div className="flex flex-col gap-1.5">
+									<div className="flex flex-col gap-2">
 										<div className="mono text-[0.66rem] uppercase tracking-wider text-muted-2 font-semibold">
 											Technologies & Libraries
 										</div>
@@ -437,7 +437,7 @@ export function Projects() {
 											{project.tags.map((tag) => (
 												<span
 													key={tag}
-													className="mono text-[0.72rem] px-2.5 py-0.5 rounded-[2px] bg-surface-card text-muted border border-line select-none hover:border-accent-border hover:text-ink transition-colors duration-150"
+													className="mono text-[0.72rem] px-2.5 py-0.5 rounded-md bg-surface-card text-muted border border-line select-none hover:border-accent-border hover:text-white transition-colors duration-150"
 												>
 													{tag}
 												</span>
@@ -448,9 +448,11 @@ export function Projects() {
 							</div>
 
 							{/* Card Footer Terminal Ribbon */}
-							<div className="px-5 py-2.5 bg-surface-card border-t border-line flex flex-wrap items-center justify-between gap-2 mono text-[0.68rem] text-muted-2">
+							<div className="px-5 py-2.5 bg-surface-card/90 border-t border-line flex flex-wrap items-center justify-between gap-2 mono text-[0.68rem] text-muted-2">
 								<span>{project.telemetry}</span>
-								<span className="text-accent-ink">[VERIFIED_ARCHITECTURE]</span>
+								<span className="text-accent-ink font-medium">
+									[VERIFIED_ARCHITECTURE]
+								</span>
 							</div>
 						</article>
 					))}

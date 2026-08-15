@@ -22,23 +22,23 @@
 }
 
 :root {
-	--paper: #f8fafc;
-	--surface: #ffffff;
-	--surface-hover: #f1f5f9;
-	--surface-card: #f8fafc;
-	--ink: #090d16;
-	--muted: #525c6e;
-	--muted-2: #8f9bb0;
-	--line: #e2e8f0;
-	--line-active: #cbd5e1;
-	--accent: #0062ff;
-	--accent-hover: #0052db;
-	--accent-soft: #edf3ff;
-	--accent-border: #bad3ff;
-	--accent-ink: #0052db;
-	--status-live: #0062ff;
-	--radius: 4px;
-	--maxw: 1120px;
+	--paper: #08090a;
+	--surface: #111318;
+	--surface-hover: #181b22;
+	--surface-card: #0c0e12;
+	--ink: #f3f4f6;
+	--muted: #9ca3af;
+	--muted-2: #4b5563;
+	--line: #1f242d;
+	--line-active: #2d3542;
+	--accent: #ff5500;
+	--accent-hover: #ff6e1a;
+	--accent-soft: rgba(255, 85, 0, 0.12);
+	--accent-border: rgba(255, 85, 0, 0.35);
+	--accent-ink: #ffa040;
+	--status-live: #00e5a0;
+	--radius: 8px;
+	--maxw: 1160px;
 }
 
 * {
@@ -47,8 +47,8 @@
 
 html {
 	scroll-behavior: smooth;
-	color-scheme: light;
-	background-color: #f8fafc;
+	color-scheme: dark;
+	background-color: #08090a;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -69,6 +69,7 @@ body {
 	font-family: var(--font-sans), "Inter", sans-serif;
 	-webkit-font-smoothing: antialiased;
 	line-height: 1.6;
+	overflow-x: hidden;
 }
 
 h1,
@@ -90,10 +91,30 @@ a {
 	color: inherit;
 }
 
-.wrap {
-	max-width: var(--maxw);
-	margin: 0 auto;
-	padding: 0 28px;
+/* Clean Mathematical Blueprint Grid */
+.bg-blueprint {
+	background-size: 40px 40px;
+	background-image:
+		linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+		linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+}
+
+.gradient-heading {
+	background: linear-gradient(
+		135deg,
+		#ffffff 40%,
+		var(--accent-ink) 85%,
+		var(--accent) 100%
+	);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+.gradient-orange,
+.gradient-cobalt {
+	background: linear-gradient(135deg, var(--accent-ink) 0%, var(--accent) 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 }
 
 /* Focus styles */
@@ -101,7 +122,7 @@ a:focus-visible,
 button:focus-visible {
 	outline: 2px solid var(--accent);
 	outline-offset: 3px;
-	border-radius: 4px;
+	border-radius: 6px;
 }
 
 /* Animations */
@@ -112,50 +133,19 @@ button:focus-visible {
 	}
 }
 
-@keyframes fadeUp {
-	from {
-		opacity: 0;
-		transform: translateY(12px);
-	}
-	to {
-		opacity: 1;
-		transform: translateY(0);
-	}
-}
-
-@keyframes lineUp {
-	to {
-		transform: translateY(0);
-	}
-}
-
 @keyframes marqueeScroll {
-	from {
+	0% {
 		transform: translateX(0);
 	}
-	to {
-		transform: translateX(-50%);
+	100% {
+		transform: translateX(-33.333%);
 	}
 }
 
 .load-in {
 	opacity: 0;
-	animation: fadeUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.split-lines {
-	overflow: hidden;
-}
-
-.split-lines .line {
-	display: block;
-	overflow: hidden;
-}
-
-.split-lines .line span {
-	display: inline-block;
-	transform: translateY(115%);
-	animation: lineUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+	transform: translateY(12px);
+	animation: layerIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Buttons */
@@ -164,8 +154,8 @@ button:focus-visible {
 	align-items: center;
 	justify-content: center;
 	gap: 8px;
-	padding: 10px 18px;
-	border-radius: 4px;
+	padding: 10px 20px;
+	border-radius: 6px;
 	font-size: 0.88rem;
 	font-weight: 500;
 	text-decoration: none;
@@ -204,16 +194,19 @@ button:focus-visible {
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-	width: 6px;
-	height: 6px;
+	width: 8px;
+	height: 8px;
 }
+
 ::-webkit-scrollbar-track {
 	background: var(--paper);
 }
+
 ::-webkit-scrollbar-thumb {
 	background: var(--line);
 	border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
-	background: var(--muted-2);
+	background: var(--line-active);
 }

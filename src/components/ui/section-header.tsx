@@ -13,7 +13,7 @@ export const SectionHeader = React.forwardRef<
 >(({ className = "", tag, title, description, ...props }, ref) => {
 	return (
 		<div ref={ref} className={`mb-12 space-y-3 ${className}`} {...props}>
-			<div className="font-mono text-xs uppercase tracking-widest text-[#00E5A0] drop-shadow-[0_0_8px_rgba(0,229,160,0.3)]">
+			<div className="font-mono text-xs uppercase tracking-widest text-[#00E5A0]">
 				{tag}
 			</div>
 			<h2 className="text-3xl font-extrabold tracking-tight text-zinc-100 md:text-4xl uppercase font-display leading-none">

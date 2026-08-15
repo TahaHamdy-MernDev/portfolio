@@ -19,14 +19,14 @@ export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
 			"inline-flex items-center gap-1.5 px-2.5 py-0.5 font-mono text-[10px] uppercase tracking-wider font-semibold border select-none rounded-md";
 
 		const variants = {
-			outline: "bg-transparent text-zinc-400 border-zinc-800",
-			solid: "bg-secondary-container text-zinc-400 border-zinc-750",
-			success: "bg-secondary-container text-zinc-200 border-zinc-750",
-			neutral: "bg-transparent text-zinc-550 border-zinc-800",
-			framework: "bg-secondary-container text-zinc-400 border-zinc-750",
-			language: "bg-secondary-container text-zinc-400 border-zinc-750",
-			database: "bg-secondary-container text-zinc-400 border-zinc-750",
-			infrastructure: "bg-secondary-container text-zinc-400 border-zinc-750",
+			outline: "bg-transparent text-muted border-line",
+			solid: "bg-surface text-ink border-line",
+			success: "bg-accent-soft text-accent-ink border-accent-border",
+			neutral: "bg-surface-card text-muted border-line",
+			framework: "bg-surface text-ink border-accent/40",
+			language: "bg-surface text-ink border-line",
+			database: "bg-surface text-ink border-line",
+			infrastructure: "bg-surface text-muted border-line",
 		};
 
 		const combinedClassName = `${baseStyles} ${variants[variant]} ${className}`;
@@ -34,7 +34,7 @@ export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
 		return (
 			<span ref={ref} className={combinedClassName} {...props}>
 				{variant === "success" && (
-					<span className="size-1.5 rounded-full bg-accent animate-pulse" />
+					<span className="size-1.5 rounded-full bg-status-live animate-pulse" />
 				)}
 				{children}
 			</span>

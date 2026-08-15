@@ -30,17 +30,54 @@ export function Footer() {
 	return (
 		<footer
 			ref={footerRef}
-			className={`border-t border-line bg-surface transition-all duration-500 ease-out ${
+			className={`border-t border-line bg-surface-card pt-16 pb-12 transition-all duration-500 ease-out overflow-hidden relative ${
 				isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"
 			}`}
 		>
-			<div className="wrap py-6 flex flex-col sm:flex-row justify-between items-center gap-3 text-[0.76rem] mono text-muted">
-				<div className="flex items-center gap-2">
-					<span className="size-1.5 rounded-full bg-status-live" />
-					<span>© 2026 TAHA HAMDY · ZERO_GRADIENT_ENGINEERED</span>
+			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center text-center relative z-10">
+				{/* Grand Typographic Watermark Logo */}
+				<div className="select-none pointer-events-none mb-6 sm:mb-8 tracking-tighter">
+					<span className="font-extrabold text-[clamp(2.3rem,10vw,6.5rem)] leading-none text-transparent bg-clip-text bg-gradient-to-b from-white/20 via-orange-500/10 to-transparent block font-sans">
+						TAHA HAMDY
+					</span>
 				</div>
-				<div className="text-muted-2">
-					NEXT.JS 16 · NESTJS · POSTGRESQL · DISTRIBUTED ARCHITECTURE
+
+				{/* Social Links Bar */}
+				<div className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 mb-6 sm:mb-8 text-sm mono">
+					<a
+						href="https://github.com/TahaHamdy-MernDev"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="text-muted hover:text-white transition-colors duration-150 flex items-center gap-1.5"
+					>
+						GitHub ↗
+					</a>
+					<span className="text-muted-2">/</span>
+					<a
+						href="https://www.linkedin.com/in/taha-hamdy"
+						target="_blank"
+						rel="noopener noreferrer"
+						className="text-muted hover:text-white transition-colors duration-150 flex items-center gap-1.5"
+					>
+						LinkedIn ↗
+					</a>
+					<span className="text-muted-2">/</span>
+					<a
+						href="mailto:tahahamdy.dev@gmail.com"
+						className="text-muted hover:text-white transition-colors duration-150 flex items-center gap-1.5"
+					>
+						Email ↗
+					</a>
+				</div>
+
+				<div className="w-full pt-6 border-t border-line/50 flex flex-col sm:flex-row justify-between items-center gap-3 text-[0.72rem] sm:text-[0.76rem] mono text-muted">
+					<div className="flex items-center gap-2">
+						{/* <span className="" /> */}
+						<span>© 2026 TAHA HAMDY · FULL_STACK_SYSTEMS</span>
+					</div>
+					<div className="text-muted-2 text-center sm:text-right">
+						NEXT.JS 16 · NESTJS · POSTGRESQL · DISTRIBUTED CONCURRENCY
+					</div>
 				</div>
 			</div>
 		</footer>
