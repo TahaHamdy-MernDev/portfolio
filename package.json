@@ -1,29 +1,30 @@
 {
-  "name": "proto",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "eslint"
-  },
-  "dependencies": {
-    "@gsap/react": "^2.1.2",
-    "gsap": "^3.15.0",
-    "lucide-react": "^1.31.0",
-    "next": "16.3.1",
-    "react": "19.2.8",
-    "react-dom": "19.2.8"
-  },
-  "devDependencies": {
-    "@tailwindcss/postcss": "^4.3.3",
-    "@types/node": "^20.19.43",
-    "@types/react": "19.2.18",
-    "@types/react-dom": "19.2.4",
-    "eslint": "10.8.1",
-    "eslint-config-next": "16.3.1",
-    "tailwindcss": "^4.3.3",
-    "typescript": "^7.0.2"
-  }
+	"name": "proto",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"format": "biome format --write .",
+		"lint": "biome lint --write .",
+		"check": "biome check --write ."
+	},
+	"dependencies": {
+		"@gsap/react": "^2.1.2",
+		"gsap": "^3.15.0",
+		"lucide-react": "^1.31.0",
+		"next": "16.3.1",
+		"react": "19.2.8",
+		"react-dom": "19.2.8"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "2.5.8",
+		"@tailwindcss/postcss": "^4.3.3",
+		"@types/node": "^20.19.43",
+		"@types/react": "19.2.18",
+		"@types/react-dom": "19.2.4",
+		"tailwindcss": "^4.3.3",
+		"typescript": "^6.0.3"
+	}
 }

@@ -3,71 +3,78 @@
 import { useEffect, useState } from "react";
 
 const NAV_ITEMS = [
-  { id: "about", label: "About" },
-  { id: "skills", label: "Skills" },
-  { id: "work", label: "Work" },
-  { id: "contact", label: "Contact" },
+	{ id: "about", num: "01", label: "About" },
+	{ id: "skills", num: "02", label: "Skills" },
+	{ id: "work", num: "03", label: "Work" },
+	{ id: "contact", num: "04", label: "Contact" },
 ];
 
 export function Header() {
-  const [activeSection, setActiveSection] = useState<string>("");
+	const [activeSection, setActiveSection] = useState<string>("");
 
-  useEffect(() => {
-    const sections = NAV_ITEMS.map((item) =>
-      document.getElementById(item.id)
-    ).filter(Boolean) as HTMLElement[];
+	useEffect(() => {
+		const sections = NAV_ITEMS.map((item) =>
+			document.getElementById(item.id),
+		).filter(Boolean) as HTMLElement[];
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: "-45% 0px -45% 0px" }
-    );
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						setActiveSection(entry.target.id);
+					}
+				});
+			},
+			{ rootMargin: "-40% 0px -40% 0px" },
+		);
 
-    sections.forEach((s) => observer.observe(s));
+		sections.forEach((s) => {
+			observer.observe(s);
+		});
 
-    return () => observer.disconnect();
-  }, []);
+		return () => observer.disconnect();
+	}, []);
 
-  return (
-    <header className="sticky top-0 z-50 bg-[#0B0C10]/85 backdrop-blur-md border-b border-(--line)">
-      <nav className="wrap flex items-center justify-between p-5!">
-        <a
-          href="#"
-          className="brand font-serif font-semibold text-[1.05rem] text-(--ink) no-underline"
-        >
-          Taha Hamdy
-        </a>
-        <div className="navlinks flex gap-4 sm:gap-7 text-[0.82rem] sm:text-[0.92rem]">
-          {NAV_ITEMS.map((item) => {
-            const isActive = activeSection === item.id;
-            return (
-              <a
-                key={item.id}
-                href={`#${item.id}`}
-                className={`relative no-underline transition-colors duration-150 py-0.5 group ${
-                  isActive
-                    ? "text-[var(--ink)] font-medium"
-                    : "text-[var(--muted)] hover:text-[var(--ink)]"
-                }`}
-              >
-                {item.label}
-                <span
-                  className={`absolute left-0 right-0 -bottom-[5px] h-[1px] bg-[var(--ink)] origin-left transition-transform duration-250 ${
-                    isActive
-                      ? "scale-x-100"
-                      : "scale-x-0 group-hover:scale-x-100"
-                  }`}
-                />
-              </a>
-            );
-          })}
-        </div>
-      </nav>
-    </header>
-  );
+	return (
+		<header className="sticky top-0 z-50 bg-paper/92 backdrop-blur-md border-b border-line">
+			<nav className="wrap flex items-center justify-between py-4!">
+				<a
+					href="/"
+					className="brand flex items-center gap-2.5 font-sans font-bold text-[0.95rem] text-ink no-underline tracking-tight"
+				>
+					<span className="size-2 rounded-full bg-accent" />
+					<span>TAHA HAMDY</span>
+					<span className="mono hidden sm:inline-block text-[0.7rem] text-muted-2 font-normal">
+						/ FULL-STACK
+					</span>
+				</a>
+
+				<div className="navlinks flex gap-2 sm:gap-6 text-[0.8rem] sm:text-[0.85rem]">
+					{NAV_ITEMS.map((item) => {
+						const isActive = activeSection === item.id;
+						return (
+							<a
+								key={item.id}
+								href={`#${item.id}`}
+								className={`mono relative no-underline px-2.5 py-1 rounded-[2px] transition-colors duration-150 flex items-center gap-1.5 ${
+									isActive
+										? "text-ink bg-surface border border-accent-border font-medium"
+										: "text-muted hover:text-ink"
+								}`}
+							>
+								<span
+									className={`text-[0.7rem] hidden sm:inline ${
+										isActive ? "text-accent font-semibold" : "text-muted-2"
+									}`}
+								>
+									{item.num}.
+								</span>
+								<span>{item.label}</span>
+							</a>
+						);
+					})}
+				</div>
+			</nav>
+		</header>
+	);
 }
