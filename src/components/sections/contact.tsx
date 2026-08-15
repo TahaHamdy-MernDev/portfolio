@@ -300,7 +300,7 @@ export function Contact() {
 								{/* Send Direct Email Primary CTA */}
 								<a
 									href={`mailto:${email}`}
-									className="py-2 px-3 rounded-xl text-[0.84rem] text-center flex items-center justify-center gap-2 font-semibold bg-accent hover:bg-accent-hover text-white active:scale-[0.97] transition-all duration-200 shadow-lg shadow-accent/25 hover:shadow-accent/40 no-underline group/btn"
+									className="py-2 px-3 rounded-xl text-[0.84rem] text-center flex items-center justify-center gap-2 font-semibold bg-accent hover:bg-accent-hover text-paper active:scale-[0.97] transition-all duration-200 shadow-lg shadow-accent/25 hover:shadow-accent/40 no-underline group/btn"
 								>
 									<Mail className="size-4 transition-transform group-hover/btn:-translate-y-0.5" />
 									<span>{t("send_direct")}</span>

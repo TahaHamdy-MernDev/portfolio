@@ -1,7 +1,4 @@
-"use client";
-
 import { useTranslations } from "next-intl";
-import { useEffect, useRef, useState } from "react";
 import { SectionHead } from "@/components/ui/section-head";
 
 interface SkillCategory {
@@ -102,30 +99,6 @@ const SKILL_CATEGORIES: SkillCategory[] = [
 export function Skills() {
 	const t = useTranslations("Skills");
 
-	const [isInView, setIsInView] = useState(false);
-	const gridRef = useRef<HTMLDivElement>(null);
-
-	useEffect(() => {
-		const el = gridRef.current;
-		if (!el) return;
-
-		const observer = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						setIsInView(true);
-						observer.unobserve(entry.target);
-					}
-				});
-			},
-			{ threshold: 0.08 },
-		);
-
-		observer.observe(el);
-
-		return () => observer.disconnect();
-	}, []);
-
 	return (
 		<section id="skills" className="py-24 border-t border-line/80 relative">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -136,23 +109,17 @@ export function Skills() {
 				/>
 
 				<div
-					ref={gridRef}
 					id="skillsGrid"
 					className="skills-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-line rounded-(--radius) overflow-hidden"
 				>
-					{SKILL_CATEGORIES.map((category, idx) => (
+					{SKILL_CATEGORIES.map((category) => (
 						<div
 							key={category.title}
 							className={`skill-group bg-surface/90 backdrop-blur-md p-5 sm:p-7 transition-all duration-200 hover:bg-surface-hover ${
 								category.fullWidth
 									? "col-span-1 sm:col-span-2 lg:col-span-3"
 									: ""
-							} ${
-								isInView
-									? "opacity-100 translate-y-0"
-									: "opacity-0 translate-y-3"
 							}`}
-							style={{ transitionDelay: `${idx * 50}ms` }}
 						>
 							<div className="flex items-center justify-between mb-2">
 								<h3 className="font-sans font-semibold text-[0.9rem] sm:text-[0.92rem] text-ink tracking-tight">

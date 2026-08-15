@@ -1,14 +1,8 @@
-"use client";
-
 import { useTranslations } from "next-intl";
-import { useEffect, useRef, useState } from "react";
 import { SectionHead } from "@/components/ui/section-head";
 
 export function Process() {
 	const t = useTranslations("Process");
-
-	const [isInView, setIsInView] = useState(false);
-	const sectionRef = useRef<HTMLDivElement>(null);
 
 	const steps = [
 		{
@@ -37,25 +31,6 @@ export function Process() {
 		},
 	];
 
-	useEffect(() => {
-		const el = sectionRef.current;
-		if (!el) return;
-
-		const observer = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						setIsInView(true);
-					}
-				});
-			},
-			{ threshold: 0.1 },
-		);
-
-		observer.observe(el);
-		return () => observer.disconnect();
-	}, []);
-
 	return (
 		<section id="process" className="py-24 border-t border-line/80 relative">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -65,24 +40,11 @@ export function Process() {
 					tag={t("section_tag")}
 				/>
 
-				<div
-					ref={sectionRef}
-					className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 relative"
-				>
-					{steps.map((step, idx) => (
+				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 relative">
+					{steps.map((step) => (
 						<article
 							key={step.num}
-							className={`process-card p-5 sm:p-6 rounded-(--radius) border bg-surface/50 border-line hover:border-accent hover:bg-surface transition-all duration-300 relative overflow-hidden flex flex-col justify-between min-h-65 group ${
-								isInView
-									? "opacity-100 translate-y-0"
-									: "opacity-0 translate-y-4"
-							}`}
-							style={{
-								transitionProperty:
-									"opacity, transform, border-color, background-color",
-								transitionDuration: "400ms, 400ms, 250ms, 250ms",
-								transitionDelay: `${idx * 80}ms, ${idx * 80}ms, 0ms, 0ms`,
-							}}
+							className="process-card p-5 sm:p-6 rounded-(--radius) border bg-surface/50 border-line hover:border-accent hover:bg-surface transition-all duration-200 relative overflow-hidden flex flex-col justify-between min-h-65 group"
 						>
 							{/* Step Watermark Number */}
 							<div className="absolute top-2 inset-e-3 text-[3.2rem] sm:text-[4rem] font-bold font-mono text-line/40 select-none pointer-events-none group-hover:text-line/60 transition-colors">

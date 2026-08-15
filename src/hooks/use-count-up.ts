@@ -3,7 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 
 export function useCountUp(target: number, suffix: string = "") {
-	const [displayValue, setDisplayValue] = useState<string>(`0${suffix}`);
+	const [displayValue, setDisplayValue] = useState<string>(
+		`${target}${suffix}`,
+	);
 	const elementRef = useRef<HTMLSpanElement>(null);
 	const hasAnimated = useRef(false);
 

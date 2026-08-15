@@ -31,82 +31,79 @@ export function Header() {
 	const isManualScroll = useRef(false);
 	const manualScrollTimeout = useRef<NodeJS.Timeout | null>(null);
 
-	// Deterministic scroll spy
+	// High-performance IntersectionObserver Scroll Spy (Zero Forced Reflows)
 	useEffect(() => {
-		let rafId: number | null = null;
+		const visibleSections = new Map<string, number>();
 
-		const handleScroll = () => {
-			if (isManualScroll.current) return;
+		const observer = new IntersectionObserver(
+			(entries) => {
+				if (isManualScroll.current) return;
 
-			if (rafId) cancelAnimationFrame(rafId);
-			rafId = requestAnimationFrame(() => {
-				const scrollY = window.scrollY;
-				const windowHeight = window.innerHeight;
-				const documentHeight = document.documentElement.scrollHeight;
-
-				// 1. Bottom of page lock (e.g. over footer/contact)
-				if (scrollY + windowHeight >= documentHeight - 80) {
-					setActiveSection("contact");
-					return;
-				}
-
-				// 2. Near top (Hero area) default to first section
-				const firstSection = document.getElementById(SECTION_IDS[0]);
-				if (firstSection && scrollY < firstSection.offsetTop - 200) {
-					setActiveSection(SECTION_IDS[0]);
-					return;
-				}
-
-				// 3. Scan sections top-to-bottom with consistent offset threshold
-				const triggerOffset = 140;
-				let current = SECTION_IDS[0];
-
-				for (const id of SECTION_IDS) {
-					const el = document.getElementById(id);
-					if (!el) continue;
-					const rect = el.getBoundingClientRect();
-					if (rect.top <= triggerOffset) {
-						current = id;
+				for (const entry of entries) {
+					if (entry.isIntersecting) {
+						visibleSections.set(entry.target.id, entry.intersectionRatio);
+					} else {
+						visibleSections.delete(entry.target.id);
 					}
 				}
 
-				setActiveSection(current);
-			});
-		};
+				if (visibleSections.size === 0) return;
 
-		window.addEventListener("scroll", handleScroll, { passive: true });
-		handleScroll();
+				let chosen: string | null = null;
+				for (const id of SECTION_IDS) {
+					if (visibleSections.has(id)) {
+						chosen = id;
+						break;
+					}
+				}
+
+				if (chosen) {
+					setActiveSection(chosen);
+				}
+			},
+			{
+				rootMargin: "-15% 0px -50% 0px",
+				threshold: [0, 0.2, 0.5, 0.8],
+			},
+		);
+
+		for (const id of SECTION_IDS) {
+			const el = document.getElementById(id);
+			if (el) observer.observe(el);
+		}
 
 		return () => {
-			window.removeEventListener("scroll", handleScroll);
-			if (rafId) cancelAnimationFrame(rafId);
+			observer.disconnect();
 			if (manualScrollTimeout.current)
 				clearTimeout(manualScrollTimeout.current);
 		};
 	}, []);
 
-	// Smoothly position active sliding pill on desktop
+	// Smoothly position active sliding pill on desktop using offset properties
 	useEffect(() => {
+		let rafId: number;
+
 		const updateIndicator = () => {
 			if (!activeSection) return;
 			const targetEl = itemRefs.current.get(activeSection);
-			const containerEl = navContainerRef.current;
 
-			if (targetEl && containerEl) {
-				const containerRect = containerEl.getBoundingClientRect();
-				const targetRect = targetEl.getBoundingClientRect();
-
-				setIndicatorStyle({
-					left: targetRect.left - containerRect.left,
-					width: targetRect.width,
-					opacity: 1,
+			if (targetEl) {
+				rafId = requestAnimationFrame(() => {
+					setIndicatorStyle({
+						left: targetEl.offsetLeft,
+						width: targetEl.offsetWidth,
+						opacity: 1,
+					});
 				});
 			}
 		};
 
 		updateIndicator();
-		window.addEventListener("resize", updateIndicator);
-		return () => window.removeEventListener("resize", updateIndicator);
+		window.addEventListener("resize", updateIndicator, { passive: true });
+		return () => {
+			window.removeEventListener("resize", updateIndicator);
+			if (rafId) cancelAnimationFrame(rafId);
+		};
 	}, [activeSection]);
 
 	// Lock body scroll when mobile menu is open

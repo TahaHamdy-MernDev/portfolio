@@ -16,7 +16,7 @@ export function generateStaticParams() {
 
 export default async function HomePage() {
 	return (
-		<div className="flex flex-col min-h-screen relative bg-paper text-ink selection:bg-accent selection:text-white">
+		<div className="flex flex-col min-h-screen relative bg-paper text-ink selection:bg-accent selection:text-paper">
 			{/* Mathematical Blueprint Background Grid */}
 			<div className="fixed inset-0 pointer-events-none bg-blueprint opacity-60 z-0" />
 

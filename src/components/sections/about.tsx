@@ -1,14 +1,8 @@
-"use client";
-
 import { useTranslations } from "next-intl";
-import { useEffect, useRef, useState } from "react";
 import { SectionHead } from "@/components/ui/section-head";
 
 export function About() {
 	const t = useTranslations("About");
-
-	const [isInView, setIsInView] = useState(false);
-	const containerRef = useRef<HTMLDivElement>(null);
 
 	const principles = [
 		{
@@ -28,25 +22,6 @@ export function About() {
 		},
 	];
 
-	useEffect(() => {
-		const el = containerRef.current;
-		if (!el) return;
-
-		const observer = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						setIsInView(true);
-					}
-				});
-			},
-			{ threshold: 0.1 },
-		);
-
-		observer.observe(el);
-		return () => observer.disconnect();
-	}, []);
-
 	return (
 		<section id="about" className="py-24 border-t border-line/80 relative">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -57,16 +32,11 @@ export function About() {
 				/>
 
 				<div
-					ref={containerRef}
 					id="aboutGrid"
 					className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start"
 				>
 					{/* Narrative Column */}
-					<div
-						className={`lg:col-span-6 transition-all duration-500 ease-out ${
-							isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-						}`}
-					>
+					<div className="lg:col-span-6">
 						<p className="text-[1.14rem] sm:text-[1.26rem] font-sans font-semibold text-ink leading-relaxed mb-6">
 							{t("bio_lead")}
 						</p>
@@ -94,11 +64,7 @@ export function About() {
 					</div>
 
 					{/* Core Principles Column */}
-					<div
-						className={`lg:col-span-6 flex flex-col gap-4 transition-all duration-500 ease-out delay-100 ${
-							isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-						}`}
-					>
+					<div className="lg:col-span-6 flex flex-col gap-4">
 						{principles.map((item, idx) => (
 							<div
 								key={item.title}

@@ -6,6 +6,10 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 const nextConfig: NextConfig = {
 	cacheComponents: true,
 	allowedDevOrigins: ["192.168.100.11"],
+	compress: true,
+	poweredByHeader: false,
+	reactStrictMode: true,
+	
 };
 
 export default withNextIntl(nextConfig);

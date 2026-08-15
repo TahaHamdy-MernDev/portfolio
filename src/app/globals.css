@@ -28,7 +28,7 @@
 	--surface-card: #0c0e12;
 	--ink: #f3f4f6;
 	--muted: #9ca3af;
-	--muted-2: #4b5563;
+	--muted-2: #8b94a0;
 	--line: #1f242d;
 	--line-active: #2d3542;
 	--accent: #ff5500;
@@ -214,7 +214,8 @@ html[dir="rtl"] .marquee-track {
 
 .btn-primary {
 	background: var(--accent);
-	color: #ffffff;
+	color: var(--paper);
+	font-weight: 600;
 }
 
 .btn-primary:hover {

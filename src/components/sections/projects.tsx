@@ -175,7 +175,7 @@ export function Projects() {
 									onClick={() => setActiveFilter(tab.id)}
 									className={`mono text-[0.72rem] sm:text-[0.76rem] px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full transition-all duration-200 whitespace-nowrap cursor-pointer flex items-center gap-1.5 sm:gap-2 ${
 										isActive
-											? "bg-accent text-white font-semibold"
+											? "bg-accent text-paper font-semibold"
 											: "text-muted hover:text-ink hover:bg-surface-hover/80"
 									}`}
 								>
@@ -183,7 +183,7 @@ export function Projects() {
 									<span
 										className={`text-[0.65rem] sm:text-[0.68rem] px-1.5 py-0.2 rounded-full ${
 											isActive
-												? "bg-white/20 text-white font-bold"
+												? "bg-paper/20 text-paper font-bold"
 												: "bg-paper text-muted-2"
 										}`}
 									>
@@ -267,7 +267,7 @@ export function Projects() {
 												href={project.linkUrl}
 												target="_blank"
 												rel="noopener noreferrer"
-												className="mono text-[0.76rem] sm:text-[0.78rem] font-semibold text-ink bg-paper border border-line px-3 sm:px-3.5 py-1 rounded-md transition-all duration-150 hover:bg-accent hover:text-white hover:border-accent no-underline"
+												className="mono text-[0.76rem] sm:text-[0.78rem] font-semibold text-ink bg-paper border border-line px-3 sm:px-3.5 py-1 rounded-md transition-all duration-150 hover:bg-accent hover:text-paper hover:border-accent no-underline"
 											>
 												{linkText}
 											</a>
