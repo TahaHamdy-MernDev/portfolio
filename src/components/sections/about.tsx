@@ -1,3 +1,4 @@
+import { ArrowRight, ArrowUpRight, FileText } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { SectionHead } from "@/components/ui/section-head";
 
@@ -37,38 +38,41 @@ export function About() {
 				>
 					{/* Narrative Column */}
 					<div className="lg:col-span-6">
-						<p className="text-[1.14rem] sm:text-[1.26rem] font-sans font-semibold text-ink leading-relaxed mb-6">
+						<p className="text-[1.05rem] sm:text-[1.26rem] font-sans font-semibold text-ink leading-relaxed mb-4 sm:mb-6">
 							{t("bio_lead")}
 						</p>
 
-						<p className="text-muted text-[0.96rem] sm:text-[1.02rem] leading-relaxed mb-8">
+						<p className="text-muted text-[0.9rem] sm:text-[1.02rem] leading-relaxed mb-6 sm:mb-8">
 							{t("bio_body")}
 						</p>
 
-						<div className="flex flex-wrap items-center gap-3">
+						<div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
 							<a
 								href="#contact"
-								className="btn btn-primary text-[0.84rem] sm:text-[0.88rem]"
+								className="btn btn-primary text-[0.82rem] sm:text-[0.88rem] px-3.5 sm:px-4 py-2 sm:py-2.5 flex items-center gap-1.5"
 							>
-								{t("section_tag")} →
+								<span>{t("section_tag")}</span>
+								<ArrowRight className="size-3.5 rtl:rotate-180" />
 							</a>
+							
 							<a
 								href="https://github.com/TahaHamdy-MernDev"
 								target="_blank"
 								rel="noreferrer"
-								className="btn btn-ghost text-[0.84rem] sm:text-[0.88rem]"
+								className="btn btn-ghost text-[0.82rem] sm:text-[0.88rem] px-3.5 sm:px-4 py-2 sm:py-2.5 flex items-center gap-1.5"
 							>
-								GitHub Profile ↗
+								<span>GitHub Profile</span>
+								<ArrowUpRight className="size-3.5 rtl:-rotate-90" />
 							</a>
 						</div>
 					</div>
 
 					{/* Core Principles Column */}
-					<div className="lg:col-span-6 flex flex-col gap-4">
+					<div className="lg:col-span-6 flex flex-col gap-3.5 sm:gap-4">
 						{principles.map((item, idx) => (
 							<div
 								key={item.title}
-								className="p-5 sm:p-6 rounded-(--radius) bg-surface border border-line hover:border-accent/40 transition-all duration-200 group"
+								className="p-4 sm:p-6 rounded-(--radius) bg-surface border border-line hover:border-accent/40 transition-all duration-200 group"
 							>
 								<div className="flex items-center justify-between mb-2 sm:mb-3">
 									<span className="mono text-[0.72rem] font-bold text-accent-ink tracking-wider">

@@ -44,7 +44,7 @@ export function Process() {
 					{steps.map((step) => (
 						<article
 							key={step.num}
-							className="process-card p-5 sm:p-6 rounded-(--radius) border bg-surface/50 border-line hover:border-accent hover:bg-surface transition-all duration-200 relative overflow-hidden flex flex-col justify-between min-h-65 group"
+							className="process-card p-4 sm:p-6 rounded-(--radius) border bg-surface/50 border-line hover:border-accent hover:bg-surface transition-all duration-200 relative overflow-hidden flex flex-col justify-between min-h-55 sm:min-h-65 group"
 						>
 							{/* Step Watermark Number */}
 							<div className="absolute top-2 inset-e-3 text-[3.2rem] sm:text-[4rem] font-bold font-mono text-line/40 select-none pointer-events-none group-hover:text-line/60 transition-colors">

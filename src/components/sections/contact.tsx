@@ -1,10 +1,18 @@
 "use client";
 
-import { ArrowUpRight, Check, Clock, Copy, Mail, MapPin } from "lucide-react";
-import Image from "next/image";
-import { useTranslations } from "next-intl";
-import { useEffect, useRef, useState } from "react";
 import { SectionHead } from "@/components/ui/section-head";
+import {
+	ArrowRight,
+	ArrowUpRight,
+	Check,
+	Clock,
+	Copy,
+	Mail,
+	MapPin,
+} from "lucide-react";
+import { useTranslations } from "next-intl";
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 
 function WhatsAppIcon({ className }: { className?: string }) {
 	return (
@@ -75,7 +83,7 @@ export function Contact() {
 			label: t("whatsapp_label"),
 			val: "+20 10 13745260",
 			desc: "Instant chat for project inquiries",
-			href: "https://wa.me/201013745260",
+			href: "https://wa.me/201114911898",
 			tag: "DIRECT_MSG",
 			icon: WhatsAppIcon,
 			brandColor: "text-[#25D366]",
@@ -180,8 +188,8 @@ export function Contact() {
 						isInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3.5"
 					}`}
 				>
-					{/* Card 1: Dedicated Image Card (4 cols) */}
-					<div className="lg:col-span-4 relative rounded-xl sm:rounded-2xl overflow-hidden border border-line bg-surface group min-h-105 sm:min-h-110 shadow-lg hover:border-accent/50 transition-all duration-300 flex flex-col justify-between p-5">
+					{/* Card 1: Dedicated Image Card (4 cols) — Compact min-h-75 on mobile */}
+					<div className="lg:col-span-4 relative rounded-xl sm:rounded-2xl overflow-hidden border border-line bg-surface group min-h-75 sm:min-h-110 shadow-lg hover:border-accent/50 transition-all duration-300 flex flex-col justify-between p-4 sm:p-5">
 						<Image
 							src="/taha-contact.jpg"
 							alt="Taha Hamdy — Full-Stack Developer & Systems Architect"
@@ -197,34 +205,34 @@ export function Contact() {
 
 						{/* Top Availability Badge */}
 						<div className="relative z-10 flex items-center justify-between gap-2 flex-wrap">
-							<div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/70 backdrop-blur-xl border border-emerald-500/30 shadow-lg shadow-black/40">
+							<div className="flex items-center gap-2 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-black/70 backdrop-blur-xl border border-emerald-500/30 shadow-lg shadow-black/40">
 								<span className="relative flex size-2">
 									<span className="animate-ping absolute inline-flex size-full rounded-full bg-emerald-400 opacity-75" />
 									<span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
 								</span>
-								<span className="mono text-[0.68rem] uppercase tracking-wider text-emerald-400 font-bold drop-shadow">
+								<span className="mono text-[0.64rem] sm:text-[0.68rem] uppercase tracking-wider text-emerald-400 font-bold drop-shadow">
 									{tCommon("statusBadge")}
 								</span>
 							</div>
 
-							<div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/70 backdrop-blur-xl border border-white/15 shadow-lg shadow-black/40 text-zinc-200">
+							<div className="flex items-center gap-1.5 px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-full bg-black/70 backdrop-blur-xl border border-white/15 shadow-lg shadow-black/40 text-zinc-200">
 								<MapPin className="size-3 text-accent-ink shrink-0" />
-								<span className="mono text-[0.68rem] font-medium tracking-tight">
+								<span className="mono text-[0.64rem] sm:text-[0.68rem] font-medium tracking-tight">
 									Alexandria, EG
 								</span>
 							</div>
 						</div>
 
 						{/* Bottom Identity Card */}
-						<div className="relative z-10 p-3.5 rounded-xl bg-paper/90 backdrop-blur-md border border-line/80 shadow-lg">
-							<h3 className="font-sans font-extrabold text-[1.2rem] text-ink leading-tight m-0">
+						<div className="relative z-10 p-3 sm:p-3.5 rounded-xl bg-paper/90 backdrop-blur-md border border-line/80 shadow-lg">
+							<h3 className="font-sans font-extrabold text-[1.12rem] sm:text-[1.2rem] text-ink leading-tight m-0">
 								{tCommon("brandTitle")}
 							</h3>
 							<div className="flex items-center justify-between gap-2 mt-1">
-								<span className="mono text-[0.74rem] text-accent-ink font-medium">
+								<span className="mono text-[0.7rem] sm:text-[0.74rem] text-accent-ink font-medium">
 									{tCommon("systemArchitecture")}
 								</span>
-								<span className="mono text-[0.66rem] text-muted-2 shrink-0">
+								<span className="mono text-[0.64rem] sm:text-[0.66rem] text-muted-2 shrink-0">
 									[ACTIVE_CONTRACTS]
 								</span>
 							</div>
@@ -232,53 +240,52 @@ export function Contact() {
 					</div>
 
 					{/* Card 2: Primary Email Outreach Card (4 cols) */}
-					<div className="lg:col-span-4 p-5 sm:p-6 rounded-xl sm:rounded-2xl bg-surface border border-line hover:border-accent/40 transition-all duration-200 flex flex-col justify-between min-h-105 sm:min-h-110 shadow-lg">
+					<div className="lg:col-span-4 p-4 sm:p-6 rounded-xl sm:rounded-2xl bg-surface border border-line hover:border-accent/40 transition-all duration-200 flex flex-col justify-between min-h-auto sm:min-h-110 shadow-lg">
 						<div>
 							<div className="flex items-center justify-between mb-3">
 								<span className="mono text-[0.68rem] uppercase tracking-wider text-muted-2 font-semibold">
 									{t("email_label")}
 								</span>
-								<span className="mono text-[0.66rem] text-accent-ink px-2.5 py-0.5 rounded-full bg-accent-soft border border-accent-border font-medium">
-									DIRECT_OUTREACH
+								<span className="mono text-[0.68rem] text-accent-ink bg-accent-soft border border-accent-border px-2 py-0.5 rounded-md font-bold">
+									PRIMARY_CONTACT
 								</span>
 							</div>
 
-							{/* Monospace Email Box */}
-							<div className="p-3.5 rounded-xl bg-paper border border-line mb-4">
-								<span className="mono text-[0.62rem] uppercase tracking-wider text-muted-2 block mb-1 font-semibold">
-									PRIMARY_ENDPOINT
-								</span>
-								<p className="font-mono text-[0.92rem] sm:text-[0.98rem] font-bold text-ink break-all select-all m-0">
-									{email}
-								</p>
-							</div>
-
-							<p className="text-[0.84rem] text-muted leading-relaxed mb-4">
-								Available for systems architecture consulting, high-throughput
-								SaaS platforms, and full-stack development contracts.
+							<h3 className="font-sans text-[1.24rem] sm:text-[1.45rem] font-extrabold text-ink tracking-tight mb-2">
+								{t("direct_inquiries")}
+							</h3>
+							<p className="text-muted text-[0.84rem] sm:text-[0.88rem] leading-relaxed mb-4">
+								{t("email_desc")}
 							</p>
 
-							{/* Stack Tags */}
-							<div className="flex flex-wrap gap-1.5 pt-1">
-								{["Next.js 16", "NestJS", "PostgreSQL", "BullMQ"].map((tag) => (
-									<span
-										key={tag}
-										className="mono text-[0.68rem] px-2 py-0.5 rounded-md bg-surface-card border border-line text-muted"
-									>
-										{tag}
-									</span>
-								))}
-							</div>
-						</div>
-
-						{/* Action Buttons & Telemetry SLA */}
-						<div className="flex flex-col gap-3 pt-4 border-t border-line/60">
-							<div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-								{/* 1-Click Copy Email Button */}
+							{/* Display Copyable Email Bar */}
+							<div className="p-3 rounded-xl bg-surface-card border border-line flex items-center justify-between gap-2 mb-4 group/email">
+								<span className="mono text-[0.76rem] sm:text-[0.82rem] text-ink font-semibold select-all truncate">
+									{email}
+								</span>
 								<button
 									type="button"
 									onClick={copyEmail}
-									className={`cursor-pointer py-3 px-4 rounded-xl text-[0.84rem] font-semibold flex items-center justify-center gap-2 border transition-all duration-200 active:scale-[0.97] select-none ${
+									className="text-muted hover:text-accent-ink p-1.5 rounded-lg hover:bg-surface transition-colors cursor-pointer shrink-0"
+									aria-label={t("copy_email")}
+								>
+									{copied ? (
+										<Check className="size-4 text-emerald-400 animate-in zoom-in duration-200" />
+									) : (
+										<Copy className="size-4" />
+									)}
+								</button>
+							</div>
+						</div>
+
+						{/* Action Buttons Row */}
+						<div className="flex flex-col gap-3 pt-2">
+							<div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+								{/* Copy Button */}
+								<button
+									type="button"
+									onClick={copyEmail}
+									className={`cursor-pointer py-2.5 sm:py-3 px-4 rounded-xl text-[0.82rem] sm:text-[0.84rem] font-semibold flex items-center justify-center gap-2 border transition-all duration-200 active:scale-[0.97] select-none ${
 										copied
 											? "bg-emerald-500/15 border-emerald-500/40 text-emerald-400 shadow-md shadow-emerald-500/10"
 											: "bg-surface-card hover:bg-surface-hover border-line hover:border-accent/40 text-ink hover:text-accent-ink shadow-sm"
@@ -300,14 +307,14 @@ export function Contact() {
 								{/* Send Direct Email Primary CTA */}
 								<a
 									href={`mailto:${email}`}
-									className="py-2 px-3 rounded-xl text-[0.84rem] text-center flex items-center justify-center gap-2 font-semibold bg-accent hover:bg-accent-hover text-paper active:scale-[0.97] transition-all duration-200 shadow-lg shadow-accent/25 hover:shadow-accent/40 no-underline group/btn"
+									className="py-2.5 sm:py-3 px-4 rounded-xl text-[0.82rem] sm:text-[0.84rem] text-center flex items-center justify-center gap-2 font-semibold bg-accent hover:bg-accent-hover text-paper active:scale-[0.97] transition-all duration-200 shadow-lg shadow-accent/25 hover:shadow-accent/40 no-underline group/btn"
 								>
 									<Mail className="size-4 transition-transform group-hover/btn:-translate-y-0.5" />
 									<span>{t("send_direct")}</span>
 								</a>
 							</div>
 
-							<div className="flex items-center justify-center gap-1.5 text-[0.7rem] mono text-muted">
+							<div className="flex items-center justify-center gap-1.5 text-[0.68rem] sm:text-[0.7rem] mono text-muted">
 								<Clock className="size-3 text-accent-ink" />
 								<span>
 									{t("response_time")}{" "}
@@ -319,8 +326,8 @@ export function Contact() {
 						</div>
 					</div>
 
-					{/* Card 3: Secondary Communication Channels with Official Brand Logos (4 cols) */}
-					<div className="md:col-span-2 lg:col-span-4 flex flex-col justify-between gap-3 min-h-105 sm:min-h-110">
+					{/* Card 3: Secondary Communication Channels (4 cols) */}
+					<div className="md:col-span-2 lg:col-span-4 flex flex-col justify-between gap-2.5 sm:gap-3 min-h-auto sm:min-h-110">
 						{contactItems.map((item) => {
 							const Icon = item.icon;
 							return (
@@ -329,7 +336,7 @@ export function Contact() {
 									href={item.href}
 									target="_blank"
 									rel="noreferrer"
-									className="p-4 rounded-xl sm:rounded-2xl bg-surface border border-line hover:border-accent hover:bg-surface-hover transition-all duration-200 no-underline flex flex-col justify-between flex-1 group shadow-md"
+									className="p-3.5 sm:p-4 rounded-xl sm:rounded-2xl bg-surface border border-line hover:border-accent hover:bg-surface-hover active:scale-[0.98] transition-all duration-200 no-underline flex flex-col justify-between flex-1 group shadow-md"
 								>
 									<div className="flex items-center justify-between mb-2">
 										<div className="flex items-center gap-3">
@@ -360,8 +367,9 @@ export function Contact() {
 										<span className="mono text-[0.74rem] text-muted group-hover:text-ink transition-colors truncate">
 											{item.val}
 										</span>
-										<span className="mono text-[0.66rem] text-accent-ink opacity-0 group-hover:opacity-100 transition-opacity">
-											CONNECT ➔
+										<span className="mono text-[0.66rem] text-accent-ink opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
+											<span>CONNECT</span>
+											<ArrowRight className="size-3 rtl:rotate-180" />
 										</span>
 									</div>
 								</a>

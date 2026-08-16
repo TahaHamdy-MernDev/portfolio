@@ -31,40 +31,55 @@ Taha Hamdy is a Full-Stack Developer and Systems Architect with 3+ years of expe
 ## Key Systems & Case Studies
 
 ### 1. Egapy ERP
-- **Website**: [https://egapy.com](https://egapy.com)
+- **Website**: [https://www.egapy.com/ar](https://www.egapy.com/ar)
 - **Role**: Full-Stack Developer (Team of 2)
 - **Status**: Live Product in Production
 - **Description**: Enterprise Resource Planning solution designed to help businesses of all sizes streamline operations, manage multi-branch inventory, handle invoicing, and monitor business analytics.
-- **Architecture**: Next.js (App Router) + NestJS + PostgreSQL + Redis Cache.
+- **Architecture**: Next.js (App Router) + NestJS + PostgreSQL + Prisma.
 - **Key Features**: Multi-tenant authorization, real-time inventory ledger, automated PDF invoicing, audit logging.
 
 ### 2. Labaik Umrah Platform
-- **Website**: [https://labaik-al-umrah.com](https://labaik-al-umrah.com)
+- **Website**: [https://labaikapp.com/ar](https://labaikapp.com/ar)
 - **Role**: Full-Stack Developer (Solo)
 - **Status**: Live Landing & Private Administrative Dashboard
 - **Description**: A platform that facilitates "Umrah al-Badal" by connecting individuals with verified delegates who perform Umrah on behalf of loved ones (elderly, ill, or deceased).
-- **Architecture**: Next.js + NestJS + PostgreSQL + Redis + WebSocket pipeline.
-- **Key Features**: Live video/photo proof of execution, administrative dashboard, mobile app backend API, payment processing.
+- **Architecture**: Next.js + NestJS + MySQL + TypeORM + BullMQ + FCM + Sockets.
+- **Key Features**: Live landing site, private admin dashboard, mobile app backend API, push notification queues.
 
 ### 3. Nazam Commerce Platform
-- **Repository**: [https://github.com/TahaHamdy-MernDev](https://github.com/TahaHamdy-MernDev)
+- **Repository**: [https://github.com/TahaHamdy-MernDev/nazam](https://github.com/TahaHamdy-MernDev/nazam)
 - **Role**: Full-Stack Developer (Solo)
 - **Status**: Private Repository
 - **Description**: Commerce-operations platform unifying multi-channel inventory, automated catalog synchronization, and distributed order processing.
-- **Architecture**: Next.js + Node.js + BullMQ + PostgreSQL.
+- **Architecture**: Next.js + NestJS + Turborepo + Prisma + PostgreSQL + Redis + BullMQ.
 
 ### 4. Buy From Egypt
 - **Repository**: [https://github.com/TahaHamdy-MernDev](https://github.com/TahaHamdy-MernDev)
-- **Role**: Full-Stack Developer
-- **Status**: Open Source Showcase
-- **Description**: Cross-border e-commerce platform allowing international customers to discover and purchase authentic Egyptian products with localized currencies and multi-language support.
-- **Architecture**: React + Express + PostgreSQL + Stripe/PayPal.
+- **Role**: Front-End Developer
+- **Status**: Private · Unpublished
+- **Description**: B2B export platform connecting Egyptian exporters with global buyers through business profiles, product listings, and communication workflows — integrated with a custom-built ML conversational model.
+- **Architecture**: Next.js + shadcn/ui + ML integration.
 
-### 5. FastChat Real-Time Infrastructure
-- **Repository**: [https://github.com/TahaHamdy-MernDev](https://github.com/TahaHamdy-MernDev)
-- **Role**: Backend & Systems Architect
-- **Status**: Open Source Showcase
-- **Description**: Low-latency chat and communication server built with Socket.IO, Redis PubSub, and MongoDB, handling high concurrent socket connections with minimal memory overhead.
+### 5. Coldwell Banker — New Alex
+- **Repository**: [https://github.com/TahaHamdy-MernDev/cold-well-banker](https://github.com/TahaHamdy-MernDev/cold-well-banker)
+- **Role**: Full-Stack Developer (Solo)
+- **Status**: Formerly Live · Now Offline
+- **Description**: Real estate discovery platform with property filtering, interactive maps, multilingual support, and SEO optimization.
+- **Architecture**: Vite + Bootstrap 5 + Node.js + Express.js + MongoDB + Cloudinary.
+
+### 6. GEDO
+- **Repository**: [https://github.com/TahaHamdy-MernDev/GEDO](https://github.com/TahaHamdy-MernDev/GEDO)
+- **Role**: Backend Developer
+- **Status**: Open Source Repository
+- **Description**: Alzheimer's care management system helping caregivers and family members manage medication, health tracking, and daily activity monitoring for patients.
+- **Architecture**: Node.js + Express.js + MongoDB.
+
+### 7. Ecombo
+- **Website**: [https://ecombo.co/ar](https://ecombo.co/ar)
+- **Role**: Front-End Developer (React.js)
+- **Status**: Live Landing Page (Production)
+- **Description**: The leading e-commerce service and logistics platform in the UAE and Saudi Arabia, serving as a virtual warehouse for merchants to launch businesses with zero upfront capital — providing automated product sourcing, warehousing, custom packaging, 24/7 support, and fast GCC shipping.
+- **Technologies**: React.js, JavaScript, HTML5, CSS3, Responsive UI.
 
 ---
 
@@ -121,7 +136,7 @@ A: Alexandria, Egypt (UTC+2 / UTC+3 timezone), with extensive experience collabo
 ## Contact & Professional Profiles
 
 - **Email**: [tahahamdy.dev@gmail.com](mailto:tahahamdy.dev@gmail.com)
-- **WhatsApp**: [+20 10 13745260](https://wa.me/201013745260)
+- **WhatsApp**: [+20 10 13745260](https://wa.me/201114911898)
 - **GitHub**: [https://github.com/TahaHamdy-MernDev](https://github.com/TahaHamdy-MernDev)
 - **LinkedIn**: [https://www.linkedin.com/in/taha-hamdy](https://www.linkedin.com/in/taha-hamdy)
 - **Website**: [https://taha-hamdy.vercel.app](https://taha-hamdy.vercel.app)

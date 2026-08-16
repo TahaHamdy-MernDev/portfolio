@@ -1,5 +1,7 @@
 "use client";
 
+import { ArrowRight, ArrowUpRight, Lock, X } from "lucide-react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { SectionHead } from "@/components/ui/section-head";
@@ -9,21 +11,29 @@ interface TopologyNode {
 	type: "client" | "service" | "queue" | "db" | "infra";
 }
 
+interface StatusBadge {
+	code: string;
+	variant: "live" | "verified" | "private" | "archived" | "case_study";
+}
+
 interface ProjectItem {
 	id: string;
 	category: "saas" | "realtime" | "ecommerce";
 	isLive?: boolean;
 	linkUrl?: string;
+	image?: string;
+	routeUrl: string;
 	tags: string[];
-	topology: TopologyNode[];
+	topology?: TopologyNode[];
 	telemetry: string;
+	statusBadge: StatusBadge;
 }
 
 const PROJECTS: ProjectItem[] = [
 	{
 		id: "nazam",
 		category: "saas",
-		linkUrl: "https://github.com/TahaHamdy-MernDev/nazam",
+		routeUrl: "https://app.nazam.internal/inventory/fulfillment",
 		tags: [
 			"Next.js",
 			"NestJS",
@@ -41,12 +51,18 @@ const PROJECTS: ProjectItem[] = [
 			{ label: "PostgreSQL", type: "db" },
 		],
 		telemetry: "ARCH: MONOREPO · DB: POSTGRESQL · QUEUE: BULLMQ · CACHE: REDIS",
+		statusBadge: {
+			code: "[PROPRIETARY_MONOREPO]",
+			variant: "private",
+		},
 	},
 	{
 		id: "egapy",
 		category: "saas",
 		isLive: true,
 		linkUrl: "https://www.egapy.com/ar",
+		image: "/projects/egapy.jpg",
+		routeUrl: "https://www.egapy.com/ar/dashboard",
 		tags: ["Next.js", "NestJS", "Prisma", "PostgreSQL"],
 		topology: [
 			{ label: "Next.js UI", type: "client" },
@@ -55,12 +71,18 @@ const PROJECTS: ProjectItem[] = [
 			{ label: "PostgreSQL", type: "db" },
 		],
 		telemetry: "PLATFORM: ERP · ARCH: FULL-STACK · DB: POSTGRESQL",
+		statusBadge: {
+			code: "[LIVE_PRODUCTION]",
+			variant: "live",
+		},
 	},
 	{
 		id: "labaik",
 		category: "realtime",
 		isLive: true,
 		linkUrl: "https://labaikapp.com/ar",
+		image: "/projects/labaik.jpg",
+		routeUrl: "https://labaikapp.com/ar/portal",
 		tags: ["Next.js", "NestJS", "TypeORM", "MySQL", "BullMQ", "FCM", "Sockets"],
 		topology: [
 			{ label: "Next.js Web", type: "client" },
@@ -69,10 +91,16 @@ const PROJECTS: ProjectItem[] = [
 			{ label: "MySQL", type: "db" },
 		],
 		telemetry: "SERVICES: WEB + MOBILE APP + DASHBOARD · QUEUES: BULLMQ",
+		statusBadge: {
+			code: "[LIVE_DEPLOYMENT]",
+			variant: "live",
+		},
 	},
 	{
 		id: "buy_from_egypt",
 		category: "ecommerce",
+		image: "/projects/buy_from_egypt.jpg",
+		routeUrl: "https://b2b.buyfromegypt.com/marketplace",
 		tags: ["Next.js", "shadcn/ui", "ML integration"],
 		topology: [
 			{ label: "Next.js UI", type: "client" },
@@ -80,11 +108,17 @@ const PROJECTS: ProjectItem[] = [
 			{ label: "B2B Gateway", type: "infra" },
 		],
 		telemetry: "DOMAIN: B2B EXPORT · AI: EMBEDDED ML MODEL",
+		statusBadge: {
+			code: "[PROPRIETARY_SYSTEM]",
+			variant: "private",
+		},
 	},
 	{
 		id: "coldwell_banker",
 		category: "ecommerce",
 		linkUrl: "https://github.com/TahaHamdy-MernDev/cold-well-banker",
+		image: "/projects/coldwell_banker.png",
+		routeUrl: "https://coldwellbanker-newalex.eg/properties",
 		tags: [
 			"Vite",
 			"Bootstrap 5",
@@ -100,10 +134,17 @@ const PROJECTS: ProjectItem[] = [
 			{ label: "Cloudinary", type: "infra" },
 		],
 		telemetry: "PLATFORM: REAL ESTATE · MAPS: INTERACTIVE · DB: MONGODB",
+		statusBadge: {
+			code: "[ARCHIVED_OFFLINE]",
+			variant: "archived",
+		},
 	},
 	{
 		id: "gedo",
 		category: "realtime",
+		linkUrl: "https://github.com/TahaHamdy-MernDev/GEDO",
+		image: "/projects/gedo.jpg",
+		routeUrl: "https://gedo-care.internal/vitals/stream",
 		tags: ["Node.js", "Express.js", "MongoDB"],
 		topology: [
 			{ label: "Caregiver App", type: "client" },
@@ -111,22 +152,67 @@ const PROJECTS: ProjectItem[] = [
 			{ label: "MongoDB", type: "db" },
 		],
 		telemetry: "DOMAIN: HEALTHCARE / ALZHEIMER · DB: MONGODB",
+		statusBadge: {
+			code: "[VERIFIED_CODEBASE]",
+			variant: "verified",
+		},
+	},
+	{
+		id: "ecombo",
+		category: "ecommerce",
+		isLive: true,
+		linkUrl: "https://ecombo.co/ar",
+		image: "/projects/ecombo.jpg",
+		routeUrl: "https://ecombo.co/ar",
+		tags: ["React.js", "JavaScript", "HTML5", "CSS3", "Responsive UI"],
+		topology: [
+			{ label: "React.js Client", type: "client" },
+			{ label: "REST APIs", type: "service" },
+			{ label: "GCC Logistics Hub", type: "infra" },
+		],
+		telemetry: "DOMAIN: E-COMMERCE LOGISTICS · STACK: REACT.JS · REPO: PRIVATE",
+		statusBadge: {
+			code: "[LIVE_PRODUCTION]",
+			variant: "live",
+		},
 	},
 ];
+
+interface SelectedImageModal {
+	src: string;
+	title: string;
+	arabicTitle?: string;
+	routeUrl: string;
+	linkUrl?: string;
+	isLive?: boolean;
+}
 
 export function Projects() {
 	const t = useTranslations("Projects");
 
 	const filterTabs = [
-		{ id: "all", label: t("tabs.all"), count: 6 },
+		{ id: "all", label: t("tabs.all"), count: 7 },
 		{ id: "saas", label: t("tabs.saas"), count: 2 },
-		{ id: "ecommerce", label: t("tabs.ecommerce"), count: 2 },
+		{ id: "ecommerce", label: t("tabs.ecommerce"), count: 3 },
 		{ id: "realtime", label: t("tabs.realtime"), count: 2 },
 	];
 
 	const [activeFilter, setActiveFilter] = useState<string>("all");
 	const [isInView, setIsInView] = useState(false);
+	const [selectedImage, setSelectedImage] = useState<SelectedImageModal | null>(
+		null,
+	);
 	const listRef = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		const handleKeyDown = (e: KeyboardEvent) => {
+			if (e.key === "Escape") {
+				setSelectedImage(null);
+			}
+		};
+		window.addEventListener("keydown", handleKeyDown);
+		return () => window.removeEventListener("keydown", handleKeyDown);
+	}, []);
 
 	useEffect(() => {
 		const el = listRef.current;
@@ -165,7 +251,7 @@ export function Projects() {
 
 				{/* Filter Tabs & System Telemetry Bar */}
 				<div className="flex flex-wrap items-center justify-between gap-4 mb-8 sm:mb-10">
-					<div className="flex items-center gap-1.5 p-1 sm:p-1.5 bg-surface/90 backdrop-blur-md border border-line rounded-full overflow-x-auto max-w-full scrollbar-none [-ms-overflow-style:none]">
+					<div className="flex items-center gap-1.5 px-2 py-1.5 sm:p-1.5 bg-surface/90 backdrop-blur-md border border-line rounded-full overflow-x-auto max-w-full scrollbar-none [-ms-overflow-style:none]">
 						{filterTabs.map((tab) => {
 							const isActive = activeFilter === tab.id;
 							return (
@@ -173,7 +259,7 @@ export function Projects() {
 									key={tab.id}
 									type="button"
 									onClick={() => setActiveFilter(tab.id)}
-									className={`mono text-[0.72rem] sm:text-[0.76rem] px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full transition-all duration-200 whitespace-nowrap cursor-pointer flex items-center gap-1.5 sm:gap-2 ${
+									className={`mono text-[0.7rem] sm:text-[0.76rem] px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full transition-all duration-200 whitespace-nowrap cursor-pointer flex items-center gap-1.5 sm:gap-2 shrink-0 ${
 										isActive
 											? "bg-accent text-paper font-semibold"
 											: "text-muted hover:text-ink hover:bg-surface-hover/80"
@@ -181,7 +267,7 @@ export function Projects() {
 								>
 									<span>{tab.label}</span>
 									<span
-										className={`text-[0.65rem] sm:text-[0.68rem] px-1.5 py-0.2 rounded-full ${
+										className={`text-[0.62rem] sm:text-[0.68rem] px-1.5 py-0.2 rounded-full ${
 											isActive
 												? "bg-paper/20 text-paper font-bold"
 												: "bg-paper text-muted-2"
@@ -231,115 +317,182 @@ export function Projects() {
 									transitionDelay: `${idx * 60}ms, ${idx * 60}ms, 0ms`,
 								}}
 							>
-								{/* Card Top Header Terminal Bar */}
-								<div className="p-3.5 sm:p-5 border-b border-line bg-surface-card/95 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-									<div className="flex items-center gap-2.5 sm:gap-3 flex-wrap">
-										<span className="mono text-[0.72rem] sm:text-[0.74rem] font-bold text-accent-ink bg-accent-soft border border-accent-border px-2 sm:px-2.5 py-0.5 rounded-md shrink-0">
-											SYS.0{PROJECTS.findIndex((p) => p.id === project.id) + 1}
-										</span>
-										<h3 className="font-sans text-[1.12rem] sm:text-[1.38rem] font-bold text-ink tracking-tight m-0 flex items-center gap-2">
-											<span>{title}</span>
-											{arabicTitle && (
-												<span className="mono text-[0.72em] font-normal text-muted">
-													({arabicTitle})
+								{/* Card Top Header Terminal Bar — Responsive 2-Row on Mobile */}
+								<div className="p-3 sm:p-5 border-b border-line bg-surface-card/95 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3">
+									{/* Row 1 on mobile: System ID, Title, and Action Link */}
+									<div className="flex items-center justify-between gap-2 w-full sm:w-auto">
+										<div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+											<span className="mono text-[0.7rem] sm:text-[0.74rem] font-bold text-accent-ink bg-accent-soft border border-accent-border px-2 sm:px-2.5 py-0.5 rounded-md shrink-0">
+												SYS.0
+												{PROJECTS.findIndex((p) => p.id === project.id) + 1}
+											</span>
+											<h3 className="font-sans text-[1.08rem] sm:text-[1.38rem] font-bold text-ink tracking-tight m-0 flex items-center gap-1.5 sm:gap-2">
+												<span>{title}</span>
+												{arabicTitle && (
+													<span className="mono text-[0.72em] font-normal text-muted">
+														({arabicTitle})
+													</span>
+												)}
+											</h3>
+										</div>
+
+										{/* Mobile-Visible Direct Action Link */}
+										<div className="sm:hidden shrink-0">
+											{hasLink && project.linkUrl ? (
+												<a
+													href={project.linkUrl}
+													target="_blank"
+													rel="noopener noreferrer"
+													className="mono text-[0.72rem] font-semibold text-ink bg-paper border border-line px-2.5 py-1 rounded-md transition-all duration-150 hover:bg-accent hover:text-paper hover:border-accent no-underline flex items-center gap-1"
+												>
+													<span>{linkText}</span>
+													<ArrowUpRight className="size-3 rtl:-rotate-90 shrink-0" />
+												</a>
+											) : (
+												<span className="mono text-[0.68rem] text-muted-2 border border-dashed border-line px-2 py-0.5 rounded-md cursor-default">
+													{disabledText}
 												</span>
 											)}
-										</h3>
-										<span className="mono text-[0.72rem] text-muted-2 hidden sm:inline">
-											/
-										</span>
-										<span className="mono text-[0.74rem] text-muted hidden sm:inline">
-											{role}
-										</span>
+										</div>
 									</div>
 
-									{/* Top Right Status & Action Link */}
-									<div className="flex items-center gap-2.5 sm:gap-3 justify-between sm:justify-end w-full sm:w-auto pt-1 sm:pt-0 border-t sm:border-t-0 border-line/40">
-										<span className="mono text-[0.7rem] sm:text-[0.72rem] px-2 sm:px-2.5 py-1 rounded-full bg-paper border border-line text-muted flex items-center gap-1.5 sm:gap-2">
-											{project.isLive && (
-												<span className="size-1.5 rounded-full bg-status-live animate-pulse" />
-											)}
-											{status}
-										</span>
-
-										{hasLink && project.linkUrl ? (
-											<a
-												href={project.linkUrl}
-												target="_blank"
-												rel="noopener noreferrer"
-												className="mono text-[0.76rem] sm:text-[0.78rem] font-semibold text-ink bg-paper border border-line px-3 sm:px-3.5 py-1 rounded-md transition-all duration-150 hover:bg-accent hover:text-paper hover:border-accent no-underline"
-											>
-												{linkText}
-											</a>
-										) : (
-											<span className="mono text-[0.72rem] sm:text-[0.74rem] text-muted-2 border border-dashed border-line px-2 sm:px-2.5 py-1 rounded-md cursor-default">
-												{disabledText}
+									{/* Row 2 on mobile: Role + Status Badge (and Desktop Action Link) */}
+									<div className="flex items-center justify-between sm:justify-end gap-2.5 sm:gap-3 w-full sm:w-auto pt-1.5 sm:pt-0 border-t sm:border-t-0 border-line/40">
+										<div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+											<span className="mono text-[0.7rem] sm:text-[0.74rem] text-muted">
+												{role}
 											</span>
-										)}
+											<span className="mono text-[0.7rem] text-muted-2">/</span>
+											<span className="mono text-[0.66rem] sm:text-[0.72rem] px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-paper border border-line text-muted flex items-center gap-1.5">
+												{project.isLive && (
+													<span className="size-1.5 rounded-full bg-status-live animate-pulse" />
+												)}
+												{status}
+											</span>
+										</div>
+
+										{/* Desktop-Visible Action Link */}
+										<div className="hidden sm:block">
+											{hasLink && project.linkUrl ? (
+												<a
+													href={project.linkUrl}
+													target="_blank"
+													rel="noopener noreferrer"
+													className="mono text-[0.76rem] sm:text-[0.78rem] font-semibold text-ink bg-paper border border-line px-3 sm:px-3.5 py-1 rounded-md transition-all duration-150 hover:bg-accent hover:text-paper hover:border-accent no-underline flex items-center gap-1"
+												>
+													<span>{linkText}</span>
+													<ArrowUpRight className="size-3.5 rtl:-rotate-90 shrink-0" />
+												</a>
+											) : (
+												<span className="mono text-[0.72rem] sm:text-[0.74rem] text-muted-2 border border-dashed border-line px-2 sm:px-2.5 py-1 rounded-md cursor-default">
+													{disabledText}
+												</span>
+											)}
+										</div>
 									</div>
 								</div>
 
-								{/* Card Body — 2-Column Engineered Split */}
-								<div className="p-4 sm:p-7 grid grid-cols-1 lg:grid-cols-[1.2fr_1.1fr] gap-5 sm:gap-8 items-start">
-									{/* Left: Narrative Description */}
-									<div className="flex flex-col gap-3.5 sm:gap-4">
+								{/* Card Body — 2-Column Engineered Split (Clean Media on Left, Specs on Right) */}
+								<div className="p-4 sm:p-7 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-start">
+									{/* Left Column: Clean Image Media or No-Preview Placeholder */}
+									<div className="lg:col-span-6 w-full">
+										{project.image ? (
+											<button
+												type="button"
+												className="w-full text-start group/preview relative border border-line rounded-(--radius) bg-paper overflow-hidden cursor-pointer transition-all duration-300 hover:border-accent/60 hover:shadow-lg hover:shadow-accent/5 p-0 block aspect-video"
+												onClick={() =>
+													setSelectedImage({
+														src: project.image as string,
+														title,
+														arabicTitle,
+														routeUrl: project.routeUrl,
+														linkUrl: project.linkUrl,
+														isLive: project.isLive,
+													})
+												}
+												aria-label={`${title} preview`}
+											>
+												<Image
+													src={project.image}
+													alt={`${title} interface preview`}
+													fill
+													sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+													className="object-cover object-top transition-transform duration-500 ease-out group-hover/preview:scale-[1.025]"
+												/>
+											</button>
+										) : (
+											<div className="w-full aspect-video rounded-(--radius) border border-dashed border-line/80 bg-paper/60 backdrop-blur-sm p-6 sm:p-8 flex flex-col items-center justify-center text-center gap-2.5 relative overflow-hidden select-none">
+												<div className="size-9 rounded-full bg-surface-card border border-line flex items-center justify-center text-muted-2">
+													<Lock className="size-4 text-muted-2 shrink-0" />
+												</div>
+												<div className="flex flex-col gap-1 z-10">
+													<span className="mono text-[0.76rem] font-bold text-ink uppercase tracking-wider">
+														{t("card.no_preview")}
+													</span>
+													<span className="mono text-[0.68rem] text-muted-2">
+														{t("card.proprietary_internal")}
+													</span>
+												</div>
+											</div>
+										)}
+									</div>
+
+									{/* Right Column: Narrative, Architecture Flow & Stack Matrix */}
+									<div className="lg:col-span-6 flex flex-col gap-4 sm:gap-5">
 										<p className="m-0 text-ink text-[0.92rem] sm:text-[0.96rem] leading-relaxed font-normal">
 											{desc}
 										</p>
-									</div>
 
-									{/* Right: Topology Pipeline & Stack Matrix */}
-									<div className="flex flex-col gap-4">
 										{/* Visual Topology Flow */}
-										<div className="bg-paper/80 border border-line rounded-(--radius) p-4">
-											<div className="mono text-[0.66rem] uppercase tracking-wider text-muted-2 mb-3 font-semibold flex justify-between items-center">
-												<span>{t("card.architecture")}</span>
-												<span className="text-[0.6rem] text-accent-ink">
-													[FLOW: CLIENT ➔ DATA]
-												</span>
-											</div>
-
-											<div className="flex items-center gap-2 flex-wrap">
-												{project.topology.map((node, nIdx) => (
-													<span
-														key={node.label}
-														className="flex items-center gap-2"
-													>
-														<span
-															className={`mono text-[0.72rem] px-2.5 py-1 rounded-md border transition-all duration-150 ${
-																node.type === "client"
-																	? "bg-surface text-ink border-line"
-																	: node.type === "service"
-																		? "bg-surface-hover text-ink border-accent/40 font-medium"
-																		: node.type === "queue"
-																			? "bg-accent-soft text-accent-ink border-accent-border font-semibold"
-																			: node.type === "db"
-																				? "bg-surface text-ink border-line font-medium"
-																				: "bg-surface-card text-muted border-line"
-															}`}
-														>
-															{node.label}
-														</span>
-														{nIdx < project.topology.length - 1 && (
-															<span className="text-muted-2 font-mono text-[0.76rem] font-bold rtl:rotate-180">
-																→
-															</span>
-														)}
+										{project.topology && project.topology.length > 0 && (
+											<div className="bg-paper/80 border border-line rounded-(--radius) p-3.5 sm:p-4">
+												<div className="mono text-[0.64rem] sm:text-[0.66rem] uppercase tracking-wider text-muted-2 mb-2.5 sm:mb-3 font-semibold flex justify-between items-center">
+													<span>{t("card.architecture")}</span>
+													<span className="text-[0.58rem] sm:text-[0.6rem] text-accent-ink">
+														[PIPELINE_FLOW]
 													</span>
-												))}
+												</div>
+
+												<div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+													{project.topology.map((node, nIdx) => (
+														<span
+															key={node.label}
+															className="flex items-center gap-1.5 sm:gap-2"
+														>
+															<span
+																className={`mono text-[0.66rem] sm:text-[0.72rem] px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-md border transition-all duration-150 whitespace-nowrap ${
+																	node.type === "client"
+																		? "bg-surface text-ink border-line"
+																		: node.type === "service"
+																			? "bg-surface-hover text-ink border-accent/40 font-medium"
+																			: node.type === "queue"
+																				? "bg-accent-soft text-accent-ink border-accent-border font-semibold"
+																				: node.type === "db"
+																					? "bg-surface text-ink border-line font-medium"
+																					: "bg-surface-card text-muted border-line"
+																}`}
+															>
+																{node.label}
+															</span>
+															{nIdx < (project.topology?.length ?? 0) - 1 && (
+																<ArrowRight className="size-3 text-muted-2 shrink-0 rtl:rotate-180" />
+															)}
+														</span>
+													))}
+												</div>
 											</div>
-										</div>
+										)}
 
 										{/* Technologies Tag Array */}
-										<div className="flex flex-col gap-2">
-											<div className="mono text-[0.66rem] uppercase tracking-wider text-muted-2 font-semibold">
+										<div className="flex flex-col gap-1.5 sm:gap-2">
+											<div className="mono text-[0.64rem] sm:text-[0.66rem] uppercase tracking-wider text-muted-2 font-semibold">
 												Technologies & Libraries
 											</div>
 											<div className="flex flex-wrap gap-1.5">
 												{project.tags.map((tag) => (
 													<span
 														key={tag}
-														className="mono text-[0.72rem] px-2.5 py-0.5 rounded-md bg-surface-card text-muted border border-line select-none hover:border-accent-border hover:text-white transition-colors duration-150"
+														className="mono text-[0.68rem] sm:text-[0.72rem] px-2 sm:px-2.5 py-0.5 rounded-md bg-surface-card text-muted border border-line select-none hover:border-accent-border hover:text-white transition-colors duration-150"
 													>
 														{tag}
 													</span>
@@ -350,17 +503,99 @@ export function Projects() {
 								</div>
 
 								{/* Card Footer Terminal Ribbon */}
-								<div className="px-5 py-2.5 bg-surface-card/90 border-t border-line flex flex-wrap items-center justify-between gap-2 mono text-[0.68rem] text-muted-2">
+								<div className="px-4 sm:px-5 py-2.5 bg-surface-card/90 border-t border-line flex flex-wrap items-center justify-between gap-2 mono text-[0.64rem] sm:text-[0.68rem] text-muted-2">
 									<span>{project.telemetry}</span>
-									<span className="text-accent-ink font-medium">
-										[VERIFIED_ARCHITECTURE]
-									</span>
+									{project.statusBadge.variant === "live" ? (
+										<span className="text-status-live font-semibold flex items-center gap-1.5">
+											<span className="size-1.5 rounded-full bg-status-live animate-pulse" />
+											{project.statusBadge.code}
+										</span>
+									) : project.statusBadge.variant === "verified" ? (
+										<span className="text-accent-ink font-semibold flex items-center gap-1.5">
+											{project.statusBadge.code}
+										</span>
+									) : (
+										<span className="text-muted-2 font-medium flex items-center gap-1.5 opacity-85">
+											{project.statusBadge.code}
+										</span>
+									)}
 								</div>
 							</article>
 						);
 					})}
 				</div>
 			</div>
+
+			{/* Fullscreen High-Resolution Lightbox Modal — Optimized for Mobile */}
+			{selectedImage && (
+				<div className="fixed inset-0 z-100 flex items-center justify-center p-2.5 sm:p-6 md:p-10 animate-fade-in">
+					<button
+						type="button"
+						className="fixed inset-0 bg-paper/90 backdrop-blur-md cursor-default w-full h-full border-none p-0"
+						onClick={() => setSelectedImage(null)}
+						aria-label={t("card.close_preview")}
+					/>
+					<div className="relative z-10 max-w-5xl w-full bg-surface border border-line rounded-(--radius) overflow-hidden shadow-2xl flex flex-col">
+						{/* Modal Header */}
+						<div className="px-3.5 sm:px-6 py-2.5 sm:py-3 bg-surface-card border-b border-line flex items-center justify-between gap-3">
+							<div className="flex items-center gap-2 sm:gap-3">
+								<h4 className="font-sans font-bold text-ink text-[0.95rem] sm:text-[1.12rem] m-0 flex items-center gap-2">
+									<span>{selectedImage.title}</span>
+									{selectedImage.arabicTitle && (
+										<span className="text-muted text-[0.8em] font-normal">
+											({selectedImage.arabicTitle})
+										</span>
+									)}
+								</h4>
+								{selectedImage.routeUrl && (
+									<span className="mono text-[0.68rem] text-muted-2 hidden md:inline px-2 py-0.5 rounded bg-paper border border-line">
+										{selectedImage.routeUrl}
+									</span>
+								)}
+							</div>
+
+							<div className="flex items-center gap-2">
+								{selectedImage.linkUrl && (
+									<a
+										href={selectedImage.linkUrl}
+										target="_blank"
+										rel="noopener noreferrer"
+										className="btn btn-ghost text-[0.74rem] sm:text-[0.78rem] px-2.5 sm:px-3 py-1 flex items-center gap-1"
+									>
+										<span>
+											{selectedImage.isLive
+												? t("card.explore")
+												: t("card.source")}
+										</span>
+										<ArrowUpRight className="size-3.5 rtl:-rotate-90 shrink-0" />
+									</a>
+								)}
+								<button
+									type="button"
+									onClick={() => setSelectedImage(null)}
+									className="mono text-[0.76rem] font-bold px-2.5 py-1 rounded bg-paper border border-line text-muted hover:text-ink hover:border-accent transition-colors cursor-pointer flex items-center gap-1.5"
+									aria-label={t("card.close_preview")}
+								>
+									<X className="size-3.5" />
+									<span>{t("card.close_preview")}</span>
+								</button>
+							</div>
+						</div>
+
+						{/* Modal Image View */}
+						<div className="relative aspect-video w-full bg-paper">
+							<Image
+								src={selectedImage.src}
+								alt={selectedImage.title}
+								fill
+								sizes="100vw"
+								priority
+								className="object-contain"
+							/>
+						</div>
+					</div>
+				</div>
+			)}
 		</section>
 	);
 }

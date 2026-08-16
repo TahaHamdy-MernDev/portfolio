@@ -14,14 +14,15 @@
 		"about": "About",
 		"contact": "Contact",
 		"systemNavigation": "System Navigation",
-		"quickAction": "Start a Conversation ↗"
+		"quickAction": "Start a Conversation"
 	},
 	"Hero": {
 		"headline_line1": "Turning complex problems",
 		"headline_line2": "into reliable systems.",
 		"subtitle": "Full-Stack Developer and Systems Architect with 3+ years designing and delivering SaaS platforms, e-commerce infrastructure, and enterprise business workflows — from interface design to distributed backend architecture.",
-		"cta_primary": "View Case Studies ↗",
-		"cta_secondary": "Get in Touch →",
+		"cta_primary": "View Case Studies",
+		"cta_secondary": "Get in Touch",
+		"cta_resume": "Download Resume",
 		"layers": {
 			"client": "01 / Interface",
 			"client_tag": "[CLIENT]",
@@ -38,8 +39,8 @@
 		},
 		"stats": {
 			"years_exp": "Years of Experience",
-			"shipped_products": "Products Shipped",
-			"live_products": "Products in Production",
+			"featured_systems": "Featured Systems",
+			"live_products": "Live in Production",
 			"production_ready": "Production-Grade"
 		}
 	},
@@ -53,7 +54,7 @@
 			"ecommerce": "E-Commerce Systems",
 			"realtime": "Real-Time & Communications"
 		},
-		"systems_loaded": "Showing {count} of 6",
+		"systems_loaded": "Showing {count} of 7",
 		"metrics": {
 			"qps": "Throughput",
 			"latency": "Latency",
@@ -68,15 +69,20 @@
 			"architecture": "Architecture Overview",
 			"key_features": "Key Capabilities",
 			"explore": "Live Preview",
-			"source": "Source Code"
+			"source": "Source Code",
+			"preview_ui": "Interface Preview",
+			"expand_preview": "Click to expand preview",
+			"close_preview": "Close preview",
+			"no_preview": "No Preview Available",
+			"proprietary_internal": "[CONFIDENTIAL_INTERNAL_SYSTEM]"
 		},
 		"items": {
 			"nazam": {
 				"title": "Nazam",
 				"arabicTitle": "نظّم",
 				"role": "Full-Stack · Solo",
-				"status": "Private repository",
-				"link_text": "GitHub ↗",
+				"status": "Private monorepo",
+				"disabled_link": "Private repository",
 				"desc": "A commerce-operations platform that helps merchants organize, combine, and follow every part of their business in one place."
 			},
 			"egapy": {
@@ -84,7 +90,7 @@
 				"arabicTitle": "إيجابي",
 				"role": "Full-Stack · Team of 2",
 				"status": "Live product",
-				"link_text": "Visit site ↗",
+				"link_text": "Visit site",
 				"desc": "A modern ERP solution designed to help businesses of all sizes streamline their operations and grow efficiently."
 			},
 			"labaik": {
@@ -92,7 +98,7 @@
 				"arabicTitle": "لبيك",
 				"role": "Full-Stack · Solo",
 				"status": "Live landing · private dashboard",
-				"link_text": "Visit site ↗",
+				"link_text": "Visit site",
 				"desc": "A platform that makes \"Umrah al-Badal\" easier and more reliable — letting people dedicate the reward of Umrah to loved ones, like the elderly, ill, or deceased, who can't make the trip themselves, by connecting them with vetted individuals who perform it on their behalf. Built the landing site plus a private dashboard managing data and backend for the promotional site, dashboard, and mobile app."
 			},
 			"buy_from_egypt": {
@@ -108,16 +114,24 @@
 				"arabicTitle": "كولدويل بانكر - نيو أليكس",
 				"role": "Full-Stack · Solo",
 				"status": "Formerly live · now offline",
-				"link_text": "GitHub (partial) ↗",
+				"link_text": "GitHub (partial)",
 				"desc": "A real estate platform in the spirit of Nawy, with property discovery, advanced filtering, interactive maps, multilingual support, and SEO-focused pages. Hosted for the client for six months; no longer maintained."
 			},
 			"gedo": {
 				"title": "GEDO",
 				"arabicTitle": "جدو",
 				"role": "Backend Developer",
-				"status": "Case study",
-				"disabled_link": "No public link",
+				"status": "Open source repository",
+				"link_text": "GitHub",
 				"desc": "An Alzheimer's care management system helping caregivers and family members manage medication, health tracking, communication, and daily activity monitoring for patients."
+			},
+			"ecombo": {
+				"title": "Ecombo",
+				"arabicTitle": "إيكومبو",
+				"role": "Front-End · Solo",
+				"status": "Live landing page",
+				"link_text": "Visit site",
+				"desc": "The leading e-commerce service and logistics platform in the UAE and Saudi Arabia, serving as a virtual warehouse for merchants to launch businesses with zero upfront capital — providing automated product sourcing, warehousing, packaging, 24/7 support, and fast GCC shipping."
 			}
 		}
 	},
@@ -134,28 +148,28 @@
 	},
 	"Process": {
 		"section_num": "03 //",
-		"section_title": "How I Work",
+		"section_title": "Engineering Process",
 		"section_tag": "PROCESS",
 		"steps": {
 			"discovery": {
 				"num": "01",
-				"title": "Discovery & Architecture",
-				"desc": "Mapping domain requirements, data models, and performance targets before any production code is written."
+				"title": "System Architecture & Schema Design",
+				"desc": "Translating business requirements into normalized relational schemas, state machines, and modular service boundaries before writing application code."
 			},
 			"development": {
 				"num": "02",
-				"title": "Iterative Development",
-				"desc": "Building features end-to-end with strict TypeScript contracts, clear domain boundaries, and automated CI checks."
+				"title": "Type-Safe Full-Stack Implementation",
+				"desc": "Building resilient frontend interfaces and robust backend APIs with end-to-end type safety, validation pipelines, and strict linting."
 			},
 			"testing": {
 				"num": "03",
-				"title": "Load & Reliability Testing",
-				"desc": "Validating behavior under load, network failures, connection pool exhaustion, and memory pressure."
+				"title": "Asynchronous Scaling & Performance",
+				"desc": "Benchmarking query performance, implementing Redis caching layers, offloading work to background queues, and verifying concurrency limits."
 			},
 			"deployment": {
 				"num": "04",
-				"title": "Deployment & Observability",
-				"desc": "Shipping to production with zero-downtime releases, health checks, dashboards, and alerting."
+				"title": "Containerization & Continuous Delivery",
+				"desc": "Dockerized deployments, automated CI/CD pipelines, structured health telemetry, and zero-downtime production rollouts."
 			}
 		}
 	},
@@ -165,6 +179,11 @@
 		"section_tag": "ABOUT",
 		"bio_lead": "I design and build reliable software that keeps high-traffic business operations running smoothly.",
 		"bio_body": "Over the past 3+ years, I've architected and shipped full-stack web applications, distributed background workers, and enterprise e-commerce systems. My approach centers on clean architectural boundaries, predictable database performance, and interfaces that are fast and pleasant to use.",
+		"download_cv": "Download Resume / CV",
+		"open_source_badge": "OPEN_SOURCE",
+		"open_source_title": "GEDO — Open Source Healthcare Platform",
+		"open_source_desc": "Architected and actively maintained as a public repository. Provides vital sign tracking, medication management, and caregiver alerts with Node.js and MongoDB.",
+		"open_source_cta": "View Repository",
 		"principles": {
 			"p1_title": "Predictable Performance",
 			"p1_desc": "Bounded query execution, proper indexing, and offloading heavy work to asynchronous queues.",
@@ -199,6 +218,8 @@
 		"response_time": "Typical Response Time:",
 		"response_time_val": "Under 12 Hours",
 		"email_label": "EMAIL",
+		"direct_inquiries": "Direct Inquiries",
+		"email_desc": "Available for systems architecture consulting, high-throughput SaaS platforms, and full-stack development contracts.",
 		"copy_email": "Copy Email",
 		"copied": "Copied to Clipboard!",
 		"send_direct": "Send an Email",

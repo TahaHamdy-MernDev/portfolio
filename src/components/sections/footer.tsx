@@ -1,3 +1,4 @@
+import { ArrowUpRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 export function Footer() {
@@ -6,7 +7,7 @@ export function Footer() {
 	const links = [
 		{ label: "GITHUB", href: "https://github.com/TahaHamdy-MernDev" },
 		{ label: "LINKEDIN", href: "https://www.linkedin.com/in/taha-hamdy" },
-		{ label: "WHATSAPP", href: "https://wa.me/201013745260" },
+		{ label: "WHATSAPP", href: "https://wa.me/201114911898" },
 		{ label: "EMAIL", href: "mailto:tahahamdy.dev@gmail.com" },
 	];
 
@@ -28,9 +29,10 @@ export function Footer() {
 							href={link.href}
 							target="_blank"
 							rel="noreferrer"
-							className="mono text-[0.74rem] sm:text-[0.78rem] text-muted hover:text-accent-ink transition-colors px-3 py-1.5 rounded-full border border-line bg-surface/50 hover:bg-surface"
+							className="mono text-[0.74rem] sm:text-[0.78rem] text-muted hover:text-accent-ink transition-colors px-3 py-1.5 rounded-full border border-line bg-surface/50 hover:bg-surface inline-flex items-center gap-1"
 						>
-							{link.label} ↗
+							<span>{link.label}</span>
+							<ArrowUpRight className="size-3 rtl:-rotate-90 shrink-0" />
 						</a>
 					))}
 				</div>

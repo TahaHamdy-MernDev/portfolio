@@ -11,12 +11,13 @@ Taha Hamdy is a full-stack engineer and systems architect based in Alexandria, E
 
 ## Featured Projects & Case Studies
 
-- [Egapy ERP](https://egapy.com): Enterprise Resource Planning solution for operational automation, multi-branch inventory, invoicing, and real-time analytics. Built with Next.js, NestJS, PostgreSQL, and Redis.
-- [Labaik Platform](https://labaik-al-umrah.com): Digital service connecting individuals with verified delegates for Umrah-al-Badal. Includes a public portal, administrative dashboard, and real-time notification pipeline.
-- [Nazam Commerce Platform](https://github.com/TahaHamdy-MernDev): Commerce operations suite unifying multi-channel inventory, automated catalog synchronization, and distributed order processing.
-- [Buy From Egypt](https://github.com/TahaHamdy-MernDev): Global cross-border marketplace enabling international customers to purchase authentic Egyptian products with multi-currency checkout and localization.
-- [FastChat Real-Time System](https://github.com/TahaHamdy-MernDev): Low-latency WebSocket chat infrastructure featuring encrypted messaging, presence telemetry, and optimistic UI rendering.
-- [DevTrack System Monitor](https://github.com/TahaHamdy-MernDev): Developer activity telemetry and uptime monitoring engine with automated SLA alerting.
+- [Egapy ERP](https://www.egapy.com/ar): Enterprise Resource Planning solution for operational automation, multi-branch inventory, invoicing, and real-time analytics. Built with Next.js, NestJS, PostgreSQL, and Prisma. (Live in Production)
+- [Labaik Platform](https://labaikapp.com/ar): Digital service connecting individuals with verified delegates for Umrah-al-Badal. Includes a public portal, administrative dashboard, and real-time notification pipeline. (Live in Production)
+- [Ecombo](https://ecombo.co/ar): Leading e-commerce logistics platform in the UAE & Saudi Arabia, providing cloud warehousing, packaging, and zero-capital business launching. Built with React.js. (Live in Production)
+- [Nazam Commerce Platform](https://github.com/TahaHamdy-MernDev/nazam): Commerce operations suite unifying multi-channel inventory, automated catalog synchronization, and distributed order processing. (Monorepo Architecture / Private)
+- [Buy From Egypt](https://github.com/TahaHamdy-MernDev): B2B export platform connecting Egyptian exporters with global buyers, integrated with an AI/ML conversational model. (Private Showcase)
+- [Coldwell Banker — New Alex](https://github.com/TahaHamdy-MernDev/cold-well-banker): Real estate discovery platform with property filtering and interactive maps. (Formerly Live · Now Offline)
+- [GEDO](https://github.com/TahaHamdy-MernDev/GEDO): Alzheimer's care management system helping caregivers manage medication, health tracking, and patient monitoring. (Open Source Repository)
 
 ## Technical Skills & Architecture
 
@@ -29,7 +30,7 @@ Taha Hamdy is a full-stack engineer and systems architect based in Alexandria, E
 
 - [GitHub Profile](https://github.com/TahaHamdy-MernDev): Open-source repositories, architectural blueprints, and engineering contributions.
 - [LinkedIn Profile](https://www.linkedin.com/in/taha-hamdy): Professional background, recommendations, and experience history.
-- [WhatsApp Instant Chat](https://wa.me/201013745260): Direct messaging for contract inquiries and technical consulting.
+- [WhatsApp Instant Chat](https://wa.me/201114911898): Direct messaging for contract inquiries and technical consulting.
 - [Direct Email Outreach](mailto:tahahamdy.dev@gmail.com): Inquiries for full-stack contracts, SaaS architecture consulting, and engineering advisory.
 
 ## Optional Resources
