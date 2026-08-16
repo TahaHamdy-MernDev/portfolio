@@ -1,11 +1,12 @@
-import type { Metadata, Viewport } from "next";
-import { Cairo, Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
-import { notFound } from "next/navigation";
-import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
+import "../globals.css";
 import { JsonLd } from "@/components/seo/json-ld";
 import { routing } from "@/i18n/routing";
-import "../globals.css";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import type { Metadata, Viewport } from "next";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
+import { Cairo, Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import { notFound } from "next/navigation";
 
 const spaceGrotesk = Space_Grotesk({
 	variable: "--font-display",
@@ -135,6 +136,7 @@ export default async function LocalizedLayout({
 				<NextIntlClientProvider locale="en" messages={messages}>
 					{children}
 				</NextIntlClientProvider>
+				<SpeedInsights />
 			</body>
 		</html>
 	);
