@@ -60,7 +60,13 @@ export const metadata: Metadata = {
 	creator: "Taha Hamdy",
 	publisher: "Taha Hamdy",
 	alternates: {
-		canonical: "https://taha-hamdy.vercel.app",
+		canonical: "https://taha-hamdy.vercel.app/en",
+		languages: {
+			en: "https://taha-hamdy.vercel.app/en",
+		},
+	},
+	verification: {
+		google: "6nGaWhd88Bk7ZqdAmHPlZvi7KfkgzaJ3YpAOzVwe6-A",
 	},
 	icons: {
 		icon: [
