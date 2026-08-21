@@ -1,6 +1,5 @@
 "use client";
 
-import { SectionHead } from "@/components/ui/section-head";
 import {
 	ArrowRight,
 	ArrowUpRight,
@@ -10,9 +9,10 @@ import {
 	Mail,
 	MapPin,
 } from "lucide-react";
-import { useTranslations } from "next-intl";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
+import { SectionHead } from "@/components/ui/section-head";
 
 function WhatsAppIcon({ className }: { className?: string }) {
 	return (

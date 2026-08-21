@@ -54,7 +54,7 @@ export function About() {
 								<span>{t("section_tag")}</span>
 								<ArrowRight className="size-3.5 rtl:rotate-180" />
 							</a>
-							
+
 							<a
 								href="https://github.com/TahaHamdy-MernDev"
 								target="_blank"

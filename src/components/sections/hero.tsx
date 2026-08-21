@@ -1,9 +1,9 @@
 "use client";
 
-import { useCountUp } from "@/hooks/use-count-up";
 import { ArrowRight, ArrowUpRight, Download } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useCallback, useRef } from "react";
+import { useCountUp } from "@/hooks/use-count-up";
 
 export function Hero() {
 	const t = useTranslations("Hero");

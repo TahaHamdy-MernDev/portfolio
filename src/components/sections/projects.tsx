@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, ArrowUpRight, Lock, X } from "lucide-react";
+import { ArrowRight, Lock, X } from "lucide-react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -183,8 +183,6 @@ interface SelectedImageModal {
 	title: string;
 	arabicTitle?: string;
 	routeUrl: string;
-	linkUrl?: string;
-	isLive?: boolean;
 }
 
 export function Projects() {
@@ -295,13 +293,6 @@ export function Projects() {
 						const role = t(`items.${project.id}.role`);
 						const status = t(`items.${project.id}.status`);
 						const desc = t(`items.${project.id}.desc`);
-						const hasLink = Boolean(project.linkUrl);
-						const linkText = hasLink
-							? t(`items.${project.id}.link_text`)
-							: null;
-						const disabledText = !hasLink
-							? t(`items.${project.id}.disabled_link`)
-							: null;
 
 						return (
 							<article
@@ -317,78 +308,34 @@ export function Projects() {
 									transitionDelay: `${idx * 60}ms, ${idx * 60}ms, 0ms`,
 								}}
 							>
-								{/* Card Top Header Terminal Bar — Responsive 2-Row on Mobile */}
-								<div className="p-3 sm:p-5 border-b border-line bg-surface-card/95 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3">
-									{/* Row 1 on mobile: System ID, Title, and Action Link */}
-									<div className="flex items-center justify-between gap-2 w-full sm:w-auto">
-										<div className="flex items-center gap-2 sm:gap-3 flex-wrap">
-											<span className="mono text-[0.7rem] sm:text-[0.74rem] font-bold text-accent-ink bg-accent-soft border border-accent-border px-2 sm:px-2.5 py-0.5 rounded-md shrink-0">
-												SYS.0
-												{PROJECTS.findIndex((p) => p.id === project.id) + 1}
-											</span>
-											<h3 className="font-sans text-[1.08rem] sm:text-[1.38rem] font-bold text-ink tracking-tight m-0 flex items-center gap-1.5 sm:gap-2">
-												<span>{title}</span>
-												{arabicTitle && (
-													<span className="mono text-[0.72em] font-normal text-muted">
-														({arabicTitle})
-													</span>
-												)}
-											</h3>
-										</div>
-
-										{/* Mobile-Visible Direct Action Link */}
-										<div className="sm:hidden shrink-0">
-											{hasLink && project.linkUrl ? (
-												<a
-													href={project.linkUrl}
-													target="_blank"
-													rel="noopener noreferrer"
-													className="mono text-[0.72rem] font-semibold text-ink bg-paper border border-line px-2.5 py-1 rounded-md transition-all duration-150 hover:bg-accent hover:text-paper hover:border-accent no-underline flex items-center gap-1"
-												>
-													<span>{linkText}</span>
-													<ArrowUpRight className="size-3 rtl:-rotate-90 shrink-0" />
-												</a>
-											) : (
-												<span className="mono text-[0.68rem] text-muted-2 border border-dashed border-line px-2 py-0.5 rounded-md cursor-default">
-													{disabledText}
+								{/* Card Top Header Terminal Bar */}
+								<div className="p-3 sm:p-5 border-b border-line bg-surface-card/95 flex flex-wrap items-center justify-between gap-2.5 sm:gap-3">
+									<div className="flex items-center gap-2 sm:gap-3 flex-wrap">
+										<span className="mono text-[0.7rem] sm:text-[0.74rem] font-bold text-accent-ink bg-accent-soft border border-accent-border px-2 sm:px-2.5 py-0.5 rounded-md shrink-0">
+											SYS.0
+											{PROJECTS.findIndex((p) => p.id === project.id) + 1}
+										</span>
+										<h3 className="font-sans text-[1.08rem] sm:text-[1.38rem] font-bold text-ink tracking-tight m-0 flex items-center gap-1.5 sm:gap-2">
+											<span>{title}</span>
+											{arabicTitle && (
+												<span className="mono text-[0.72em] font-normal text-muted">
+													({arabicTitle})
 												</span>
 											)}
-										</div>
+										</h3>
 									</div>
 
-									{/* Row 2 on mobile: Role + Status Badge (and Desktop Action Link) */}
-									<div className="flex items-center justify-between sm:justify-end gap-2.5 sm:gap-3 w-full sm:w-auto pt-1.5 sm:pt-0 border-t sm:border-t-0 border-line/40">
-										<div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
-											<span className="mono text-[0.7rem] sm:text-[0.74rem] text-muted">
-												{role}
-											</span>
-											<span className="mono text-[0.7rem] text-muted-2">/</span>
-											<span className="mono text-[0.66rem] sm:text-[0.72rem] px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-paper border border-line text-muted flex items-center gap-1.5">
-												{project.isLive && (
-													<span className="size-1.5 rounded-full bg-status-live animate-pulse" />
-												)}
-												{status}
-											</span>
-										</div>
-
-										{/* Desktop-Visible Action Link */}
-										<div className="hidden sm:block">
-											{hasLink && project.linkUrl ? (
-												<a
-													href={project.linkUrl}
-													target="_blank"
-													rel="noopener noreferrer"
-													className="mono text-[0.76rem] sm:text-[0.78rem] font-semibold text-ink bg-paper border border-line px-3 sm:px-3.5 py-1 rounded-md transition-all duration-150 hover:bg-accent hover:text-paper hover:border-accent no-underline flex items-center gap-1"
-												>
-													<span>{linkText}</span>
-													<ArrowUpRight className="size-3.5 rtl:-rotate-90 shrink-0" />
-												</a>
-											) : (
-												<span className="mono text-[0.72rem] sm:text-[0.74rem] text-muted-2 border border-dashed border-line px-2 sm:px-2.5 py-1 rounded-md cursor-default">
-													{disabledText}
-												</span>
+									<div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+										<span className="mono text-[0.7rem] sm:text-[0.74rem] text-muted">
+											{role}
+										</span>
+										<span className="mono text-[0.7rem] text-muted-2">/</span>
+										<span className="mono text-[0.66rem] sm:text-[0.72rem] px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-full bg-paper border border-line text-muted flex items-center gap-1.5">
+											{project.isLive && (
+												<span className="size-1.5 rounded-full bg-status-live animate-pulse" />
 											)}
-										</div>
+											{status}
+										</span>
 									</div>
 								</div>
 
@@ -406,8 +353,6 @@ export function Projects() {
 														title,
 														arabicTitle,
 														routeUrl: project.routeUrl,
-														linkUrl: project.linkUrl,
-														isLive: project.isLive,
 													})
 												}
 												aria-label={`${title} preview`}
@@ -416,7 +361,7 @@ export function Projects() {
 													src={project.image}
 													alt={`${title} interface preview`}
 													fill
-													sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 600px"
+													sizes="(max-width: 1024px) 100vw, (max-width: 1280px) 50vw, 600px"
 													className="object-cover object-top transition-transform duration-500 ease-out group-hover/preview:scale-[1.025]"
 												/>
 											</button>
@@ -554,32 +499,15 @@ export function Projects() {
 								)}
 							</div>
 
-							<div className="flex items-center gap-2">
-								{selectedImage.linkUrl && (
-									<a
-										href={selectedImage.linkUrl}
-										target="_blank"
-										rel="noopener noreferrer"
-										className="btn btn-ghost text-[0.74rem] sm:text-[0.78rem] px-2.5 sm:px-3 py-1 flex items-center gap-1"
-									>
-										<span>
-											{selectedImage.isLive
-												? t("card.explore")
-												: t("card.source")}
-										</span>
-										<ArrowUpRight className="size-3.5 rtl:-rotate-90 shrink-0" />
-									</a>
-								)}
-								<button
-									type="button"
-									onClick={() => setSelectedImage(null)}
-									className="mono text-[0.76rem] font-bold px-2.5 py-1 rounded bg-paper border border-line text-muted hover:text-ink hover:border-accent transition-colors cursor-pointer flex items-center gap-1.5"
-									aria-label={t("card.close_preview")}
-								>
-									<X className="size-3.5" />
-									<span>{t("card.close_preview")}</span>
-								</button>
-							</div>
+							<button
+								type="button"
+								onClick={() => setSelectedImage(null)}
+								className="mono text-[0.76rem] font-bold px-2.5 py-1 rounded bg-paper border border-line text-muted hover:text-ink hover:border-accent transition-colors cursor-pointer flex items-center gap-1.5"
+								aria-label={t("card.close_preview")}
+							>
+								<X className="size-3.5" />
+								<span>{t("card.close_preview")}</span>
+							</button>
 						</div>
 
 						{/* Modal Image View */}
@@ -588,7 +516,7 @@ export function Projects() {
 								src={selectedImage.src}
 								alt={selectedImage.title}
 								fill
-								sizes="100vw"
+								sizes="(max-width: 1024px) 100vw, 1024px"
 								priority
 								className="object-contain"
 							/>
