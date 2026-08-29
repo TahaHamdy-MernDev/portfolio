@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { setRequestLocale } from "next-intl/server";
 import { ProjectDetailView } from "@/components/sections/project-detail-view";
 import { ALL_PROJECTS, getProjectBySlug } from "@/data/projects-data";
 import { routing } from "@/i18n/routing";
@@ -30,7 +31,8 @@ export async function generateMetadata({
 	params,
 }: ProjectPageProps): Promise<Metadata> {
 	const { slug, locale } = await params;
-	const project = getProjectBySlug(slug);
+	setRequestLocale(locale);
+	const project = getProjectBySlug(slug, locale);
 
 	if (!project) {
 		return {
@@ -71,8 +73,9 @@ export async function generateMetadata({
 }
 
 export default async function ProjectDetailPage({ params }: ProjectPageProps) {
-	const { slug } = await params;
-	const project = getProjectBySlug(slug);
+	const { slug, locale } = await params;
+	setRequestLocale(locale);
+	const project = getProjectBySlug(slug, locale);
 
 	if (!project) {
 		notFound();
@@ -80,10 +83,12 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
 	const currentIndex = ALL_PROJECTS.findIndex((p) => p.slug === project.slug);
 	const prevProject =
-		currentIndex > 0 ? ALL_PROJECTS[currentIndex - 1] : undefined;
+		currentIndex > 0
+			? getProjectBySlug(ALL_PROJECTS[currentIndex - 1].slug, locale)
+			: undefined;
 	const nextProject =
 		currentIndex < ALL_PROJECTS.length - 1
-			? ALL_PROJECTS[currentIndex + 1]
+			? getProjectBySlug(ALL_PROJECTS[currentIndex + 1].slug, locale)
 			: undefined;
 
 	return (

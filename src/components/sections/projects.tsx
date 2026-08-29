@@ -505,7 +505,7 @@ export function Projects() {
 										{/* Technologies Tag Array */}
 										<div className="flex flex-col gap-1.5 sm:gap-2">
 											<div className="mono text-[0.64rem] sm:text-[0.66rem] uppercase tracking-wider text-muted-2 font-semibold">
-												Technologies & Libraries
+												{t("card.tech_libraries")}
 											</div>
 											<div className="flex flex-wrap gap-1.5">
 												{project.tags.map((tag) => (

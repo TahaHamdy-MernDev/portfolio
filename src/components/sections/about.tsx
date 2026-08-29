@@ -9,17 +9,17 @@ export function About() {
 		{
 			title: t("principles.p1_title"),
 			desc: t("principles.p1_desc"),
-			badge: "SCALABILITY",
+			badge: t("principles.p1_badge"),
 		},
 		{
 			title: t("principles.p2_title"),
 			desc: t("principles.p2_desc"),
-			badge: "INTEGRITY",
+			badge: t("principles.p2_badge"),
 		},
 		{
 			title: t("principles.p3_title"),
 			desc: t("principles.p3_desc"),
-			badge: "RESILIENCE",
+			badge: t("principles.p3_badge"),
 		},
 	];
 
@@ -61,7 +61,7 @@ export function About() {
 								rel="noreferrer"
 								className="btn btn-ghost text-[0.82rem] sm:text-[0.88rem] px-3.5 sm:px-4 py-2 sm:py-2.5 flex items-center gap-1.5"
 							>
-								<span>GitHub Profile</span>
+								<span>{t("github_profile")}</span>
 								<ArrowUpRight className="size-3.5 rtl:-rotate-90" />
 							</a>
 						</div>

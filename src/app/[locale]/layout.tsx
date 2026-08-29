@@ -47,72 +47,71 @@ export function generateStaticParams() {
 	return routing.locales.map((locale) => ({ locale }));
 }
 
-export const metadata: Metadata = {
-	metadataBase: new URL("https://taha-hamdy.vercel.app"),
-	title: {
-		default: "Taha Hamdy — Full-Stack Developer & Systems Architect",
-		template: "%s | Taha Hamdy",
-	},
-	description:
-		"Full-Stack Developer & Systems Architect with 3+ years delivering high-throughput SaaS platforms, e-commerce infrastructure, and enterprise business workflows with Next.js, NestJS, and PostgreSQL.",
-	applicationName: "Taha Hamdy Portfolio",
-	authors: [{ name: "Taha Hamdy", url: "https://taha-hamdy.vercel.app" }],
-	creator: "Taha Hamdy",
-	publisher: "Taha Hamdy",
-	alternates: {
-		canonical: "https://taha-hamdy.vercel.app/en",
-		languages: {
-			en: "https://taha-hamdy.vercel.app/en",
+export async function generateMetadata({
+	params,
+}: {
+	params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+	const { locale } = await params;
+	const isArabic = locale === "ar";
+
+	const title = isArabic
+		? "طه حمدي — مطور Full-Stack ومهندس أنظمة برمجية"
+		: "Taha Hamdy — Full-Stack Developer & Systems Architect";
+
+	const description = isArabic
+		? "مطور Full-Stack ومهندس أنظمة بخبرة أكثر من 3 سنوات في تصميم وإطلاق منصات SaaS وبنية التجارة الإلكترونية والأنظمة الموزعة."
+		: "Full-Stack Developer & Systems Architect with 3+ years delivering high-throughput SaaS platforms, e-commerce infrastructure, and enterprise business workflows with Next.js, NestJS, and PostgreSQL.";
+
+	return {
+		metadataBase: new URL("https://taha-hamdy.vercel.app"),
+		title: {
+			default: title,
+			template: `%s | ${isArabic ? "طه حمدي" : "Taha Hamdy"}`,
 		},
-	},
-	verification: {
-		google: "6nGaWhd88Bk7ZqdAmHPlZvi7KfkgzaJ3YpAOzVwe6-A",
-	},
-	icons: {
-		icon: [
-			{ url: "/icon.png", type: "image/png" },
-			{ url: "/favicon.ico", sizes: "any" },
-		],
-		apple: [{ url: "/apple-touch-icon.png", type: "image/png" }],
-	},
-	openGraph: {
-		type: "website",
-		locale: "en_US",
-		url: "https://taha-hamdy.vercel.app",
-		siteName: "Taha Hamdy — Full-Stack Systems",
-		title: "Taha Hamdy — Full-Stack Developer & Systems Architect",
-		description:
-			"I build the systems businesses run on. Full-Stack Developer delivering high-throughput SaaS platforms, e-commerce infrastructure, and distributed backend pipelines.",
-		images: [
-			{
-				url: "/og-image.png",
-				width: 1200,
-				height: 630,
-				alt: "Taha Hamdy — Full-Stack Developer & Systems Architect",
+		description,
+		applicationName: isArabic ? "معرض أعمال طه حمدي" : "Taha Hamdy Portfolio",
+		authors: [{ name: "Taha Hamdy", url: "https://taha-hamdy.vercel.app" }],
+		creator: "Taha Hamdy",
+		alternates: {
+			canonical: `https://taha-hamdy.vercel.app/${locale}`,
+			languages: {
+				en: "https://taha-hamdy.vercel.app/en",
+				ar: "https://taha-hamdy.vercel.app/ar",
 			},
-		],
-	},
-	twitter: {
-		card: "summary_large_image",
-		title: "Taha Hamdy — Full-Stack Developer & Systems Architect",
-		description:
-			"I build the systems businesses run on. Full-Stack Developer delivering high-throughput SaaS platforms, e-commerce infrastructure, and distributed backend pipelines.",
-		creator: "@TahaHamdy",
-		images: ["/og-image.png"],
-	},
-	robots: {
-		index: true,
-		follow: true,
-		googleBot: {
+		},
+		openGraph: {
+			type: "website",
+			locale: isArabic ? "ar_EG" : "en_US",
+			url: `https://taha-hamdy.vercel.app/${locale}`,
+			siteName: isArabic
+				? "طه حمدي — أنظمة Full-Stack"
+				: "Taha Hamdy — Full-Stack Systems",
+			title,
+			description,
+			images: [
+				{
+					url: "/og-image.png",
+					width: 1200,
+					height: 630,
+					alt: title,
+				},
+			],
+		},
+		twitter: {
+			card: "summary_large_image",
+			title,
+			description,
+			images: ["/og-image.png"],
+			creator: "@tahahamdy",
+		},
+		robots: {
 			index: true,
 			follow: true,
-			"max-video-preview": -1,
-			"max-image-preview": "large",
-			"max-snippet": -1,
 		},
-	},
-	category: "technology",
-};
+		category: "technology",
+	};
+}
 
 export default async function LocalizedLayout({
 	children,
@@ -123,7 +122,7 @@ export default async function LocalizedLayout({
 }>) {
 	const { locale } = await params;
 
-	if (!routing.locales.includes(locale as "en")) {
+	if (!routing.locales.includes(locale as (typeof routing.locales)[number])) {
 		notFound();
 	}
 
@@ -131,15 +130,15 @@ export default async function LocalizedLayout({
 
 	return (
 		<html
-			lang="en"
-			dir="ltr"
+			lang={locale}
+			dir={locale === "ar" ? "rtl" : "ltr"}
 			className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable} ${cairo.variable} scroll-smooth`}
 		>
 			<head>
 				<JsonLd />
 			</head>
 			<body className="min-h-full flex flex-col antialiased bg-paper text-ink">
-				<NextIntlClientProvider locale="en" messages={messages}>
+				<NextIntlClientProvider locale={locale} messages={messages}>
 					{children}
 				</NextIntlClientProvider>
 				<SpeedInsights />

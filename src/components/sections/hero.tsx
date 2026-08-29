@@ -1,9 +1,9 @@
 "use client";
 
+import { useCountUp } from "@/hooks/use-count-up";
 import { ArrowRight, ArrowUpRight, Download } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useCallback, useRef } from "react";
-import { useCountUp } from "@/hooks/use-count-up";
 
 export function Hero() {
 	const t = useTranslations("Hero");
@@ -91,10 +91,8 @@ export function Hero() {
 								href="/resume.pdf"
 								target="_blank"
 								rel="noopener noreferrer"
-								// download
-								onClick={(e) => e.preventDefault()}
-								aria-disabled="true"
-								className="btn btn-ghost cursor-not-allowed w-full sm:w-auto text-center flex items-center justify-center gap-1.5 px-3 py-2.5 text-[0.84rem] sm:text-[0.88rem]"
+								download
+								className="btn btn-ghost w-full sm:w-auto text-center flex items-center justify-center gap-1.5 px-3 py-2.5 text-[0.84rem] sm:text-[0.88rem]"
 							>
 								<Download className="size-3.5 text-accent-ink shrink-0" />
 								<span>{t("cta_resume")}</span>

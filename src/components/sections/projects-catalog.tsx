@@ -16,16 +16,10 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 import { Footer } from "@/components/sections/footer";
 import { ALL_PROJECTS } from "@/data/projects-data";
-
-const CATEGORIES = [
-	{ id: "all", label: "All Systems" },
-	{ id: "saas", label: "Enterprise SaaS" },
-	{ id: "ecommerce", label: "E-Commerce & Logistics" },
-	{ id: "realtime", label: "Real-Time & Telemetry" },
-];
 
 const POPULAR_STACK_FILTERS = [
 	"NestJS",
@@ -38,6 +32,20 @@ const POPULAR_STACK_FILTERS = [
 ];
 
 export function ProjectsCatalog() {
+	const tCat = useTranslations("ProjectsCatalog");
+	const tCommon = useTranslations("Common");
+	const tProj = useTranslations("Projects");
+
+	const categories = useMemo(
+		() => [
+			{ id: "all", label: tProj("tabs.all") },
+			{ id: "saas", label: tProj("tabs.saas") },
+			{ id: "ecommerce", label: tProj("tabs.ecommerce") },
+			{ id: "realtime", label: tProj("tabs.realtime") },
+		],
+		[tProj],
+	);
+
 	const [selectedCategory, setSelectedCategory] = useState<string>("all");
 	const [selectedTech, setSelectedTech] = useState<string>("all");
 	const [searchQuery, setSearchQuery] = useState<string>("");
@@ -121,15 +129,15 @@ export function ProjectsCatalog() {
 							className="mono text-[0.76rem] sm:text-[0.82rem] text-muted hover:text-ink transition-colors inline-flex items-center gap-2 group px-3 py-1.5 rounded-full border border-line bg-surface/60 hover:bg-surface"
 						>
 							<ArrowLeft className="size-3.5 group-hover:-translate-x-1 rtl:group-hover:translate-x-1 rtl:rotate-180 transition-transform" />
-							<span>Return to Portfolio Home</span>
+							<span>{tCommon("backHome")}</span>
 						</Link>
 
 						<div className="flex items-center gap-2">
 							<span className="mono text-[0.7rem] font-bold text-accent-ink bg-accent-soft border border-accent-border px-2.5 py-1 rounded-md">
-								SYSTEMS DIRECTORY
+								{tCommon("systemsDirectory")}
 							</span>
 							<span className="mono text-[0.7rem] text-muted-2 px-2 py-1 rounded bg-surface border border-line hidden sm:inline">
-								{ALL_PROJECTS.length} PRODUCTION SYSTEMS
+								{tCommon("productionSystems", { count: ALL_PROJECTS.length })}
 							</span>
 						</div>
 					</div>
@@ -142,15 +150,13 @@ export function ProjectsCatalog() {
 						<div className="space-y-2">
 							<div className="flex items-center gap-2 mono text-[0.72rem] text-accent-ink uppercase tracking-wider font-bold">
 								<Terminal className="size-4" />
-								<span>ARCHITECTURAL PORTFOLIO & CODEBASE DIRECTORY</span>
+								<span>{tCat("header_tag")}</span>
 							</div>
 							<h1 className="text-[clamp(2.2rem,4vw,3.5rem)] font-extrabold font-sans tracking-tight text-ink m-0">
-								Production Systems & Architectures
+								{tCat("title")}
 							</h1>
 							<p className="text-[1.05rem] sm:text-[1.15rem] text-muted max-w-3xl font-normal leading-relaxed m-0">
-								Case studies, technical architectures, concurrency solutions, and
-								telemetry for enterprise platforms, B2B marketplaces, and
-								distributed backend systems.
+								{tCat("subtitle")}
 							</p>
 						</div>
 
@@ -158,40 +164,40 @@ export function ProjectsCatalog() {
 						<div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 p-4 rounded-(--radius) bg-surface/90 border border-line">
 							<div className="space-y-1">
 								<div className="mono text-[0.66rem] text-muted-2 uppercase font-semibold">
-									Total Architectures
+									{tCat("hud.total_arch")}
 								</div>
 								<div className="mono text-[1.4rem] font-bold text-ink">
 									0{ALL_PROJECTS.length}{" "}
 									<span className="text-[0.75rem] text-muted font-normal">
-										Systems
+										{tCat("hud.systems_unit")}
 									</span>
 								</div>
 							</div>
 							<div className="space-y-1">
 								<div className="mono text-[0.66rem] text-muted-2 uppercase font-semibold">
-									Codebase Monorepos
+									{tCat("hud.monorepos")}
 								</div>
 								<div className="mono text-[1.4rem] font-bold text-accent-ink">
 									10+{" "}
 									<span className="text-[0.75rem] text-muted font-normal">
-										Apps & APIs
+										{tCat("hud.apps_unit")}
 									</span>
 								</div>
 							</div>
 							<div className="space-y-1">
 								<div className="mono text-[0.66rem] text-muted-2 uppercase font-semibold">
-									Concurrency Target
+									{tCat("hud.concurrency")}
 								</div>
 								<div className="mono text-[1.4rem] font-bold text-status-live">
 									100%{" "}
 									<span className="text-[0.75rem] text-muted font-normal">
-										Idempotent
+										{tCat("hud.idempotent")}
 									</span>
 								</div>
 							</div>
 							<div className="space-y-1">
 								<div className="mono text-[0.66rem] text-muted-2 uppercase font-semibold">
-									Primary Frameworks
+									{tCat("hud.frameworks")}
 								</div>
 								<div className="mono text-[1.4rem] font-bold text-ink truncate">
 									Nest · Next · Postgres
@@ -204,7 +210,7 @@ export function ProjectsCatalog() {
 							<div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
 								{/* Category Tabs */}
 								<div className="flex items-center gap-1.5 flex-wrap">
-									{CATEGORIES.map((cat) => {
+									{categories.map((cat) => {
 										const count =
 											categoryCounts[cat.id as keyof typeof categoryCounts] ??
 											0;
@@ -243,7 +249,7 @@ export function ProjectsCatalog() {
 											type="text"
 											value={searchQuery}
 											onChange={(e) => setSearchQuery(e.target.value)}
-											placeholder="Search title, tech, problem..."
+											placeholder={tCat("search_placeholder")}
 											className="w-full bg-surface border border-line rounded-lg px-3 py-1.5 pl-9 rtl:pl-3 rtl:pr-9 text-[0.8rem] mono text-ink placeholder:text-muted-2 focus:outline-none focus:border-accent"
 										/>
 										{searchQuery && (
@@ -283,7 +289,7 @@ export function ProjectsCatalog() {
 							<div className="flex items-center gap-2 flex-wrap pt-1 border-t border-line/60">
 								<div className="mono text-[0.66rem] text-muted-2 uppercase font-semibold flex items-center gap-1 shrink-0">
 									<Filter className="size-3 text-accent-ink" />
-									<span>Filter Tech:</span>
+									<span>{tCat("filter_tech")}</span>
 								</div>
 
 								<button
@@ -295,7 +301,7 @@ export function ProjectsCatalog() {
 											: "bg-surface text-muted-2 border-line hover:text-ink"
 									}`}
 								>
-									All Tech
+									{tCat("all_tech")}
 								</button>
 
 								{POPULAR_STACK_FILTERS.map((tech) => (
@@ -321,7 +327,8 @@ export function ProjectsCatalog() {
 										onClick={resetFilters}
 										className="mono text-[0.66rem] text-accent-ink hover:underline cursor-pointer ms-auto"
 									>
-										Reset Filters ({filteredProjects.length} matches)
+										{tCommon("resetFilters")}{" "}
+										{tCat("matches_count", { count: filteredProjects.length })}
 									</button>
 								)}
 							</div>
@@ -335,18 +342,17 @@ export function ProjectsCatalog() {
 								<Search className="size-4" />
 							</div>
 							<div className="mono text-[0.92rem] font-bold text-ink">
-								No matching systems found
+								{tCommon("noMatchingSystems")}
 							</div>
 							<p className="text-[0.84rem] text-muted max-w-sm mx-auto m-0">
-								No architecture matching the selected category, stack, or query was
-								found.
+								{tCommon("noMatchingDesc")}
 							</p>
 							<button
 								type="button"
 								onClick={resetFilters}
 								className="btn btn-secondary text-[0.76rem] py-1.5 px-4 inline-flex items-center gap-1.5 mt-2 cursor-pointer"
 							>
-								<span>Reset All Filters</span>
+								<span>{tCommon("resetFilters")}</span>
 							</button>
 						</div>
 					) : viewMode === "grid" ? (
@@ -387,7 +393,7 @@ export function ProjectsCatalog() {
 													) : project.isComingSoon ? (
 														<span className="mono text-[0.66rem] text-accent-ink border border-accent-border bg-paper/90 px-2 py-0.5 rounded-full font-semibold flex items-center gap-1.5 backdrop-blur-md">
 															<Clock className="size-3" />
-															COMING SOON
+															{tCommon("comingSoon").toUpperCase()}
 														</span>
 													) : (
 														<span className="mono text-[0.66rem] text-muted-2 border border-line bg-paper/90 px-2 py-0.5 rounded-full font-medium flex items-center gap-1.5 backdrop-blur-md">
@@ -403,10 +409,10 @@ export function ProjectsCatalog() {
 													<Lock className="size-4 text-accent-ink" />
 												</div>
 												<span className="mono text-[0.76rem] font-bold text-ink uppercase tracking-wider mb-0.5">
-													No Preview Available
+													{tCommon("noPreview")}
 												</span>
 												<span className="mono text-[0.66rem] text-muted-2">
-													[CONFIDENTIAL_INTERNAL_SYSTEM]
+													{tCommon("confidentialSystem")}
 												</span>
 
 												<div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
@@ -415,7 +421,7 @@ export function ProjectsCatalog() {
 													</span>
 													<span className="mono text-[0.66rem] text-accent-ink border border-accent-border bg-paper/90 px-2 py-0.5 rounded-full font-semibold flex items-center gap-1.5 backdrop-blur-md">
 														<Clock className="size-3" />
-														COMING SOON
+														{tCommon("comingSoon").toUpperCase()}
 													</span>
 												</div>
 											</div>
@@ -427,8 +433,8 @@ export function ProjectsCatalog() {
 												<div className="flex items-center gap-2 mono text-[0.68rem] text-muted-2 uppercase font-semibold">
 													<span>
 														{project.category === "saas"
-															? "Enterprise SaaS"
-															: "E-Commerce"}
+															? tProj("tabs.saas")
+															: tProj("tabs.ecommerce")}
 													</span>
 													<span>•</span>
 													<span>{project.timeline}</span>
@@ -458,7 +464,7 @@ export function ProjectsCatalog() {
 											{project.topology && project.topology.length > 0 && (
 												<div className="p-3 rounded-md bg-paper border border-line space-y-2">
 													<div className="mono text-[0.62rem] uppercase tracking-wider text-muted-2 font-semibold flex justify-between">
-														<span>Topology Pipeline</span>
+														<span>{tProj("card.architecture")}</span>
 														<span className="text-accent-ink">[DATA_FLOW]</span>
 													</div>
 													<div className="flex items-center gap-1.5 flex-wrap">
@@ -501,14 +507,14 @@ export function ProjectsCatalog() {
 										{project.isComingSoon ? (
 											<span className="mono text-[0.76rem] py-2 px-3.5 rounded-(--radius) bg-surface border border-accent-border/60 text-accent-ink inline-flex items-center gap-1.5 font-semibold select-none shadow-xs">
 												<Clock className="size-3.5" />
-												<span>Case Study Coming Soon</span>
+												<span>{tCommon("caseStudySoon")}</span>
 											</span>
 										) : (
 											<Link
 												href={`/projects/${project.slug}`}
 												className="btn btn-primary text-[0.8rem] py-2 px-4 inline-flex items-center gap-1.5 font-semibold"
 											>
-												<span>Deep-Dive Case Study</span>
+												<span>{tCat("deep_dive_btn")}</span>
 												<ArrowRight className="size-3.5 rtl:rotate-180" />
 											</Link>
 										)}
@@ -520,13 +526,13 @@ export function ProjectsCatalog() {
 												rel="noreferrer"
 												className="btn btn-secondary text-[0.8rem] py-2 px-3.5 inline-flex items-center gap-1.5"
 											>
-												<span>Visit Site</span>
+												<span>{tCommon("visitSite")}</span>
 												<ArrowUpRight className="size-3.5 rtl:-rotate-90" />
 											</a>
 										) : (
 											<span className="mono text-[0.72rem] text-muted-2 flex items-center gap-1.5">
 												<ShieldCheck className="size-3.5 text-accent-ink" />
-												<span>Private System</span>
+												<span>{tCommon("privateSystem")}</span>
 											</span>
 										)}
 									</div>
@@ -540,13 +546,27 @@ export function ProjectsCatalog() {
 								<table className="w-full text-start border-collapse">
 									<thead>
 										<tr className="bg-surface-card border-b border-line mono text-[0.68rem] text-muted-2 uppercase font-semibold">
-											<th className="py-3.5 px-4 text-start">SYS_ID</th>
-											<th className="py-3.5 px-4 text-start">System Title</th>
-											<th className="py-3.5 px-4 text-start">Category</th>
-											<th className="py-3.5 px-4 text-start">Role / Scope</th>
-											<th className="py-3.5 px-4 text-start">Core Stack</th>
-											<th className="py-3.5 px-4 text-start">Status</th>
-											<th className="py-3.5 px-4 text-end">Action</th>
+											<th className="py-3.5 px-4 text-start">
+												{tCat("table.sys_id")}
+											</th>
+											<th className="py-3.5 px-4 text-start">
+												{tCat("table.system_title")}
+											</th>
+											<th className="py-3.5 px-4 text-start">
+												{tCat("table.category")}
+											</th>
+											<th className="py-3.5 px-4 text-start">
+												{tCat("table.role_scope")}
+											</th>
+											<th className="py-3.5 px-4 text-start">
+												{tCat("table.core_stack")}
+											</th>
+											<th className="py-3.5 px-4 text-start">
+												{tCat("table.status")}
+											</th>
+											<th className="py-3.5 px-4 text-end">
+												{tCat("table.action")}
+											</th>
 										</tr>
 									</thead>
 									<tbody className="divide-y divide-line text-[0.84rem]">
@@ -586,7 +606,7 @@ export function ProjectsCatalog() {
 													) : project.isComingSoon ? (
 														<span className="mono text-[0.7rem] text-accent-ink font-semibold flex items-center gap-1.5">
 															<Clock className="size-3" />
-															SOON
+															{tCommon("comingSoon").toUpperCase()}
 														</span>
 													) : (
 														<span className="mono text-[0.7rem] text-muted-2 flex items-center gap-1.5">
@@ -598,14 +618,14 @@ export function ProjectsCatalog() {
 												<td className="py-4 px-4 text-end">
 													{project.isComingSoon ? (
 														<span className="mono text-[0.72rem] text-accent-ink font-semibold">
-															Coming Soon
+															{tCommon("comingSoon")}
 														</span>
 													) : (
 														<Link
 															href={`/projects/${project.slug}`}
 															className="btn btn-ghost text-[0.74rem] py-1 px-2.5 inline-flex items-center gap-1"
 														>
-															<span>View Spec</span>
+															<span>{tCat("table.view_spec")}</span>
 															<ArrowRight className="size-3 rtl:rotate-180" />
 														</Link>
 													)}

@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
 import { ProjectsCatalog } from "@/components/sections/projects-catalog";
+import { routing } from "@/i18n/routing";
+import type { Metadata } from "next";
 
 interface ProjectsPageProps {
 	params: Promise<{
@@ -7,10 +8,15 @@ interface ProjectsPageProps {
 	}>;
 }
 
+export function generateStaticParams() {
+	return routing.locales.map((locale) => ({ locale }));
+}
+
 export async function generateMetadata({
 	params,
 }: ProjectsPageProps): Promise<Metadata> {
 	const { locale } = await params;
+
 	const isArabic = locale === "ar";
 
 	return {
@@ -23,6 +29,6 @@ export async function generateMetadata({
 	};
 }
 
-export default function ProjectsIndexPage() {
+export default async function ProjectsIndexPage() {
 	return <ProjectsCatalog />;
 }

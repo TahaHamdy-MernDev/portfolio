@@ -5,7 +5,26 @@
 		"statusAvailable": "Available for Select Engineering Contracts",
 		"statusBadge": "AVAILABLE FOR CONTRACTS",
 		"location": "LOC: Alexandria, Egypt",
-		"systemArchitecture": "FULL_STACK_ARCH"
+		"systemArchitecture": "FULL_STACK_ARCH",
+		"backHome": "Return to Portfolio Home",
+		"systemsDirectory": "SYSTEMS DIRECTORY",
+		"productionSystems": "{count} PRODUCTION SYSTEMS",
+		"viewAllSystems": "View All Systems",
+		"requestConsultation": "Request Technical Consultation",
+		"scheduleDiscussion": "Schedule Architecture Discussion",
+		"livePlatform": "Visit Live Platform",
+		"visitSite": "Visit Site",
+		"privateEnterprise": "Private Enterprise System",
+		"privateSystem": "Private System",
+		"confidentialSystem": "[CONFIDENTIAL_INTERNAL_SYSTEM]",
+		"noPreview": "No Preview Available",
+		"comingSoon": "Coming Soon",
+		"caseStudySoon": "Case Study Coming Soon",
+		"expandView": "Expand View",
+		"close": "Close",
+		"resetFilters": "Reset All Filters",
+		"noMatchingSystems": "No matching systems found",
+		"noMatchingDesc": "No architecture matching the selected category, stack, or query was found."
 	},
 	"Nav": {
 		"work": "Work",
@@ -44,6 +63,19 @@
 			"production_ready": "Production-Grade"
 		}
 	},
+	"Marquee": {
+		"items": [
+			"Enterprise SaaS Architecture",
+			"Distributed Node & NestJS Systems",
+			"Commerce Operations Engines",
+			"Real-Time WebSockets & FCM",
+			"Async Queues (BullMQ & Redis)",
+			"PostgreSQL & Prisma Hygiene",
+			"Next.js 16 (App Router & Turbopack)",
+			"Role-Based Access Control (RBAC)",
+			"Docker & Zero-Downtime CI/CD"
+		]
+	},
 	"Projects": {
 		"section_num": "01 //",
 		"section_title": "Featured Work & Case Studies",
@@ -76,7 +108,8 @@
 			"expand_preview": "Click to expand preview",
 			"close_preview": "Close preview",
 			"no_preview": "No Preview Available",
-			"proprietary_internal": "[CONFIDENTIAL_INTERNAL_SYSTEM]"
+			"proprietary_internal": "[CONFIDENTIAL_INTERNAL_SYSTEM]",
+			"tech_libraries": "Technologies & Libraries"
 		},
 		"items": {
 			"nazam": {
@@ -137,16 +170,147 @@
 			}
 		}
 	},
+	"ProjectsCatalog": {
+		"header_tag": "ARCHITECTURAL PORTFOLIO & CODEBASE DIRECTORY",
+		"title": "Production Systems & Architectures",
+		"subtitle": "Case studies, technical architectures, concurrency solutions, and telemetry for enterprise platforms, B2B marketplaces, and distributed backend systems.",
+		"hud": {
+			"total_arch": "Total Architectures",
+			"systems_unit": "Systems",
+			"monorepos": "Codebase Monorepos",
+			"apps_unit": "Apps & APIs",
+			"concurrency": "Concurrency Target",
+			"idempotent": "Idempotent",
+			"frameworks": "Primary Frameworks"
+		},
+		"filter_tech": "Filter Tech:",
+		"all_tech": "All Tech",
+		"search_placeholder": "Search title, tech, problem...",
+		"matches_count": "({count} matches)",
+		"deep_dive_btn": "Deep-Dive Case Study",
+		"table": {
+			"sys_id": "SYS_ID",
+			"system_title": "System Title",
+			"category": "Category",
+			"role_scope": "Role / Scope",
+			"core_stack": "Core Stack",
+			"status": "Status",
+			"action": "Action",
+			"view_spec": "View Spec"
+		}
+	},
+	"ProjectDetailView": {
+		"case_study_badge": "Technical Case Study",
+		"category_saas": "Enterprise SaaS Architecture",
+		"category_ecommerce": "E-Commerce & Logistics Infrastructure",
+		"category_realtime": "Real-Time Telemetry Platform",
+		"coming_soon_title": "Technical Case Study & Benchmarks In Progress (Coming Soon)",
+		"coming_soon_desc": "The full architecture breakdown, performance benchmarks, and detailed concurrency telemetry for this system are currently being compiled.",
+		"hud_role": "Engineering Role",
+		"hud_scope": "Architecture Scope",
+		"hud_backend": "Core Backend & DB",
+		"hud_status": "System Status",
+		"preview_redacted_title": "Interface Preview Redacted (Proprietary System)",
+		"preview_redacted_desc": "Visual UI assets for this enterprise deployment are restricted under confidential client agreements. Architectural schematics and system specifications are outlined below.",
+		"nav_overview": "Overview",
+		"nav_challenge": "Challenge & Solution",
+		"nav_subsystems": "Subsystems",
+		"nav_capabilities": "Capabilities",
+		"nav_pipeline": "Data Flow",
+		"nav_stack": "Tech Stack",
+		"sec_problem_title": "01: Operational Challenge & Concurrency Bottleneck",
+		"sec_solution_title": "02: Engineered Solution & ACID Guarantees",
+		"sec_ownership_title": "Engineering Ownership & Architecture Scope",
+		"sec_subsystems_title": "Core Subsystem Modules & Domain Isolation",
+		"sec_capabilities_title": "Architectural Capabilities & Engineered Workflows",
+		"sec_topology_title": "System Topology & Architectural Data Flow",
+		"sec_stack_title": "Production Technology Matrix & Ecosystem",
+		"sec_cta_title": "Next Steps & Technical Inquiries",
+		"sec_cta_subtitle": "Looking for a systems architect or full-stack engineer for your next high-throughput platform? Let's discuss architecture and technical requirements."
+	},
 	"Skills": {
 		"section_num": "02 //",
 		"section_title": "Technical Skills & Stack",
 		"section_tag": "SKILLS",
-		"categories": {
-			"frontend": "01 / Frontend & Client Systems",
-			"backend": "02 / Backend & Microservices",
-			"database": "03 / Data & Caching",
-			"devops": "04 / Infrastructure & Tooling"
-		}
+		"categories_data": [
+			{
+				"title": "Core Languages",
+				"code": "LANG",
+				"description": "Strong foundation in typed, functional, and relational syntax.",
+				"skills": ["TypeScript", "JavaScript (ESNext)", "SQL", "HTML5", "CSS3"]
+			},
+			{
+				"title": "Frontend Engineering",
+				"code": "CLIENT",
+				"description": "Fluid, responsive, server-rendered and client-side web applications.",
+				"skills": [
+					"React 19",
+					"Next.js 16 (App Router)",
+					"Tailwind CSS",
+					"shadcn/ui",
+					"Zustand / Redux",
+					"Framer Motion"
+				]
+			},
+			{
+				"title": "Backend & Microservices",
+				"code": "SERVER",
+				"description": "Modular APIs, distributed architectures, and webhook ingestors.",
+				"skills": [
+					"NestJS",
+					"Node.js",
+					"RESTful APIs",
+					"GraphQL",
+					"Webhooks",
+					"Microservices"
+				]
+			},
+			{
+				"title": "Databases & Storage",
+				"code": "STORAGE",
+				"description": "Schema modeling, query performance tuning, and ORM hygiene.",
+				"skills": ["PostgreSQL", "MySQL", "MongoDB", "Prisma ORM", "TypeORM"]
+			},
+			{
+				"title": "Asynchronous & Real-Time",
+				"code": "ASYNC",
+				"description": "Concurrency scaling, message queues, and live event synchronization.",
+				"skills": [
+					"Redis",
+					"BullMQ",
+					"WebSockets / Socket.io",
+					"Background Workers",
+					"FCM Push"
+				]
+			},
+			{
+				"title": "Architecture & DevOps",
+				"code": "INFRA",
+				"description": "Monorepo tooling, containerization, and automated deployments.",
+				"skills": [
+					"Turborepo (Monorepo)",
+					"Docker",
+					"Linux Server Mgmt",
+					"CI/CD Pipelines",
+					"Vercel",
+					"pnpm Workspaces"
+				]
+			},
+			{
+				"title": "Domain Architecture & Production Workflows",
+				"code": "DOMAINS",
+				"description": "End-to-end mission-critical software solutions for modern enterprises.",
+				"skills": [
+					"Enterprise SaaS Architecture",
+					"E-commerce & Inventory Engines",
+					"Payment Gateway Integrations",
+					"Multi-Role Auth & RBAC",
+					"Multi-lingual / i18n Systems",
+					"Data Pipelines & Reporting",
+					"High-Density Admin Portals"
+				]
+			}
+		]
 	},
 	"Process": {
 		"section_num": "03 //",
@@ -182,17 +346,15 @@
 		"bio_lead": "I design and build reliable software that keeps high-traffic business operations running smoothly.",
 		"bio_body": "Over the past 3+ years, I've architected and shipped full-stack web applications, distributed background workers, and enterprise e-commerce systems. My approach centers on clean architectural boundaries, predictable database performance, and interfaces that are fast and pleasant to use.",
 		"download_cv": "Download Resume / CV",
-		"open_source_badge": "OPEN_SOURCE",
-		"open_source_title": "GEDO — Open Source Healthcare Platform",
-		"open_source_desc": "Architected and actively maintained as a public repository. Provides vital sign tracking, medication management, and caregiver alerts with Node.js and MongoDB.",
-		"open_source_cta": "View Repository",
+		"github_profile": "GitHub Profile",
 		"principles": {
+			"p1_badge": "SCALABILITY",
 			"p1_title": "Predictable Performance",
-			"p1_desc": "Bounded query execution, proper indexing, and offloading heavy work to asynchronous queues."
-			,
+			"p1_desc": "Bounded query execution, proper indexing, and offloading heavy work to asynchronous queues.",
+			"p2_badge": "INTEGRITY",
 			"p2_title": "Type-Safe by Design",
-			"p2_desc": "End-to-end type safety, from database models to frontend components."
-			,
+			"p2_desc": "End-to-end type safety, from database models to frontend components.",
+			"p3_badge": "RESILIENCE",
 			"p3_title": "Built for Production",
 			"p3_desc": "Defensive error handling, structured logging, idempotent APIs, and zero-downtime deployments."
 		}
@@ -235,10 +397,5 @@
 		"copyright": "© 2026 Taha Hamdy · Full-Stack Systems",
 		"built_with": "Built with Next.js 16 · Turbopack · TypeScript · Tailwind",
 		"loc_badge": "LOC: Alexandria, Egypt"
-	},
-	"LocaleSwitcher": {
-		"en": "EN",
-		"ar": "عربي",
-		"toggle": "Switch language"
 	}
 }

@@ -1,7 +1,5 @@
 "use client";
 
-import { Footer } from "@/components/sections/footer";
-import type { ProjectDetail } from "@/data/projects-data";
 import {
 	Activity,
 	ArrowLeft,
@@ -25,7 +23,10 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
+import { useEffect, useMemo, useState } from "react";
+import { Footer } from "@/components/sections/footer";
+import type { ProjectDetail } from "@/data/projects-data";
 
 interface ProjectDetailViewProps {
 	project: ProjectDetail;
@@ -38,6 +39,9 @@ export function ProjectDetailView({
 	prevProject,
 	nextProject,
 }: ProjectDetailViewProps) {
+	const tView = useTranslations("ProjectDetailView");
+	const tCommon = useTranslations("Common");
+
 	const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 	const [activeSection, setActiveSection] = useState("sec-overview");
 
@@ -92,14 +96,17 @@ export function ProjectDetailView({
 		}
 	};
 
-	const navSections = [
-		{ id: "sec-overview", label: "Overview" },
-		{ id: "sec-challenge", label: "Challenge & Solution" },
-		{ id: "sec-subsystems", label: "Subsystems" },
-		{ id: "sec-capabilities", label: "Capabilities" },
-		{ id: "sec-pipeline", label: "Data Pipeline" },
-		{ id: "sec-stack", label: "Tech Stack" },
-	];
+	const navSections = useMemo(
+		() => [
+			{ id: "sec-overview", label: tView("nav_overview") },
+			{ id: "sec-challenge", label: tView("nav_challenge") },
+			{ id: "sec-subsystems", label: tView("nav_subsystems") },
+			{ id: "sec-capabilities", label: tView("nav_capabilities") },
+			{ id: "sec-pipeline", label: tView("nav_pipeline") },
+			{ id: "sec-stack", label: tView("nav_stack") },
+		],
+		[tView],
+	);
 
 	// Determine optimal grid column classes for stack categories
 	const stackGridClass =
@@ -122,8 +129,10 @@ export function ProjectDetailView({
 							className="mono text-[0.76rem] sm:text-[0.8rem] text-muted hover:text-ink transition-colors inline-flex items-center gap-2 group px-3.5 py-1.5 rounded-full border border-line bg-surface/70 hover:bg-surface"
 						>
 							<ArrowLeft className="size-3.5 group-hover:-translate-x-1 rtl:group-hover:translate-x-1 rtl:rotate-180 transition-transform" />
-							<span className="hidden sm:inline">Systems Directory</span>
-							<span className="sm:hidden">Back</span>
+							<span className="hidden sm:inline">
+								{tCommon("systemsDirectory")}
+							</span>
+							<span className="sm:hidden">{tCommon("backHome")}</span>
 						</Link>
 
 						{/* Quick Section Jump Pills (Desktop) */}
@@ -156,13 +165,20 @@ export function ProjectDetailView({
 							{project.statusBadge.variant === "live" ? (
 								<span className="mono text-[0.68rem] text-status-live border border-status-live/30 bg-status-live/10 px-2.5 py-1 rounded-full font-semibold inline-flex items-center gap-1.5">
 									<span className="size-1.5 rounded-full bg-status-live animate-pulse" />
-									<span className="hidden sm:inline">LIVE IN PRODUCTION</span>
+									<span className="hidden sm:inline">
+										{tCommon("livePlatform").toUpperCase()}
+									</span>
 									<span className="sm:hidden">LIVE</span>
+								</span>
+							) : project.isComingSoon ? (
+								<span className="mono text-[0.68rem] text-accent-ink border border-accent-border bg-accent-soft px-2.5 py-1 rounded-full font-semibold inline-flex items-center gap-1.5">
+									<Clock className="size-3" />
+									<span>{tCommon("comingSoon").toUpperCase()}</span>
 								</span>
 							) : (
 								<span className="mono text-[0.68rem] text-muted-2 border border-line bg-surface px-2.5 py-1 rounded-full font-medium inline-flex items-center gap-1.5">
 									<Lock className="size-3 text-muted-2" />
-									<span>PRIVATE SYSTEM</span>
+									<span>{tCommon("privateSystem").toUpperCase()}</span>
 								</span>
 							)}
 						</div>
@@ -181,11 +197,11 @@ export function ProjectDetailView({
 								<Clock className="size-5 text-accent-ink shrink-0 mt-0.5" />
 								<div className="space-y-1">
 									<div className="mono text-[0.78rem] font-bold text-accent-ink uppercase tracking-wider flex items-center gap-2">
-										<span>Technical Case Study In Progress (Coming Soon)</span>
+										<span>{tView("coming_soon_title")}</span>
 										<span className="size-1.5 rounded-full bg-accent-ink animate-pulse" />
 									</div>
 									<p className="text-[0.86rem] text-muted leading-relaxed m-0">
-										The full architecture breakdown, performance benchmarks, and detailed concurrency telemetry for this system are currently being compiled.
+										{tView("coming_soon_desc")}
 									</p>
 								</div>
 							</div>
@@ -196,10 +212,10 @@ export function ProjectDetailView({
 							<div className="flex items-center gap-2.5 flex-wrap">
 								<span className="mono text-[0.7rem] uppercase tracking-wider text-accent-ink font-bold bg-accent-soft border border-accent-border px-3 py-0.5 rounded-full">
 									{project.category === "saas"
-										? "Enterprise SaaS Architecture"
+										? tView("category_saas")
 										: project.category === "ecommerce"
-											? "E-Commerce & Logistics Infrastructure"
-											: "Real-Time Telemetry Platform"}
+											? tView("category_ecommerce")
+											: tView("category_realtime")}
 								</span>
 								<span className="mono text-[0.7rem] text-muted-2">•</span>
 								<span className="mono text-[0.74rem] text-muted font-medium">
@@ -229,7 +245,7 @@ export function ProjectDetailView({
 							<div className="space-y-1">
 								<div className="mono text-[0.66rem] text-muted-2 uppercase font-semibold flex items-center gap-1.5">
 									<Cpu className="size-3.5 text-accent-ink" />
-									<span>Engineering Role</span>
+									<span>{tView("hud_role")}</span>
 								</div>
 								<div className="mono text-[0.84rem] font-bold text-ink leading-snug">
 									{project.role}
@@ -239,7 +255,7 @@ export function ProjectDetailView({
 							<div className="space-y-1">
 								<div className="mono text-[0.66rem] text-muted-2 uppercase font-semibold flex items-center gap-1.5">
 									<Layers className="size-3.5 text-accent-ink" />
-									<span>Architecture Scope</span>
+									<span>{tView("hud_scope")}</span>
 								</div>
 								<div className="mono text-[0.82rem] font-medium text-muted leading-snug">
 									{project.team}
@@ -249,7 +265,7 @@ export function ProjectDetailView({
 							<div className="space-y-1">
 								<div className="mono text-[0.66rem] text-muted-2 uppercase font-semibold flex items-center gap-1.5">
 									<Database className="size-3.5 text-accent-ink" />
-									<span>Core Backend & DB</span>
+									<span>{tView("hud_backend")}</span>
 								</div>
 								<div className="mono text-[0.84rem] font-semibold text-ink leading-snug">
 									{project.stack[0]?.technologies.slice(0, 3).join(" · ") ||
@@ -260,7 +276,7 @@ export function ProjectDetailView({
 							<div className="space-y-1">
 								<div className="mono text-[0.66rem] text-muted-2 uppercase font-semibold flex items-center gap-1.5">
 									<Radio className="size-3.5 text-accent-ink" />
-									<span>System Status</span>
+									<span>{tView("hud_status")}</span>
 								</div>
 								<div className="mono text-[0.84rem] font-semibold text-accent-ink flex items-center gap-1.5">
 									<span className="size-1.5 rounded-full bg-accent-ink" />
@@ -295,7 +311,7 @@ export function ProjectDetailView({
 											className="mono text-[0.7rem] text-muted hover:text-ink px-2.5 py-1 rounded bg-paper border border-line flex items-center gap-1.5 transition-colors cursor-pointer hover:border-accent"
 										>
 											<Maximize2 className="size-3.5" />
-											<span>Expand View</span>
+											<span>{tCommon("expandView")}</span>
 										</button>
 									)}
 								</div>
@@ -324,10 +340,10 @@ export function ProjectDetailView({
 											<Lock className="size-5 text-accent-ink" />
 										</div>
 										<div className="mono text-[0.88rem] font-bold text-ink uppercase tracking-wider mb-1">
-											Interface Preview Redacted (Proprietary System)
+											{tView("preview_redacted_title")}
 										</div>
 										<p className="mono text-[0.76rem] text-muted max-w-md m-0 leading-relaxed">
-											Visual UI assets for this enterprise deployment are restricted under confidential client agreements. Architectural schematics and system specifications are outlined below.
+											{tView("preview_redacted_desc")}
 										</p>
 									</div>
 								)}
@@ -343,13 +359,13 @@ export function ProjectDetailView({
 											rel="noreferrer"
 											className="btn btn-primary px-5 py-2 text-[0.84rem]"
 										>
-											<span>Visit Live Platform</span>
+											<span>{tCommon("livePlatform")}</span>
 											<ArrowUpRight className="size-4 rtl:-rotate-90" />
 										</a>
 									) : (
 										<div className="inline-flex items-center gap-2 px-4 py-2 rounded-(--radius) bg-surface border border-line text-[0.8rem] mono text-muted-2 select-none">
 											<ShieldCheck className="size-4 text-accent-ink" />
-											<span>Private Enterprise System</span>
+											<span>{tCommon("privateEnterprise")}</span>
 										</div>
 									)}
 								</div>
@@ -358,7 +374,7 @@ export function ProjectDetailView({
 									href="/#contact"
 									className="btn btn-ghost px-4 py-2 text-[0.84rem]"
 								>
-									<span>Request Technical Consultation</span>
+									<span>{tCommon("requestConsultation")}</span>
 									<ArrowRight className="size-3.5 rtl:rotate-180" />
 								</Link>
 							</div>
@@ -400,7 +416,7 @@ export function ProjectDetailView({
 								{"01 //"}
 							</span>
 							<h2 className="text-[1.3rem] sm:text-[1.6rem] font-bold font-sans text-ink m-0">
-								Problem Diagnosis & Architectural Solution
+								{tView("sec_problem_title")}
 							</h2>
 						</div>
 
@@ -409,7 +425,7 @@ export function ProjectDetailView({
 							<div className="space-y-1">
 								<div className="mono text-[0.68rem] uppercase tracking-wider text-muted-2 font-semibold flex items-center gap-2">
 									<Cpu className="size-4 text-accent-ink" />
-									<span>Engineering Leadership & Architecture Scope</span>
+									<span>{tView("sec_ownership_title")}</span>
 								</div>
 								<p className="text-[0.94rem] text-ink leading-relaxed m-0 max-w-4xl">
 									{project.myRoleAndChallenge.roleOverview}
@@ -424,7 +440,7 @@ export function ProjectDetailView({
 								<div className="space-y-4">
 									<div className="flex items-center gap-2 mono text-[0.72rem] uppercase tracking-wider font-bold text-amber-400">
 										<Activity className="size-4 shrink-0" />
-										<span>The Operational Challenge & Scale Bottleneck</span>
+										<span>{tView("sec_problem_title")}</span>
 									</div>
 
 									<div className="space-y-3">
@@ -457,7 +473,7 @@ export function ProjectDetailView({
 								<div className="space-y-4">
 									<div className="flex items-center gap-2 mono text-[0.72rem] uppercase tracking-wider font-bold text-accent-ink">
 										<ShieldCheck className="size-4 shrink-0" />
-										<span>The Engineered Solution & ACID Guarantees</span>
+										<span>{tView("sec_solution_title")}</span>
 									</div>
 
 									<p className="text-[0.95rem] text-ink leading-relaxed m-0 font-normal">
@@ -484,7 +500,7 @@ export function ProjectDetailView({
 										{"02 //"}
 									</span>
 									<h2 className="text-[1.3rem] sm:text-[1.6rem] font-bold font-sans text-ink m-0">
-										Key Subsystem Modules
+										{tView("sec_subsystems_title")}
 									</h2>
 								</div>
 
@@ -530,7 +546,7 @@ export function ProjectDetailView({
 								{"03 //"}
 							</span>
 							<h2 className="text-[1.3rem] sm:text-[1.6rem] font-bold font-sans text-ink m-0">
-								Key Architectural Capabilities
+								{tView("sec_capabilities_title")}
 							</h2>
 						</div>
 
@@ -591,7 +607,7 @@ export function ProjectDetailView({
 								{"04 //"}
 							</span>
 							<h2 className="text-[1.3rem] sm:text-[1.6rem] font-bold font-sans text-ink m-0">
-								System Topology & Data Pipeline
+								{tView("sec_topology_title")}
 							</h2>
 						</div>
 
@@ -675,7 +691,7 @@ export function ProjectDetailView({
 								{"05 //"}
 							</span>
 							<h2 className="text-[1.3rem] sm:text-[1.6rem] font-bold font-sans text-ink m-0">
-								Technology Matrix & Specifications
+								{tView("sec_stack_title")}
 							</h2>
 						</div>
 
@@ -789,12 +805,10 @@ export function ProjectDetailView({
 								ARCHITECTURAL CONSULTING & CONTRACTS
 							</span>
 							<h2 className="text-[clamp(1.5rem,3.5vw,2.2rem)] font-extrabold font-sans text-ink m-0">
-								Have a Similar Architecture Challenge?
+								{tView("sec_cta_title")}
 							</h2>
 							<p className="text-[0.95rem] sm:text-[1.02rem] text-muted leading-relaxed m-0">
-								I specialize in designing and shipping multi-tenant platforms,
-								high-throughput background queues, and resilient database
-								schemas built for heavy production traffic.
+								{tView("sec_cta_subtitle")}
 							</p>
 						</div>
 
@@ -803,14 +817,14 @@ export function ProjectDetailView({
 								href="/#contact"
 								className="btn btn-primary px-6 py-2.5 text-[0.88rem]"
 							>
-								<span>Schedule Architecture Discussion</span>
+								<span>{tCommon("scheduleDiscussion")}</span>
 								<ArrowUpRight className="size-4 rtl:-rotate-90" />
 							</Link>
 							<Link
 								href="/#work"
 								className="btn btn-secondary px-5 py-2.5 text-[0.88rem]"
 							>
-								<span>View All Systems</span>
+								<span>{tCommon("viewAllSystems")}</span>
 							</Link>
 						</div>
 					</section>
@@ -827,13 +841,13 @@ export function ProjectDetailView({
 						type="button"
 						className="fixed inset-0 bg-paper/90 backdrop-blur-md cursor-default w-full h-full border-none p-0"
 						onClick={() => setIsLightboxOpen(false)}
-						aria-label="Close full preview"
+						aria-label={tCommon("close")}
 					/>
 					<div className="relative z-10 max-w-5xl w-full bg-surface border border-line rounded-(--radius) overflow-hidden shadow-2xl flex flex-col">
 						<div className="px-4 sm:px-6 py-3 bg-surface-card border-b border-line flex items-center justify-between gap-3">
 							<div className="flex items-center gap-2">
 								<h3 className="mono text-[0.84rem] sm:text-[0.92rem] font-bold text-ink m-0">
-									{project.title} — Interface Blueprint
+									{project.title} — {tView("case_study_badge")}
 								</h3>
 							</div>
 
@@ -843,7 +857,7 @@ export function ProjectDetailView({
 								className="mono text-[0.74rem] font-bold px-2.5 py-1 rounded bg-paper border border-line text-muted hover:text-ink hover:border-accent transition-colors cursor-pointer flex items-center gap-1.5"
 							>
 								<X className="size-3.5" />
-								<span>Close</span>
+								<span>{tCommon("close")}</span>
 							</button>
 						</div>
 

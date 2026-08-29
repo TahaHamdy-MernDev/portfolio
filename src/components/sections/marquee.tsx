@@ -1,19 +1,12 @@
+"use client";
+
+import { useTranslations } from "next-intl";
 import React from "react";
 
-const MARQUEE_ITEMS = [
-	"Enterprise SaaS Architecture",
-	"Distributed Node & NestJS Systems",
-	"Commerce Operations Engines",
-	"Real-Time WebSockets & FCM",
-	"Async Queues (BullMQ & Redis)",
-	"PostgreSQL & Prisma Hygiene",
-	"Next.js 16 (App Router & Turbopack)",
-	"Role-Based Access Control (RBAC)",
-	"Docker & Zero-Downtime CI/CD",
-];
-
 export function Marquee() {
-	const items = [...MARQUEE_ITEMS, ...MARQUEE_ITEMS, ...MARQUEE_ITEMS];
+	const t = useTranslations("Marquee");
+	const rawItems: string[] = t.raw("items") || [];
+	const items = [...rawItems, ...rawItems, ...rawItems];
 
 	return (
 		<div

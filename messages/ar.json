@@ -5,7 +5,26 @@
 		"statusAvailable": "متاح لعدد محدود من العقود الهندسية",
 		"statusBadge": "متاح للتعاقد",
 		"location": "الموقع: الإسكندرية (UTC+2)",
-		"systemArchitecture": "FULL_STACK_ARCH"
+		"systemArchitecture": "FULL_STACK_ARCH",
+		"backHome": "العودة للرئيسية",
+		"systemsDirectory": "دليل الأنظمة",
+		"productionSystems": "{count} أنظمة إنتاجية",
+		"viewAllSystems": "استعراض كل الأنظمة",
+		"requestConsultation": "طلب استشارة معمارية",
+		"scheduleDiscussion": "تحديد موعد لمناقشة المعمارية",
+		"livePlatform": "زيارة المنصة الحية",
+		"visitSite": "زيارة الموقع",
+		"privateEnterprise": "نظام مؤسسي خاص",
+		"privateSystem": "نظام خاص",
+		"confidentialSystem": "[نظام داخلي خاص]",
+		"noPreview": "معاينة الواجهة غير متاحة",
+		"comingSoon": "قريباً",
+		"caseStudySoon": "دراسة الحالة قريباً",
+		"expandView": "تكبير العرض",
+		"close": "إغلاق",
+		"resetFilters": "إعادة ضبط كل الفلاتر",
+		"noMatchingSystems": "لم يتم العثور على أنظمة مطابقة",
+		"noMatchingDesc": "لا توجد معمارية تطابق الفئة أو التقنية أو البحث المحدد."
 	},
 	"Nav": {
 		"work": "الأعمال",
@@ -44,6 +63,19 @@
 			"production_ready": "جاهزة للـ Production"
 		}
 	},
+	"Marquee": {
+		"items": [
+			"معمارية منصات SaaS المؤسسية",
+			"أنظمة Node و NestJS الموزعة",
+			"محركات عمليات التجارة والمخازن",
+			"اتصالات لحظية عبر WebSockets و FCM",
+			"طوابير غير متزامنة (BullMQ و Redis)",
+			"قواعد بيانات PostgreSQL و Prisma",
+			"Next.js 16 (App Router و Turbopack)",
+			"صلاحيات وأمان متقدم (RBAC)",
+			"حاويات Docker ونشر مستمر بدون توقف"
+		]
+	},
 	"Projects": {
 		"section_num": "01 //",
 		"section_title": "أبرز الأعمال ودراسات الحالة",
@@ -76,7 +108,8 @@
 			"expand_preview": "اضغط لتكبير الصورة",
 			"close_preview": "إغلاق المعاينة",
 			"no_preview": "معاينة الواجهة غير متاحة",
-			"proprietary_internal": "[نظام داخلي خاص · غير متاح للعامة]"
+			"proprietary_internal": "[نظام داخلي خاص · غير متاح للعامة]",
+			"tech_libraries": "التقنيات والمكتبات المستخدمة"
 		},
 		"items": {
 			"nazam": {
@@ -137,16 +170,147 @@
 			}
 		}
 	},
+	"ProjectsCatalog": {
+		"header_tag": "معمارية الأنظمة ودليل المشاريع",
+		"title": "الأنظمة والمعماريات الإنتاجية",
+		"subtitle": "دراسات حالة، مخططات معمارية، حلول التزامن العالي، وبيانات الأداء لمنصات المؤسسات والأسواق الرقمية والأنظمة الموزعة.",
+		"hud": {
+			"total_arch": "إجمالي المعماريات",
+			"systems_unit": "أنظمة",
+			"monorepos": "مستودعات Monorepo",
+			"apps_unit": "تطبيقات وواجهات",
+			"concurrency": "أمان التزامن",
+			"idempotent": "غير قابل للتكرار",
+			"frameworks": "التقنيات الأساسية"
+		},
+		"filter_tech": "فلترة التقنيات:",
+		"all_tech": "كل التقنيات",
+		"search_placeholder": "ابحث بالعنوان، التقنية، المشكلة...",
+		"matches_count": "({count} نتائج)",
+		"deep_dive_btn": "دراسة الحالة والمواصفات",
+		"table": {
+			"sys_id": "المعرف",
+			"system_title": "اسم النظام",
+			"category": "الفئة",
+			"role_scope": "الدور / النطاق",
+			"core_stack": "الحزمة التقنية",
+			"status": "الحالة",
+			"action": "الإجراء",
+			"view_spec": "استعراض المواصفات"
+		}
+	},
+	"ProjectDetailView": {
+		"case_study_badge": "دراسة حالة تقنية",
+		"category_saas": "معمارية SaaS للمؤسسات",
+		"category_ecommerce": "بنية التجارة الإلكترونية واللوجستيات",
+		"category_realtime": "منصة تتبع وأنظمة لحظية",
+		"coming_soon_title": "دراسة الحالة ومؤشرات الأداء قيد التجهيز (قريباً)",
+		"coming_soon_desc": "يجري حالياً إعداد التفاصيل المعمارية الكاملة ومؤشرات الأداء تحت الضغط لهذا النظام.",
+		"hud_role": "الدور الهندسي",
+		"hud_scope": "نطاق المعمارية",
+		"hud_backend": "الواجهة الخلفية وقاعدة البيانات",
+		"hud_status": "حالة النظام",
+		"preview_redacted_title": "معاينة الواجهة محجوبة (نظام خاص)",
+		"preview_redacted_desc": "الواجهات المرئية لهذا النظام محجوبة بموجب اتفاقيات سرية مع العميل. المخططات المعمارية والمواصفات موضحة أدناه.",
+		"nav_overview": "نظرة عامة",
+		"nav_challenge": "التحدي والحل",
+		"nav_subsystems": "الأنظمة الفرعية",
+		"nav_capabilities": "الإمكانيات",
+		"nav_pipeline": "مسار البيانات",
+		"nav_stack": "الحزمة التقنية",
+		"sec_problem_title": "01: التحدي التشغيلي واختناق التزامن",
+		"sec_solution_title": "02: الحل الهندسي وضمانات ACID",
+		"sec_ownership_title": "الملكية الهندسية ونطاق المعمارية",
+		"sec_subsystems_title": "الأنظمة الفرعية وفصل النطاقات",
+		"sec_capabilities_title": "الإمكانيات المعمارية ومسارات العمل",
+		"sec_topology_title": "المخطط الهيكلي ومسار تدفق البيانات",
+		"sec_stack_title": "مصفوفة التقنيات والبيئة التشغيلية",
+		"sec_cta_title": "الخطوات التالية والاستفسارات التقنية",
+		"sec_cta_subtitle": "هل تبحث عن مهندس أنظمة أو مطور Full-Stack لمنصتك القادمة؟ دعنا نناقش متطلباتك ومعمارية النظام."
+	},
 	"Skills": {
 		"section_num": "02 //",
 		"section_title": "المهارات التقنية والأدوات",
 		"section_tag": "المهارات",
-		"categories": {
-			"frontend": "01 / الواجهة الأمامية وأنظمة العميل",
-			"backend": "02 / الواجهة الخلفية والـ Microservices",
-			"database": "03 / قواعد البيانات والـ Caching",
-			"devops": "04 / البنية التحتية والأدوات"
-		}
+		"categories_data": [
+			{
+				"title": "لغات البرمجة الأساسية",
+				"code": "LANG",
+				"description": "أساس متين في البرمجة الموجهة بالأنواع والوظيفية وقواعد البيانات.",
+				"skills": ["TypeScript", "JavaScript (ESNext)", "SQL", "HTML5", "CSS3"]
+			},
+			{
+				"title": "هندسة الواجهة الأمامية",
+				"code": "CLIENT",
+				"description": "تطبيقات ويب سريعة، متجاوبة، وتعمل بكفاءة على مستوى الخادم والعميل.",
+				"skills": [
+					"React 19",
+					"Next.js 16 (App Router)",
+					"Tailwind CSS",
+					"shadcn/ui",
+					"Zustand / Redux",
+					"Framer Motion"
+				]
+			},
+			{
+				"title": "الواجهة الخلفية والـ Microservices",
+				"code": "SERVER",
+				"description": "واجهات برمجة معيارية (APIs)، معماريات موزعة، ومعالجة Webhooks.",
+				"skills": [
+					"NestJS",
+					"Node.js",
+					"RESTful APIs",
+					"GraphQL",
+					"Webhooks",
+					"Microservices"
+				]
+			},
+			{
+				"title": "قواعد البيانات والتخزين",
+				"code": "STORAGE",
+				"description": "تصميم النماذج، تحسين خطط الاستعلام، وإدارة الـ ORM بانضباط.",
+				"skills": ["PostgreSQL", "MySQL", "MongoDB", "Prisma ORM", "TypeORM"]
+			},
+			{
+				"title": "المعالجة غير المتزامنة والأنظمة اللحظية",
+				"code": "ASYNC",
+				"description": "معالجة التزامن العالي، طوابير الرسائل، ومزامنة الأحداث اللحظية.",
+				"skills": [
+					"Redis",
+					"BullMQ",
+					"WebSockets / Socket.io",
+					"Background Workers",
+					"FCM Push"
+				]
+			},
+			{
+				"title": "المعمارية والبنية التحتية (DevOps)",
+				"code": "INFRA",
+				"description": "إدارة مستودعات Monorepo، حاويات Docker، وأنابيب النشر المؤتمتة.",
+				"skills": [
+					"Turborepo (Monorepo)",
+					"Docker",
+					"Linux Server Mgmt",
+					"CI/CD Pipelines",
+					"Vercel",
+					"pnpm Workspaces"
+				]
+			},
+			{
+				"title": "معمارية النطاقات والحلول المؤسسية",
+				"code": "DOMAINS",
+				"description": "حلول برمجية متكاملة ومصممة للعمليات الحيوية للشركات الحديثة.",
+				"skills": [
+					"معمارية منصات SaaS المؤسسية",
+					"محركات التجارة وإدارة المخازن",
+					"الربط مع بوابات الدفع الإلكتروني",
+					"إدارة الأدوار والصلاحيات (RBAC)",
+					"أنظمة التوطين ودعم اللغات (i18n)",
+					"معالجة البيانات والتقارير المالية",
+					"لوحات تحكم إدارية عالية الكثافة"
+				]
+			}
+		]
 	},
 	"Process": {
 		"section_num": "03 //",
@@ -182,15 +346,15 @@
 		"bio_lead": "بصمّم وأبني برمجيات موثوقة بتخلّي عمليات الشركات ذات الحركة العالية تشتغل بسلاسة وثبات.",
 		"bio_body": "على مدار أكثر من 3 سنوات، صممت وأطلقت تطبيقات ويب متكاملة، وعمال معالجة خلفية موزعة، وأنظمة تجارة إلكترونية مؤسسية. منهجي يعتمد على وضوح الحدود المعمارية، وإمكانية التنبؤ بأداء استعلامات قواعد البيانات، وتقديم واجهات سريعة وسهلة الاستخدام.",
 		"download_cv": "تحميل السيرة الذاتية",
-		"open_source_badge": "مفتوح المصدر",
-		"open_source_title": "مشروع جدو (GEDO) — منصة رعاية صحية مفتوحة المصدر",
-		"open_source_desc": "مشروع كود مفتوح المصدر وموثق بالكامل لمجتمع المطورين. يدير متابعة المؤشرات الحيوية، مواعيد الأدوية، وتنبيهات مقدمي الرعاية عبر Node.js و MongoDB.",
-		"open_source_cta": "استعراض المستودع",
+		"github_profile": "الملف الشخصي على GitHub",
 		"principles": {
+			"p1_badge": "التوسع",
 			"p1_title": "أداء يمكن التنبؤ به",
 			"p1_desc": "استعلامات منضبطة زمنياً، وفهرسة دقيقة، وتفريغ المهام الثقيلة على طوابير غير متزامنة.",
+			"p2_badge": "الموثوقية",
 			"p2_title": "Type-Safe من التصميم",
 			"p2_desc": "تحقق شامل من صحة الأنواع والبيانات من نماذج التخزين حتى واجهة المستخدم.",
+			"p3_badge": "الاستدامة",
 			"p3_title": "مبني لبيئة الإنتاج الحقيقية",
 			"p3_desc": "معالجة دفاعية للأخطاء، وتسجيل منظم للأحداث، ونقاط API آمنة ومحصنة ضد تكرار المعالجة."
 		}
@@ -233,10 +397,5 @@
 		"copyright": "© 2026 طه حمدي · Full-Stack Systems",
 		"built_with": "تم البناء باستخدام Next.js 16 · Turbopack · TypeScript · Tailwind",
 		"loc_badge": "الموقع: الإسكندرية (UTC+2)"
-	},
-	"LocaleSwitcher": {
-		"en": "EN",
-		"ar": "عربي",
-		"toggle": "تبديل اللغة"
 	}
 }
