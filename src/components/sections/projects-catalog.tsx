@@ -4,38 +4,108 @@ import {
 	ArrowLeft,
 	ArrowRight,
 	ArrowUpRight,
+	Clock,
+	Filter,
 	LayoutGrid,
 	Lock,
 	Search,
 	ShieldCheck,
 	Table,
 	Terminal,
+	X,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Footer } from "@/components/sections/footer";
 import { ALL_PROJECTS } from "@/data/projects-data";
 
+const CATEGORIES = [
+	{ id: "all", label: "All Systems" },
+	{ id: "saas", label: "Enterprise SaaS" },
+	{ id: "ecommerce", label: "E-Commerce & Logistics" },
+	{ id: "realtime", label: "Real-Time & Telemetry" },
+];
+
+const POPULAR_STACK_FILTERS = [
+	"NestJS",
+	"Next.js",
+	"PostgreSQL",
+	"MongoDB",
+	"Redis",
+	"Socket.io",
+	"TypeScript",
+];
+
 export function ProjectsCatalog() {
 	const [selectedCategory, setSelectedCategory] = useState<string>("all");
+	const [selectedTech, setSelectedTech] = useState<string>("all");
 	const [searchQuery, setSearchQuery] = useState<string>("");
 	const [viewMode, setViewMode] = useState<"grid" | "table">("grid");
 
-	const filteredProjects = ALL_PROJECTS.filter((project) => {
-		const matchesCategory =
-			selectedCategory === "all" || project.category === selectedCategory;
-		const matchesSearch =
-			project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-			project.arabicTitle?.includes(searchQuery) ||
-			project.tagline.toLowerCase().includes(searchQuery.toLowerCase()) ||
-			project.stack.some((s) =>
-				s.technologies.some((t) =>
-					t.toLowerCase().includes(searchQuery.toLowerCase()),
-				),
-			);
-		return matchesCategory && matchesSearch;
-	});
+	const categoryCounts = useMemo(() => {
+		return {
+			all: ALL_PROJECTS.length,
+			saas: ALL_PROJECTS.filter((p) =>
+				p.categories ? p.categories.includes("saas") : p.category === "saas",
+			).length,
+			ecommerce: ALL_PROJECTS.filter((p) =>
+				p.categories
+					? p.categories.includes("ecommerce")
+					: p.category === "ecommerce",
+			).length,
+			realtime: ALL_PROJECTS.filter((p) =>
+				p.categories
+					? p.categories.includes("realtime")
+					: p.category === "realtime",
+			).length,
+		};
+	}, []);
+
+	const filteredProjects = useMemo(() => {
+		return ALL_PROJECTS.filter((project) => {
+			const matchesCategory =
+				selectedCategory === "all" ||
+				(project.categories
+					? project.categories.includes(
+							selectedCategory as "saas" | "ecommerce" | "realtime",
+						)
+					: project.category === selectedCategory);
+
+			const matchesTech =
+				selectedTech === "all" ||
+				project.stack.some((s) =>
+					s.technologies.some((t) =>
+						t.toLowerCase().includes(selectedTech.toLowerCase()),
+					),
+				);
+
+			const query = searchQuery.trim().toLowerCase();
+			const matchesSearch =
+				!query ||
+				project.title.toLowerCase().includes(query) ||
+				(project.arabicTitle &&
+					project.arabicTitle.toLowerCase().includes(query)) ||
+				project.tagline.toLowerCase().includes(query) ||
+				project.role.toLowerCase().includes(query) ||
+				project.theProblem.toLowerCase().includes(query) ||
+				project.keyFeatures.some((f) => f.toLowerCase().includes(query)) ||
+				project.stack.some((s) =>
+					s.technologies.some((t) => t.toLowerCase().includes(query)),
+				);
+
+			return matchesCategory && matchesTech && matchesSearch;
+		});
+	}, [selectedCategory, selectedTech, searchQuery]);
+
+	const resetFilters = () => {
+		setSelectedCategory("all");
+		setSelectedTech("all");
+		setSearchQuery("");
+	};
+
+	const hasActiveFilters =
+		selectedCategory !== "all" || selectedTech !== "all" || searchQuery !== "";
 
 	return (
 		<div className="flex flex-col min-h-screen relative bg-paper text-ink selection:bg-accent selection:text-paper antialiased">
@@ -59,7 +129,7 @@ export function ProjectsCatalog() {
 								SYSTEMS DIRECTORY
 							</span>
 							<span className="mono text-[0.7rem] text-muted-2 px-2 py-1 rounded bg-surface border border-line hidden sm:inline">
-								{ALL_PROJECTS.length} PRODUCTION CODEBASES
+								{ALL_PROJECTS.length} PRODUCTION SYSTEMS
 							</span>
 						</div>
 					</div>
@@ -78,9 +148,9 @@ export function ProjectsCatalog() {
 								Production Systems & Architectures
 							</h1>
 							<p className="text-[1.05rem] sm:text-[1.15rem] text-muted max-w-3xl font-normal leading-relaxed m-0">
-								Deep-dive case studies, technical schematics, concurrency
-								solutions, and telemetry for enterprise platforms, B2B
-								marketplaces, and real-time distributed applications.
+								Case studies, technical architectures, concurrency solutions, and
+								telemetry for enterprise platforms, B2B marketplaces, and
+								distributed backend systems.
 							</p>
 						</div>
 
@@ -124,82 +194,163 @@ export function ProjectsCatalog() {
 									Primary Frameworks
 								</div>
 								<div className="mono text-[1.4rem] font-bold text-ink truncate">
-									Nest · Next · Mongo
+									Nest · Next · Postgres
 								</div>
 							</div>
 						</div>
 
-						{/* Filter & Search Bar */}
-						<div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 pt-2">
-							{/* Category Filters */}
-							<div className="flex items-center gap-1.5 flex-wrap">
-								{[
-									{ id: "all", label: "All Systems" },
-									{ id: "saas", label: "Enterprise SaaS" },
-									{ id: "ecommerce", label: "E-Commerce & Logistics" },
-								].map((cat) => (
+						{/* Filter, Search & View Controls */}
+						<div className="space-y-4 pt-2">
+							<div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
+								{/* Category Tabs */}
+								<div className="flex items-center gap-1.5 flex-wrap">
+									{CATEGORIES.map((cat) => {
+										const count =
+											categoryCounts[cat.id as keyof typeof categoryCounts] ??
+											0;
+										const isActive = selectedCategory === cat.id;
+										return (
+											<button
+												key={cat.id}
+												type="button"
+												onClick={() => setSelectedCategory(cat.id)}
+												className={`mono text-[0.74rem] px-3.5 py-1.5 rounded-full border transition-all cursor-pointer flex items-center gap-2 ${
+													isActive
+														? "bg-accent text-paper font-bold shadow-sm border-accent"
+														: "bg-surface text-muted border-line hover:text-ink hover:border-line-active"
+												}`}
+											>
+												<span>{cat.label}</span>
+												<span
+													className={`text-[0.62rem] px-1.5 py-0.2 rounded-full ${
+														isActive
+															? "bg-paper/25 text-paper font-bold"
+															: "bg-paper text-muted-2"
+													}`}
+												>
+													{count}
+												</span>
+											</button>
+										);
+									})}
+								</div>
+
+								{/* Search Input & View Mode Toggles */}
+								<div className="flex items-center gap-3">
+									<div className="relative flex-1 sm:w-64">
+										<Search className="size-3.5 text-muted-2 absolute left-3 top-1/2 -translate-y-1/2 rtl:left-auto rtl:right-3" />
+										<input
+											type="text"
+											value={searchQuery}
+											onChange={(e) => setSearchQuery(e.target.value)}
+											placeholder="Search title, tech, problem..."
+											className="w-full bg-surface border border-line rounded-lg px-3 py-1.5 pl-9 rtl:pl-3 rtl:pr-9 text-[0.8rem] mono text-ink placeholder:text-muted-2 focus:outline-none focus:border-accent"
+										/>
+										{searchQuery && (
+											<button
+												type="button"
+												onClick={() => setSearchQuery("")}
+												className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted hover:text-ink text-[0.7rem] mono cursor-pointer"
+											>
+												<X className="size-3.5" />
+											</button>
+										)}
+									</div>
+
+									{/* View Mode Toggle */}
+									<div className="flex items-center gap-1 bg-surface p-1 rounded-lg border border-line">
+										<button
+											type="button"
+											onClick={() => setViewMode("grid")}
+											className={`p-1.5 rounded ${viewMode === "grid" ? "bg-paper text-accent-ink font-bold" : "text-muted hover:text-ink"} cursor-pointer`}
+											title="Grid View"
+										>
+											<LayoutGrid className="size-4" />
+										</button>
+										<button
+											type="button"
+											onClick={() => setViewMode("table")}
+											className={`p-1.5 rounded ${viewMode === "table" ? "bg-paper text-accent-ink font-bold" : "text-muted hover:text-ink"} cursor-pointer`}
+											title="Table View"
+										>
+											<Table className="size-4" />
+										</button>
+									</div>
+								</div>
+							</div>
+
+							{/* Secondary Technology Stack Filter Chips */}
+							<div className="flex items-center gap-2 flex-wrap pt-1 border-t border-line/60">
+								<div className="mono text-[0.66rem] text-muted-2 uppercase font-semibold flex items-center gap-1 shrink-0">
+									<Filter className="size-3 text-accent-ink" />
+									<span>Filter Tech:</span>
+								</div>
+
+								<button
+									type="button"
+									onClick={() => setSelectedTech("all")}
+									className={`mono text-[0.68rem] px-2.5 py-0.5 rounded border transition-colors cursor-pointer ${
+										selectedTech === "all"
+											? "bg-accent-soft text-accent-ink border-accent-border font-bold"
+											: "bg-surface text-muted-2 border-line hover:text-ink"
+									}`}
+								>
+									All Tech
+								</button>
+
+								{POPULAR_STACK_FILTERS.map((tech) => (
 									<button
-										key={cat.id}
+										key={tech}
 										type="button"
-										onClick={() => setSelectedCategory(cat.id)}
-										className={`mono text-[0.74rem] px-3.5 py-1.5 rounded-full border transition-all cursor-pointer ${
-											selectedCategory === cat.id
-												? "bg-accent-soft text-accent-ink border-accent-border font-bold shadow-sm"
+										onClick={() =>
+											setSelectedTech(selectedTech === tech ? "all" : tech)
+										}
+										className={`mono text-[0.68rem] px-2.5 py-0.5 rounded border transition-colors cursor-pointer ${
+											selectedTech === tech
+												? "bg-accent text-paper border-accent font-semibold"
 												: "bg-surface text-muted border-line hover:text-ink hover:border-line-active"
 										}`}
 									>
-										{cat.label}
+										{tech}
 									</button>
 								))}
-							</div>
 
-							{/* Search Input & View Mode Toggles */}
-							<div className="flex items-center gap-3">
-								<div className="relative flex-1 md:w-64">
-									<Search className="size-3.5 text-muted-2 absolute left-3 top-1/2 -translate-y-1/2 rtl:left-auto rtl:right-3" />
-									<input
-										type="text"
-										value={searchQuery}
-										onChange={(e) => setSearchQuery(e.target.value)}
-										placeholder="Search stack, title, feature..."
-										className="w-full bg-surface border border-line rounded-lg px-3 py-1.5 pl-9 rtl:pl-3 rtl:pr-9 text-[0.8rem] mono text-ink placeholder:text-muted-2 focus:outline-none focus:border-accent"
-									/>
-									{searchQuery && (
-										<button
-											type="button"
-											onClick={() => setSearchQuery("")}
-											className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted hover:text-ink text-[0.7rem] mono"
-										>
-											Clear
-										</button>
-									)}
-								</div>
-
-								{/* View Mode Toggle */}
-								<div className="flex items-center gap-1 bg-surface p-1 rounded-lg border border-line">
+								{hasActiveFilters && (
 									<button
 										type="button"
-										onClick={() => setViewMode("grid")}
-										className={`p-1.5 rounded ${viewMode === "grid" ? "bg-paper text-accent-ink" : "text-muted hover:text-ink"} cursor-pointer`}
-										title="Grid View"
+										onClick={resetFilters}
+										className="mono text-[0.66rem] text-accent-ink hover:underline cursor-pointer ms-auto"
 									>
-										<LayoutGrid className="size-4" />
+										Reset Filters ({filteredProjects.length} matches)
 									</button>
-									<button
-										type="button"
-										onClick={() => setViewMode("table")}
-										className={`p-1.5 rounded ${viewMode === "table" ? "bg-paper text-accent-ink" : "text-muted hover:text-ink"} cursor-pointer`}
-										title="Table View"
-									>
-										<Table className="size-4" />
-									</button>
-								</div>
+								)}
 							</div>
 						</div>
 					</div>
 
-					{/* Catalog Stream */}
-					{viewMode === "grid" ? (
+					{/* Empty State */}
+					{filteredProjects.length === 0 ? (
+						<div className="p-12 text-center rounded-(--radius) bg-surface border border-dashed border-line space-y-3">
+							<div className="size-10 rounded-full bg-surface-card border border-line flex items-center justify-center text-muted-2 mx-auto">
+								<Search className="size-4" />
+							</div>
+							<div className="mono text-[0.92rem] font-bold text-ink">
+								No matching systems found
+							</div>
+							<p className="text-[0.84rem] text-muted max-w-sm mx-auto m-0">
+								No architecture matching the selected category, stack, or query was
+								found.
+							</p>
+							<button
+								type="button"
+								onClick={resetFilters}
+								className="btn btn-secondary text-[0.76rem] py-1.5 px-4 inline-flex items-center gap-1.5 mt-2 cursor-pointer"
+							>
+								<span>Reset All Filters</span>
+							</button>
+						</div>
+					) : viewMode === "grid" ? (
+						/* Catalog Stream Grid View */
 						<div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
 							{filteredProjects.map((project) => (
 								<article
@@ -207,39 +358,68 @@ export function ProjectsCatalog() {
 									className="rounded-(--radius) bg-surface/90 border border-line hover:border-accent-border transition-all duration-200 overflow-hidden flex flex-col justify-between shadow-lg group"
 								>
 									<div>
-										{/* Preview Image Frame */}
-										<Link
-											href={`/projects/${project.slug}`}
-											className="relative aspect-16/9 w-full bg-paper block border-b border-line overflow-hidden"
-										>
-											<Image
-												src={project.image}
-												alt={`${project.title} overview`}
-												fill
-												sizes="(max-width: 768px) 100vw, 600px"
-												className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02]"
-											/>
-											<div className="absolute inset-0 bg-linear-to-t from-paper/80 via-transparent to-transparent opacity-60" />
+										{/* Preview Image Frame or Confidential Redacted Frame */}
+										{project.image ? (
+											<Link
+												href={`/projects/${project.slug}`}
+												className="relative aspect-16/9 w-full bg-paper block border-b border-line overflow-hidden"
+											>
+												<Image
+													src={project.image}
+													alt={`${project.title} overview`}
+													fill
+													sizes="(max-width: 768px) 100vw, 600px"
+													className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+												/>
+												<div className="absolute inset-0 bg-linear-to-t from-paper/80 via-transparent to-transparent opacity-60" />
 
-											{/* Top Image Badges */}
-											<div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
-												<span className="mono text-[0.68rem] font-bold text-accent-ink bg-paper/90 border border-line px-2.5 py-1 rounded backdrop-blur-md">
-													{project.sysId}
+												{/* Top Image Badges */}
+												<div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
+													<span className="mono text-[0.68rem] font-bold text-accent-ink bg-paper/90 border border-line px-2.5 py-1 rounded backdrop-blur-md">
+														{project.sysId}
+													</span>
+
+													{project.statusBadge.variant === "live" ? (
+														<span className="mono text-[0.66rem] text-status-live border border-status-live/30 bg-paper/90 px-2 py-0.5 rounded-full font-semibold flex items-center gap-1.5 backdrop-blur-md">
+															<span className="size-1.5 rounded-full bg-status-live animate-pulse" />
+															LIVE
+														</span>
+													) : project.isComingSoon ? (
+														<span className="mono text-[0.66rem] text-accent-ink border border-accent-border bg-paper/90 px-2 py-0.5 rounded-full font-semibold flex items-center gap-1.5 backdrop-blur-md">
+															<Clock className="size-3" />
+															COMING SOON
+														</span>
+													) : (
+														<span className="mono text-[0.66rem] text-muted-2 border border-line bg-paper/90 px-2 py-0.5 rounded-full font-medium flex items-center gap-1.5 backdrop-blur-md">
+															<Lock className="size-2.5" />
+															PRIVATE
+														</span>
+													)}
+												</div>
+											</Link>
+										) : (
+											<div className="relative aspect-16/9 w-full bg-paper/70 border-b border-line flex flex-col items-center justify-center text-center p-6 select-none">
+												<div className="size-9 rounded-full bg-surface-card border border-line flex items-center justify-center text-muted-2 mb-2">
+													<Lock className="size-4 text-accent-ink" />
+												</div>
+												<span className="mono text-[0.76rem] font-bold text-ink uppercase tracking-wider mb-0.5">
+													No Preview Available
+												</span>
+												<span className="mono text-[0.66rem] text-muted-2">
+													[CONFIDENTIAL_INTERNAL_SYSTEM]
 												</span>
 
-												{project.statusBadge.variant === "live" ? (
-													<span className="mono text-[0.66rem] text-status-live border border-status-live/30 bg-paper/90 px-2 py-0.5 rounded-full font-semibold flex items-center gap-1.5 backdrop-blur-md">
-														<span className="size-1.5 rounded-full bg-status-live animate-pulse" />
-														LIVE
+												<div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
+													<span className="mono text-[0.68rem] font-bold text-accent-ink bg-paper/90 border border-line px-2.5 py-1 rounded backdrop-blur-md">
+														{project.sysId}
 													</span>
-												) : (
-													<span className="mono text-[0.66rem] text-muted-2 border border-line bg-paper/90 px-2 py-0.5 rounded-full font-medium flex items-center gap-1.5 backdrop-blur-md">
-														<Lock className="size-2.5" />
-														PRIVATE
+													<span className="mono text-[0.66rem] text-accent-ink border border-accent-border bg-paper/90 px-2 py-0.5 rounded-full font-semibold flex items-center gap-1.5 backdrop-blur-md">
+														<Clock className="size-3" />
+														COMING SOON
 													</span>
-												)}
+												</div>
 											</div>
-										</Link>
+										)}
 
 										{/* Content Body */}
 										<div className="p-6 space-y-4">
@@ -318,13 +498,20 @@ export function ProjectsCatalog() {
 
 									{/* Card Footer Actions */}
 									<div className="p-6 pt-0 border-t border-line/50 mt-4 flex items-center justify-between gap-3">
-										<Link
-											href={`/projects/${project.slug}`}
-											className="btn btn-primary text-[0.8rem] py-2 px-4 inline-flex items-center gap-1.5 font-semibold"
-										>
-											<span>Deep-Dive Case Study</span>
-											<ArrowRight className="size-3.5 rtl:rotate-180" />
-										</Link>
+										{project.isComingSoon ? (
+											<span className="mono text-[0.76rem] py-2 px-3.5 rounded-(--radius) bg-surface border border-accent-border/60 text-accent-ink inline-flex items-center gap-1.5 font-semibold select-none shadow-xs">
+												<Clock className="size-3.5" />
+												<span>Case Study Coming Soon</span>
+											</span>
+										) : (
+											<Link
+												href={`/projects/${project.slug}`}
+												className="btn btn-primary text-[0.8rem] py-2 px-4 inline-flex items-center gap-1.5 font-semibold"
+											>
+												<span>Deep-Dive Case Study</span>
+												<ArrowRight className="size-3.5 rtl:rotate-180" />
+											</Link>
+										)}
 
 										{project.liveUrl ? (
 											<a
@@ -392,25 +579,36 @@ export function ProjectsCatalog() {
 												</td>
 												<td className="py-4 px-4">
 													{project.statusBadge.variant === "live" ? (
-														<span className="mono text-[0.68rem] text-status-live border border-status-live/30 bg-status-live/10 px-2 py-0.5 rounded-full font-semibold inline-flex items-center gap-1.5">
+														<span className="mono text-[0.7rem] text-status-live font-semibold flex items-center gap-1.5">
 															<span className="size-1.5 rounded-full bg-status-live animate-pulse" />
 															LIVE
 														</span>
+													) : project.isComingSoon ? (
+														<span className="mono text-[0.7rem] text-accent-ink font-semibold flex items-center gap-1.5">
+															<Clock className="size-3" />
+															SOON
+														</span>
 													) : (
-														<span className="mono text-[0.68rem] text-muted-2 border border-line bg-surface px-2 py-0.5 rounded-full font-medium inline-flex items-center gap-1">
-															<Lock className="size-2.5" />
+														<span className="mono text-[0.7rem] text-muted-2 flex items-center gap-1.5">
+															<Lock className="size-3" />
 															PRIVATE
 														</span>
 													)}
 												</td>
 												<td className="py-4 px-4 text-end">
-													<Link
-														href={`/projects/${project.slug}`}
-														className="btn btn-ghost text-[0.74rem] py-1 px-3 inline-flex items-center gap-1"
-													>
-														<span>Case Study</span>
-														<ArrowRight className="size-3 rtl:rotate-180" />
-													</Link>
+													{project.isComingSoon ? (
+														<span className="mono text-[0.72rem] text-accent-ink font-semibold">
+															Coming Soon
+														</span>
+													) : (
+														<Link
+															href={`/projects/${project.slug}`}
+															className="btn btn-ghost text-[0.74rem] py-1 px-2.5 inline-flex items-center gap-1"
+														>
+															<span>View Spec</span>
+															<ArrowRight className="size-3 rtl:rotate-180" />
+														</Link>
+													)}
 												</td>
 											</tr>
 										))}
@@ -420,10 +618,9 @@ export function ProjectsCatalog() {
 						</div>
 					)}
 				</main>
-
-				{/* Global Footer */}
-				<Footer />
 			</div>
+
+			<Footer />
 		</div>
 	);
 }

@@ -34,8 +34,10 @@ export interface ProjectDetail {
 	arabicTitle?: string;
 	tagline: string;
 	category: "saas" | "ecommerce" | "realtime";
+	categories?: ("saas" | "ecommerce" | "realtime")[];
+	isComingSoon?: boolean;
 	statusBadge: StatusBadge;
-	image: string;
+	image?: string;
 	gallery?: string[];
 	liveUrl?: string;
 	role: string;
@@ -70,6 +72,7 @@ export const ALL_PROJECTS: ProjectDetail[] = [
 			variant: "private",
 		},
 		category: "saas",
+		categories: ["saas", "ecommerce"],
 		image: "/projects/egapy.jpg",
 		role: "Principal Systems Architect & Lead Full-Stack Engineer",
 		team: "Core Engineering Team · 3 Applications (Core API Engine + Merchant Operations Portal & Landing + Governance Console)",
@@ -267,12 +270,14 @@ export const ALL_PROJECTS: ProjectDetail[] = [
 		tagline:
 			"A centralized commerce operations hub that connects online storefronts, inventory, payment collection, and regional shipping couriers across the Middle East.",
 		statusBadge: {
-			code: "[PROPRIETARY_SYSTEM]",
-			label: "Private Enterprise System",
-			variant: "private",
+			code: "[CASE_STUDY_SOON]",
+			label: "Technical Case Study Coming Soon",
+			variant: "verified",
 		},
 		category: "saas",
-		image: "/projects/nazam.jpg",
+		categories: ["saas", "ecommerce"],
+		isComingSoon: true,
+		image: "",
 		role: "Lead Full-Stack Engineer",
 		team: "Solo Engineer",
 		timeline: "2024 – 2025",
@@ -387,6 +392,7 @@ export const ALL_PROJECTS: ProjectDetail[] = [
 			variant: "private",
 		},
 		category: "saas",
+		categories: ["saas", "realtime"],
 		image: "/projects/labika.webp",
 		role: "Lead Full-Stack Architect & Systems Engineer",
 		team: "Core Team · 3 Applications (API Engine, Operations Dashboard, Marketing Portal)",
@@ -556,6 +562,7 @@ export const ALL_PROJECTS: ProjectDetail[] = [
 			variant: "private",
 		},
 		category: "saas",
+		categories: ["saas"],
 		image: "/projects/coldwell_banker.jpg",
 		role: "Lead Full-Stack Architect / Systems Engineer",
 		team: "Full-Stack Architecture · 2 Subsystems (API Engine + Client Portal)",
@@ -713,6 +720,7 @@ export const ALL_PROJECTS: ProjectDetail[] = [
 			variant: "private",
 		},
 		category: "saas",
+		categories: ["saas", "realtime"],
 		image: "/projects/alzcare.jpg",
 		role: "Lead Full-Stack Architect / Systems Engineer",
 		team: "Core Engineering Team · 3-Tier Distributed Architecture",
@@ -869,6 +877,7 @@ export const ALL_PROJECTS: ProjectDetail[] = [
 			variant: "private",
 		},
 		category: "ecommerce",
+		categories: ["ecommerce", "realtime"],
 		image: "/projects/buy-from-egypt.jpg",
 		role: "Lead Full-Stack Architect / Systems Engineer",
 		team: "Core Engineering · B2B Trade & Exporter Monorepo",
@@ -1021,6 +1030,7 @@ export const ALL_PROJECTS: ProjectDetail[] = [
 			variant: "live",
 		},
 		category: "ecommerce",
+		categories: ["ecommerce"],
 		image: "/projects/ecombo.jpg",
 		liveUrl: "https://ecompo.com",
 		role: "Lead Frontend Architect & Systems Engineer",

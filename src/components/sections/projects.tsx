@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, ArrowUpRight, Lock, X } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Clock, Lock, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
@@ -21,7 +21,9 @@ interface ProjectItem {
 	id: string;
 	slug: string;
 	category: "saas" | "realtime" | "ecommerce";
+	categories?: ("saas" | "realtime" | "ecommerce")[];
 	isLive?: boolean;
+	isComingSoon?: boolean;
 	linkUrl?: string;
 	image?: string;
 	routeUrl: string;
@@ -36,7 +38,8 @@ const PROJECTS: ProjectItem[] = [
 		id: "nazam",
 		slug: "nazam",
 		category: "saas",
-		image: "/projects/nazam.jpg",
+		categories: ["saas", "ecommerce"],
+		isComingSoon: true,
 		routeUrl: "https://app.nazam.internal/inventory/fulfillment",
 		tags: [
 			"Next.js",
@@ -56,14 +59,15 @@ const PROJECTS: ProjectItem[] = [
 		],
 		telemetry: "ARCH: MONOREPO · DB: POSTGRESQL · QUEUE: BULLMQ · CACHE: REDIS",
 		statusBadge: {
-			code: "[PROPRIETARY_SYSTEM]",
-			variant: "private",
+			code: "[CASE_STUDY_SOON]",
+			variant: "verified",
 		},
 	},
 	{
 		id: "egapy",
 		slug: "egapy",
 		category: "saas",
+		categories: ["saas", "ecommerce"],
 		image: "/projects/egapy.jpg",
 		routeUrl: "https://www.egapy.com/ar/dashboard",
 		tags: ["Next.js", "NestJS", "Prisma", "PostgreSQL"],
@@ -83,6 +87,7 @@ const PROJECTS: ProjectItem[] = [
 		id: "labaik",
 		slug: "labika",
 		category: "saas",
+		categories: ["saas", "realtime"],
 		image: "/projects/labika.webp",
 		routeUrl: "https://labika.app",
 		tags: [
@@ -111,6 +116,7 @@ const PROJECTS: ProjectItem[] = [
 		id: "buy_from_egypt",
 		slug: "buy-from-egypt",
 		category: "ecommerce",
+		categories: ["ecommerce", "realtime"],
 		image: "/projects/buy-from-egypt.jpg",
 		routeUrl: "https://buyfromegypt.com",
 		tags: [
@@ -138,6 +144,7 @@ const PROJECTS: ProjectItem[] = [
 		id: "coldwell_banker",
 		slug: "coldwell-banker",
 		category: "saas",
+		categories: ["saas"],
 		image: "/projects/coldwell_banker.jpg",
 		routeUrl: "https://coldwellbankeregypt.com",
 		tags: ["React 18", "Vite", "Mapbox GL", "Node.js", "Express.js", "MongoDB"],
@@ -158,6 +165,7 @@ const PROJECTS: ProjectItem[] = [
 		id: "gedo",
 		slug: "alzcare",
 		category: "saas",
+		categories: ["saas", "realtime"],
 		image: "/projects/alzcare.jpg",
 		routeUrl: "https://gedo.internal/caregiver/portal",
 		tags: [
@@ -185,6 +193,7 @@ const PROJECTS: ProjectItem[] = [
 		id: "ecombo",
 		slug: "e-combo",
 		category: "ecommerce",
+		categories: ["ecommerce"],
 		isLive: true,
 		linkUrl: "https://ecombo.co",
 		image: "/projects/ecombo.jpg",
@@ -222,12 +231,37 @@ interface SelectedImageModal {
 export function Projects() {
 	const t = useTranslations("Projects");
 
-	const filterTabs = [
-		{ id: "all", label: t("tabs.all"), count: 7 },
-		{ id: "saas", label: t("tabs.saas"), count: 2 },
-		{ id: "ecommerce", label: t("tabs.ecommerce"), count: 3 },
-		{ id: "realtime", label: t("tabs.realtime"), count: 2 },
-	];
+	const filterTabs = useMemo(
+		() => [
+			{ id: "all", label: t("tabs.all"), count: PROJECTS.length },
+			{
+				id: "saas",
+				label: t("tabs.saas"),
+				count: PROJECTS.filter((p) =>
+					p.categories ? p.categories.includes("saas") : p.category === "saas",
+				).length,
+			},
+			{
+				id: "ecommerce",
+				label: t("tabs.ecommerce"),
+				count: PROJECTS.filter((p) =>
+					p.categories
+						? p.categories.includes("ecommerce")
+						: p.category === "ecommerce",
+				).length,
+			},
+			{
+				id: "realtime",
+				label: t("tabs.realtime"),
+				count: PROJECTS.filter((p) =>
+					p.categories
+						? p.categories.includes("realtime")
+						: p.category === "realtime",
+				).length,
+			},
+		],
+		[t],
+	);
 
 	const [activeFilter, setActiveFilter] = useState<string>("all");
 	const [isInView, setIsInView] = useState(false);
@@ -269,7 +303,13 @@ export function Projects() {
 
 	const filteredProjects = useMemo(() => {
 		if (activeFilter === "all") return PROJECTS;
-		return PROJECTS.filter((p) => p.category === activeFilter);
+		return PROJECTS.filter((p) =>
+			p.categories
+				? p.categories.includes(
+						activeFilter as "saas" | "ecommerce" | "realtime",
+					)
+				: p.category === activeFilter,
+		);
 	}, [activeFilter]);
 
 	return (
@@ -481,13 +521,20 @@ export function Projects() {
 
 										{/* Action Links Bar */}
 										<div className="flex flex-wrap items-center gap-2.5 pt-1 sm:pt-2">
-											<Link
-												href={`/projects/${project.slug}`}
-												className="btn btn-primary text-[0.76rem] sm:text-[0.8rem] py-1.5 px-3.5 inline-flex items-center gap-1.5 font-semibold shadow-sm hover:shadow-accent/20"
-											>
-												<span>{t("card.case_study")}</span>
-												<ArrowRight className="size-3.5 rtl:rotate-180" />
-											</Link>
+											{project.isComingSoon ? (
+												<span className="mono text-[0.74rem] sm:text-[0.78rem] py-1.5 px-3 rounded-(--radius) bg-surface border border-accent-border/60 text-accent-ink inline-flex items-center gap-1.5 font-semibold select-none shadow-xs">
+													<Clock className="size-3.5" />
+													<span>{t("card.case_study_soon")}</span>
+												</span>
+											) : (
+												<Link
+													href={`/projects/${project.slug}`}
+													className="btn btn-primary text-[0.76rem] sm:text-[0.8rem] py-1.5 px-3.5 inline-flex items-center gap-1.5 font-semibold shadow-sm hover:shadow-accent/20"
+												>
+													<span>{t("card.case_study")}</span>
+													<ArrowRight className="size-3.5 rtl:rotate-180" />
+												</Link>
+											)}
 
 											{project.linkUrl && (
 												<a

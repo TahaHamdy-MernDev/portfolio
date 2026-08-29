@@ -54,7 +54,7 @@ export async function generateMetadata({
 			siteName: "Taha Hamdy — Full-Stack Systems",
 			images: [
 				{
-					url: project.image,
+					url: project.image || "/og-image.png",
 					width: 1200,
 					height: 630,
 					alt: `${project.title} architecture showcase`,
@@ -65,7 +65,7 @@ export async function generateMetadata({
 			card: "summary_large_image",
 			title,
 			description,
-			images: [project.image],
+			images: [project.image || "/og-image.png"],
 		},
 	};
 }

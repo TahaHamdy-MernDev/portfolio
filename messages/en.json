@@ -49,10 +49,10 @@
 		"section_title": "Featured Work & Case Studies",
 		"section_tag": "WORK",
 		"tabs": {
-			"all": "All Projects",
-			"saas": "SaaS Platforms",
-			"ecommerce": "E-Commerce Systems",
-			"realtime": "Real-Time & Communications"
+			"all": "All Systems",
+			"saas": "Enterprise SaaS",
+			"ecommerce": "E-Commerce & Logistics",
+			"realtime": "Real-Time & Telemetry"
 		},
 		"systems_loaded": "Showing {count} of 7",
 		"metrics": {
@@ -69,6 +69,7 @@
 			"architecture": "Architecture Overview",
 			"key_features": "Key Capabilities",
 			"case_study": "Technical Case Study",
+			"case_study_soon": "Case Study Coming Soon",
 			"explore": "Live Preview",
 			"source": "Source Code",
 			"preview_ui": "Interface Preview",

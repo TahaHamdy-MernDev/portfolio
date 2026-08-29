@@ -8,6 +8,7 @@ import {
 	ArrowRight,
 	ArrowUpRight,
 	CheckCircle2,
+	Clock,
 	Cpu,
 	Database,
 	Layers,
@@ -174,6 +175,22 @@ export function ProjectDetailView({
 					{/* 00: EXECUTIVE HERO SHOWCASE & SYSTEM SPECS */}
 					{/* ========================================================================= */}
 					<section id="sec-overview" className="space-y-8 scroll-mt-24">
+						{/* Coming Soon Notice Banner */}
+						{project.isComingSoon && (
+							<div className="p-4 sm:p-5 rounded-(--radius) bg-accent-soft/70 border border-accent-border flex items-start gap-3.5 shadow-sm">
+								<Clock className="size-5 text-accent-ink shrink-0 mt-0.5" />
+								<div className="space-y-1">
+									<div className="mono text-[0.78rem] font-bold text-accent-ink uppercase tracking-wider flex items-center gap-2">
+										<span>Technical Case Study In Progress (Coming Soon)</span>
+										<span className="size-1.5 rounded-full bg-accent-ink animate-pulse" />
+									</div>
+									<p className="text-[0.86rem] text-muted leading-relaxed m-0">
+										The full architecture breakdown, performance benchmarks, and detailed concurrency telemetry for this system are currently being compiled.
+									</p>
+								</div>
+							</div>
+						)}
+
 						{/* Title Header */}
 						<div className="space-y-4 max-w-4xl">
 							<div className="flex items-center gap-2.5 flex-wrap">
@@ -271,33 +288,49 @@ export function ProjectDetailView({
 										</span>
 									</div>
 
-									<button
-										type="button"
-										onClick={() => setIsLightboxOpen(true)}
-										className="mono text-[0.7rem] text-muted hover:text-ink px-2.5 py-1 rounded bg-paper border border-line flex items-center gap-1.5 transition-colors cursor-pointer hover:border-accent"
-									>
-										<Maximize2 className="size-3.5" />
-										<span>Expand View</span>
-									</button>
+									{project.image && (
+										<button
+											type="button"
+											onClick={() => setIsLightboxOpen(true)}
+											className="mono text-[0.7rem] text-muted hover:text-ink px-2.5 py-1 rounded bg-paper border border-line flex items-center gap-1.5 transition-colors cursor-pointer hover:border-accent"
+										>
+											<Maximize2 className="size-3.5" />
+											<span>Expand View</span>
+										</button>
+									)}
 								</div>
 
-								{/* Screenshot Preview */}
-								<button
-									type="button"
-									className="relative aspect-16/9 md:aspect-21/9 w-full bg-paper cursor-pointer p-0 border-none block text-start overflow-hidden"
-									onClick={() => setIsLightboxOpen(true)}
-									aria-label="Click to enlarge image"
-								>
-									<Image
-										src={project.image}
-										alt={`${project.title} overview`}
-										fill
-										priority
-										sizes="(max-width: 1280px) 100vw, 1280px"
-										className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.01]"
-									/>
-									<div className="absolute inset-0 bg-linear-to-t from-paper/60 via-transparent to-transparent opacity-40 pointer-events-none" />
-								</button>
+								{/* Screenshot Preview or Redacted Frame */}
+								{project.image ? (
+									<button
+										type="button"
+										className="relative aspect-16/9 md:aspect-21/9 w-full bg-paper cursor-pointer p-0 border-none block text-start overflow-hidden"
+										onClick={() => setIsLightboxOpen(true)}
+										aria-label="Click to enlarge image"
+									>
+										<Image
+											src={project.image}
+											alt={`${project.title} overview`}
+											fill
+											priority
+											sizes="(max-width: 1280px) 100vw, 1280px"
+											className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.01]"
+										/>
+										<div className="absolute inset-0 bg-linear-to-t from-paper/60 via-transparent to-transparent opacity-40 pointer-events-none" />
+									</button>
+								) : (
+									<div className="relative aspect-16/9 md:aspect-21/9 w-full bg-paper/70 flex flex-col items-center justify-center text-center p-8 select-none">
+										<div className="size-12 rounded-full bg-surface-card border border-line flex items-center justify-center text-muted-2 mb-3">
+											<Lock className="size-5 text-accent-ink" />
+										</div>
+										<div className="mono text-[0.88rem] font-bold text-ink uppercase tracking-wider mb-1">
+											Interface Preview Redacted (Proprietary System)
+										</div>
+										<p className="mono text-[0.76rem] text-muted max-w-md m-0 leading-relaxed">
+											Visual UI assets for this enterprise deployment are restricted under confidential client agreements. Architectural schematics and system specifications are outlined below.
+										</p>
+									</div>
+								)}
 							</div>
 
 							{/* Action Links Bar */}
@@ -788,7 +821,7 @@ export function ProjectDetailView({
 			</div>
 
 			{/* Fullscreen Lightbox Modal */}
-			{isLightboxOpen && (
+			{isLightboxOpen && project.image && (
 				<div className="fixed inset-0 z-100 flex items-center justify-center p-2.5 sm:p-6 md:p-10 animate-fade-in">
 					<button
 						type="button"
