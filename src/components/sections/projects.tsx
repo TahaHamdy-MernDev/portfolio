@@ -1,7 +1,8 @@
 "use client";
 
-import { ArrowRight, Lock, X } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Lock, X } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { SectionHead } from "@/components/ui/section-head";
@@ -18,6 +19,7 @@ interface StatusBadge {
 
 interface ProjectItem {
 	id: string;
+	slug: string;
 	category: "saas" | "realtime" | "ecommerce";
 	isLive?: boolean;
 	linkUrl?: string;
@@ -32,7 +34,9 @@ interface ProjectItem {
 const PROJECTS: ProjectItem[] = [
 	{
 		id: "nazam",
+		slug: "nazam",
 		category: "saas",
+		image: "/projects/nazam.jpg",
 		routeUrl: "https://app.nazam.internal/inventory/fulfillment",
 		tags: [
 			"Next.js",
@@ -52,15 +56,14 @@ const PROJECTS: ProjectItem[] = [
 		],
 		telemetry: "ARCH: MONOREPO · DB: POSTGRESQL · QUEUE: BULLMQ · CACHE: REDIS",
 		statusBadge: {
-			code: "[PROPRIETARY_MONOREPO]",
+			code: "[PROPRIETARY_SYSTEM]",
 			variant: "private",
 		},
 	},
 	{
 		id: "egapy",
+		slug: "egapy",
 		category: "saas",
-		isLive: true,
-		linkUrl: "https://www.egapy.com/ar",
 		image: "/projects/egapy.jpg",
 		routeUrl: "https://www.egapy.com/ar/dashboard",
 		tags: ["Next.js", "NestJS", "Prisma", "PostgreSQL"],
@@ -72,42 +75,60 @@ const PROJECTS: ProjectItem[] = [
 		],
 		telemetry: "PLATFORM: ERP · ARCH: FULL-STACK · DB: POSTGRESQL",
 		statusBadge: {
-			code: "[LIVE_PRODUCTION]",
-			variant: "live",
+			code: "[PROPRIETARY_SYSTEM]",
+			variant: "private",
 		},
 	},
 	{
 		id: "labaik",
-		category: "realtime",
-		isLive: true,
-		linkUrl: "https://labaikapp.com/ar",
-		image: "/projects/labaik.jpg",
-		routeUrl: "https://labaikapp.com/ar/portal",
-		tags: ["Next.js", "NestJS", "TypeORM", "MySQL", "BullMQ", "FCM", "Sockets"],
-		topology: [
-			{ label: "Next.js Web", type: "client" },
-			{ label: "NestJS Core", type: "service" },
-			{ label: "BullMQ / FCM", type: "queue" },
-			{ label: "MySQL", type: "db" },
+		slug: "labika",
+		category: "saas",
+		image: "/projects/labika.webp",
+		routeUrl: "https://labika.app",
+		tags: [
+			"Next.js 16",
+			"NestJS",
+			"TypeORM",
+			"MySQL",
+			"BullMQ",
+			"Redis",
+			"Socket.io",
 		],
-		telemetry: "SERVICES: WEB + MOBILE APP + DASHBOARD · QUEUES: BULLMQ",
+		topology: [
+			{ label: "Marketing & App", type: "client" },
+			{ label: "NestJS Core API", type: "service" },
+			{ label: "BullMQ / Redis", type: "queue" },
+			{ label: "MySQL (TypeORM)", type: "db" },
+		],
+		telemetry:
+			"SERVICES: API + DASHBOARD + LANDING · QUEUES: BULLMQ · ESCROW: MULTI-PARTITION",
 		statusBadge: {
-			code: "[LIVE_DEPLOYMENT]",
-			variant: "live",
+			code: "[PROPRIETARY_SYSTEM]",
+			variant: "private",
 		},
 	},
 	{
 		id: "buy_from_egypt",
+		slug: "buy-from-egypt",
 		category: "ecommerce",
-		image: "/projects/buy_from_egypt.jpg",
-		routeUrl: "https://b2b.buyfromegypt.com/marketplace",
-		tags: ["Next.js", "shadcn/ui", "ML integration"],
-		topology: [
-			{ label: "Next.js UI", type: "client" },
-			{ label: "ML Model API", type: "service" },
-			{ label: "B2B Gateway", type: "infra" },
+		image: "/projects/buy-from-egypt.jpg",
+		routeUrl: "https://buyfromegypt.com",
+		tags: [
+			"Next.js 15",
+			"React 19",
+			"RTK Query",
+			"Socket.io",
+			"NestJS",
+			"Tailwind v4",
 		],
-		telemetry: "DOMAIN: B2B EXPORT · AI: EMBEDDED ML MODEL",
+		topology: [
+			{ label: "Buyer & Exporter", type: "client" },
+			{ label: "NestJS API", type: "service" },
+			{ label: "WebSocket Hub", type: "service" },
+			{ label: "PostgreSQL", type: "db" },
+		],
+		telemetry:
+			"PLATFORM: CROSS-BORDER B2B · REALTIME: WEBSOCKET · STATE: RTK QUERY",
 		statusBadge: {
 			code: "[PROPRIETARY_SYSTEM]",
 			variant: "private",
@@ -115,62 +136,75 @@ const PROJECTS: ProjectItem[] = [
 	},
 	{
 		id: "coldwell_banker",
-		category: "ecommerce",
-		linkUrl: "https://github.com/TahaHamdy-MernDev/cold-well-banker",
-		image: "/projects/coldwell_banker.png",
-		routeUrl: "https://coldwellbanker-newalex.eg/properties",
-		tags: [
-			"Vite",
-			"Bootstrap 5",
-			"Node.js",
-			"Express.js",
-			"MongoDB",
-			"Cloudinary",
-		],
+		slug: "coldwell-banker",
+		category: "saas",
+		image: "/projects/coldwell_banker.jpg",
+		routeUrl: "https://coldwellbankeregypt.com",
+		tags: ["React 18", "Vite", "Mapbox GL", "Node.js", "Express.js", "MongoDB"],
 		topology: [
-			{ label: "Vite Client", type: "client" },
-			{ label: "Node.js API", type: "service" },
+			{ label: "React / Mapbox", type: "client" },
+			{ label: "Express API", type: "service" },
+			{ label: "Media Storage", type: "service" },
 			{ label: "MongoDB", type: "db" },
-			{ label: "Cloudinary", type: "infra" },
 		],
-		telemetry: "PLATFORM: REAL ESTATE · MAPS: INTERACTIVE · DB: MONGODB",
+		telemetry:
+			"PLATFORM: NODE.JS / EXPRESS · CLIENT: REACT 18 + VITE + MAPBOX GL · DB: MONGODB",
 		statusBadge: {
-			code: "[ARCHIVED_OFFLINE]",
-			variant: "archived",
+			code: "[PROPRIETARY_SYSTEM]",
+			variant: "private",
 		},
 	},
 	{
 		id: "gedo",
-		category: "realtime",
-		linkUrl: "https://github.com/TahaHamdy-MernDev/GEDO",
-		image: "/projects/gedo.jpg",
-		routeUrl: "https://gedo-care.internal/vitals/stream",
-		tags: ["Node.js", "Express.js", "MongoDB"],
-		topology: [
-			{ label: "Caregiver App", type: "client" },
-			{ label: "Node.js API", type: "service" },
-			{ label: "MongoDB", type: "db" },
+		slug: "alzcare",
+		category: "saas",
+		image: "/projects/alzcare.jpg",
+		routeUrl: "https://gedo.internal/caregiver/portal",
+		tags: [
+			"Node.js",
+			"Express.js",
+			"MongoDB",
+			"Node-Cron",
+			"FCM",
+			"Cloudinary",
 		],
-		telemetry: "DOMAIN: HEALTHCARE / ALZHEIMER · DB: MONGODB",
+		topology: [
+			{ label: "Patient & Caregiver", type: "client" },
+			{ label: "Express Gateway", type: "service" },
+			{ label: "Cron Scheduler", type: "service" },
+			{ label: "MongoDB Store", type: "db" },
+		],
+		telemetry:
+			"PLATFORM: HEALTHCARE TELEMETRY · QUEUES: NODE-CRON + FCM · DB: MONGODB",
 		statusBadge: {
-			code: "[VERIFIED_CODEBASE]",
-			variant: "verified",
+			code: "[PROPRIETARY_SYSTEM]",
+			variant: "private",
 		},
 	},
 	{
 		id: "ecombo",
+		slug: "e-combo",
 		category: "ecommerce",
 		isLive: true,
-		linkUrl: "https://ecombo.co/ar",
+		linkUrl: "https://ecombo.co",
 		image: "/projects/ecombo.jpg",
-		routeUrl: "https://ecombo.co/ar",
-		tags: ["React.js", "JavaScript", "HTML5", "CSS3", "Responsive UI"],
-		topology: [
-			{ label: "React.js Client", type: "client" },
-			{ label: "REST APIs", type: "service" },
-			{ label: "GCC Logistics Hub", type: "infra" },
+		routeUrl: "https://ecombo.co",
+		tags: [
+			"Next.js 14",
+			"React 18",
+			"Tailwind CSS",
+			"Radix UI",
+			"Framer Motion",
+			"d3-geo",
 		],
-		telemetry: "DOMAIN: E-COMMERCE LOGISTICS · STACK: REACT.JS · REPO: PRIVATE",
+		topology: [
+			{ label: "Acquisition Web", type: "client" },
+			{ label: "Supplier Dashboard", type: "client" },
+			{ label: "Core Fulfillment", type: "service" },
+			{ label: "COD Ledger", type: "db" },
+		],
+		telemetry:
+			"PLATFORM: NEXT.JS 14 · LOCALIZATION: NATIVE RTL · MAPS: MERCATOR PROJECTION",
 		statusBadge: {
 			code: "[LIVE_PRODUCTION]",
 			variant: "live",
@@ -443,6 +477,29 @@ export function Projects() {
 													</span>
 												))}
 											</div>
+										</div>
+
+										{/* Action Links Bar */}
+										<div className="flex flex-wrap items-center gap-2.5 pt-1 sm:pt-2">
+											<Link
+												href={`/projects/${project.slug}`}
+												className="btn btn-primary text-[0.76rem] sm:text-[0.8rem] py-1.5 px-3.5 inline-flex items-center gap-1.5 font-semibold shadow-sm hover:shadow-accent/20"
+											>
+												<span>{t("card.case_study")}</span>
+												<ArrowRight className="size-3.5 rtl:rotate-180" />
+											</Link>
+
+											{project.linkUrl && (
+												<a
+													href={project.linkUrl}
+													target="_blank"
+													rel="noreferrer"
+													className="btn btn-secondary text-[0.76rem] sm:text-[0.8rem] py-1.5 px-3.5 inline-flex items-center gap-1.5"
+												>
+													<span>{t("card.explore")}</span>
+													<ArrowUpRight className="size-3.5 rtl:-rotate-90" />
+												</a>
+											)}
 										</div>
 									</div>
 								</div>

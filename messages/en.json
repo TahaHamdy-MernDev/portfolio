@@ -19,7 +19,7 @@
 	"Hero": {
 		"headline_line1": "Turning complex problems",
 		"headline_line2": "into reliable systems.",
-		"subtitle": "Full-Stack Developer and Systems Architect with 3+ years designing and delivering SaaS platforms, e-commerce infrastructure, and enterprise business workflows — from interface design to distributed backend architecture.",
+		"subtitle": "Full-Stack Developer and Systems Architect with 3+ years designing and shipping SaaS platforms, e-commerce infrastructure, and distributed backend systems — from interface design to database architecture.",
 		"cta_primary": "View Case Studies",
 		"cta_secondary": "Get in Touch",
 		"cta_resume": "Download Resume",
@@ -68,6 +68,7 @@
 		"card": {
 			"architecture": "Architecture Overview",
 			"key_features": "Key Capabilities",
+			"case_study": "Technical Case Study",
 			"explore": "Live Preview",
 			"source": "Source Code",
 			"preview_ui": "Interface Preview",
@@ -81,49 +82,49 @@
 				"title": "Nazam",
 				"arabicTitle": "نظّم",
 				"role": "Full-Stack · Solo",
-				"status": "Private monorepo",
-				"disabled_link": "Private repository",
-				"desc": "A commerce-operations platform that helps merchants organize, combine, and follow every part of their business in one place."
+				"status": "Private enterprise system",
+				"disabled_link": "Private business system",
+				"desc": "A commerce operations hub that helps merchants manage inventory sync, courier dispatch, and cash-on-delivery settlements in one place."
 			},
 			"egapy": {
 				"title": "Egapy",
 				"arabicTitle": "إيجابي",
-				"role": "Full-Stack · Team of 2",
-				"status": "Live product",
-				"link_text": "Visit site",
-				"desc": "A modern ERP solution designed to help businesses of all sizes streamline their operations and grow efficiently."
+				"role": "Co-Architect · Team of 2",
+				"status": "Private enterprise system",
+				"disabled_link": "Private business system",
+				"desc": "An enterprise operations platform connecting online storefronts, multiple warehouses, regional couriers, and payment collection for retail merchants."
 			},
 			"labaik": {
 				"title": "Labaik",
 				"arabicTitle": "لبيك",
 				"role": "Full-Stack · Solo",
-				"status": "Live landing · private dashboard",
-				"link_text": "Visit site",
-				"desc": "A platform that makes \"Umrah al-Badal\" easier and more reliable — letting people dedicate the reward of Umrah to loved ones, like the elderly, ill, or deceased, who can't make the trip themselves, by connecting them with vetted individuals who perform it on their behalf. Built the landing site plus a private dashboard managing data and backend for the promotional site, dashboard, and mobile app."
+				"status": "Private enterprise system",
+				"disabled_link": "Private business system",
+				"desc": "A pilgrimage-by-proxy platform connecting seekers with verified performers in Mecca, featuring step-by-step ritual verification and escrow payments."
 			},
 			"buy_from_egypt": {
 				"title": "Buy From Egypt",
 				"arabicTitle": "اشتري من مصر",
 				"role": "Front-End",
-				"status": "Private · unpublished",
-				"disabled_link": "Not public",
-				"desc": "A B2B export platform connecting Egyptian exporters with global buyers through business profiles, product listings, and communication workflows — integrated with a custom-built machine learning model that chats with and answers users."
+				"status": "Private enterprise system",
+				"disabled_link": "Private business system",
+				"desc": "A B2B export marketplace connecting verified Egyptian manufacturers with international buyers through structured catalogs and real-time negotiation."
 			},
 			"coldwell_banker": {
 				"title": "Coldwell Banker — New Alex",
 				"arabicTitle": "كولدويل بانكر - نيو أليكس",
 				"role": "Full-Stack · Solo",
-				"status": "Formerly live · now offline",
-				"link_text": "GitHub (partial)",
-				"desc": "A real estate platform in the spirit of Nawy, with property discovery, advanced filtering, interactive maps, multilingual support, and SEO-focused pages. Hosted for the client for six months; no longer maintained."
+				"status": "Private business system",
+				"disabled_link": "Private business system",
+				"desc": "A real estate discovery platform featuring interactive geospatial mapping, property filtering, and automated lead routing for regional brokerages."
 			},
 			"gedo": {
 				"title": "GEDO",
 				"arabicTitle": "جدو",
 				"role": "Backend Developer",
-				"status": "Open source repository",
-				"link_text": "GitHub",
-				"desc": "An Alzheimer's care management system helping caregivers and family members manage medication, health tracking, communication, and daily activity monitoring for patients."
+				"status": "Private healthcare system",
+				"disabled_link": "Private healthcare system",
+				"desc": "A healthcare platform connecting Alzheimer’s patients and family caregivers with scheduled medication alerts, health records, and shared memory notes."
 			},
 			"ecombo": {
 				"title": "Ecombo",
@@ -131,7 +132,7 @@
 				"role": "Front-End · Solo",
 				"status": "Live landing page",
 				"link_text": "Visit site",
-				"desc": "The leading e-commerce service and logistics platform in the UAE and Saudi Arabia, serving as a virtual warehouse for merchants to launch businesses with zero upfront capital — providing automated product sourcing, warehousing, packaging, 24/7 support, and fast GCC shipping."
+				"desc": "A dropshipping and logistics platform enabling GCC merchants to launch retail stores with zero upfront inventory capital and regional warehousing."
 			}
 		}
 	},
@@ -159,12 +160,12 @@
 			"development": {
 				"num": "02",
 				"title": "Type-Safe Full-Stack Implementation",
-				"desc": "Building resilient frontend interfaces and robust backend APIs with end-to-end type safety, validation pipelines, and strict linting."
+				"desc": "Building responsive frontend interfaces and backend APIs with end-to-end type safety, validation pipelines, and strict error handling."
 			},
 			"testing": {
 				"num": "03",
 				"title": "Asynchronous Scaling & Performance",
-				"desc": "Benchmarking query performance, implementing Redis caching layers, offloading work to background queues, and verifying concurrency limits."
+				"desc": "Benchmarking database queries, configuring Redis caching, offloading work to background queues, and verifying concurrency limits."
 			},
 			"deployment": {
 				"num": "04",
@@ -186,9 +187,11 @@
 		"open_source_cta": "View Repository",
 		"principles": {
 			"p1_title": "Predictable Performance",
-			"p1_desc": "Bounded query execution, proper indexing, and offloading heavy work to asynchronous queues.",
+			"p1_desc": "Bounded query execution, proper indexing, and offloading heavy work to asynchronous queues."
+			,
 			"p2_title": "Type-Safe by Design",
-			"p2_desc": "End-to-end type safety, from database models to frontend components.",
+			"p2_desc": "End-to-end type safety, from database models to frontend components."
+			,
 			"p3_title": "Built for Production",
 			"p3_desc": "Defensive error handling, structured logging, idempotent APIs, and zero-downtime deployments."
 		}
@@ -213,8 +216,8 @@
 		"section_title": "Get in Touch",
 		"section_tag": "CONTACT",
 		"banner_badge": "LET'S WORK TOGETHER",
-		"banner_title": "Your vision, engineered with rigor. Let's build something exceptional.",
-		"banner_subtitle": "Whether you're scaling an existing platform, launching something new, or need architectural guidance, my inbox is open.",
+		"banner_title": "Let's turn your requirements into a reliable, high-performance system.",
+		"banner_subtitle": "Whether you're scaling an existing platform, launching a new product, or need architectural guidance, my inbox is open.",
 		"response_time": "Typical Response Time:",
 		"response_time_val": "Under 12 Hours",
 		"email_label": "EMAIL",

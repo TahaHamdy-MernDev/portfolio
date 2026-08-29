@@ -1,4 +1,4 @@
-import { ArrowRight, ArrowUpRight, FileText } from "lucide-react";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { SectionHead } from "@/components/ui/section-head";
 
