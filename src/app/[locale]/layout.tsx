@@ -1,12 +1,12 @@
-import "../globals.css";
-import { SpeedInsights } from "@vercel/speed-insights/next";
-import type { Metadata, Viewport } from "next";
-import { Cairo, Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
-import { notFound } from "next/navigation";
-import { NextIntlClientProvider } from "next-intl";
-import { getMessages } from "next-intl/server";
 import { JsonLd } from "@/components/seo/json-ld";
 import { routing } from "@/i18n/routing";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import type { Metadata, Viewport } from "next";
+import { NextIntlClientProvider } from "next-intl";
+import { getMessages } from "next-intl/server";
+import { Cairo, Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
+import { notFound } from "next/navigation";
+import "../globals.css";
 
 const spaceGrotesk = Space_Grotesk({
 	variable: "--font-display",
@@ -108,6 +108,9 @@ export async function generateMetadata({
 		robots: {
 			index: true,
 			follow: true,
+		},
+		verification: {
+			google: "6nGaWhd88Bk7ZqdAmHPlZvi7KfkgzaJ3YpAOzVwe6-A",
 		},
 		category: "technology",
 	};
