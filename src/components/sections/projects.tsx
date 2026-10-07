@@ -2,10 +2,10 @@
 
 import { ArrowRight, ArrowUpRight, Clock, Lock, X } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { SectionHead } from "@/components/ui/section-head";
+import { Link } from "@/i18n/navigation";
 
 interface TopologyNode {
 	label: string;
@@ -230,6 +230,7 @@ interface SelectedImageModal {
 
 export function Projects() {
 	const t = useTranslations("Projects");
+	const tCommon = useTranslations("Common");
 
 	const filterTabs = useMemo(
 		() => [
@@ -572,6 +573,17 @@ export function Projects() {
 							</article>
 						);
 					})}
+				</div>
+
+				{/* Full Systems Architecture Directory Link */}
+				<div className="mt-12 sm:mt-16 text-center flex flex-col sm:flex-row items-center justify-center gap-4">
+					<Link
+						href="/projects"
+						className="mono text-[0.82rem] sm:text-[0.88rem] px-5 py-2.5 inline-flex items-center gap-2 rounded-full border border-line bg-surface hover:bg-surface-hover hover:border-accent text-ink transition-colors shadow-xs"
+					>
+						<span>{tCommon("viewAllSystems")}</span>
+						<ArrowRight className="size-3.5 rtl:rotate-180 text-accent-ink" />
+					</Link>
 				</div>
 			</div>
 

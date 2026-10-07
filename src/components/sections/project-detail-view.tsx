@@ -22,11 +22,11 @@ import {
 	Zap,
 } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useState } from "react";
 import { Footer } from "@/components/sections/footer";
 import type { ProjectDetail } from "@/data/projects-data";
+import { Link } from "@/i18n/navigation";
 
 interface ProjectDetailViewProps {
 	project: ProjectDetail;
@@ -699,8 +699,7 @@ export function ProjectDetailView({
 						<div className={stackGridClass}>
 							{project.stack.map((group, gIdx) => {
 								// When 5 items in a 3-col grid, expand the 5th item across 2 columns to fill row 2 (1+2=3)
-								const isFifthInFive =
-									project.stack.length === 5 && gIdx === 4;
+								const isFifthInFive = project.stack.length === 5 && gIdx === 4;
 
 								return (
 									<div

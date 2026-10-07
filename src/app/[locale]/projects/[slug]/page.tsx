@@ -48,6 +48,10 @@ export async function generateMetadata({
 		description,
 		alternates: {
 			canonical: `https://taha-hamdy.vercel.app/${locale}/projects/${project.slug}`,
+			languages: {
+				en: `https://taha-hamdy.vercel.app/en/projects/${project.slug}`,
+				"x-default": `https://taha-hamdy.vercel.app/en/projects/${project.slug}`,
+			},
 		},
 		openGraph: {
 			title,

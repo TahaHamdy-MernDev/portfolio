@@ -3,6 +3,7 @@
 import { ArrowRight, ArrowUpRight, Menu, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useRef, useState } from "react";
+import { Link } from "@/i18n/navigation";
 
 const SECTION_IDS = ["work", "skills", "process", "about", "contact"];
 
@@ -146,7 +147,7 @@ export function Header() {
 		<header className="sticky top-0 z-50 bg-paper/95 backdrop-blur-xl border-b border-line transition-colors duration-200">
 			<nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between py-3.5 sm:py-4">
 				{/* Brand Logo */}
-				<a
+				<Link
 					href="/"
 					onClick={() => setIsMobileMenuOpen(false)}
 					className="brand flex items-center gap-2.5 font-sans font-bold text-[0.92rem] sm:text-[0.95rem] text-ink no-underline tracking-tight group"
@@ -157,7 +158,7 @@ export function Header() {
 					<span className="mono hidden sm:inline-block text-[0.7rem] text-muted-2 font-normal">
 						{tCommon("brandSubtitle")}
 					</span>
-				</a>
+				</Link>
 
 				{/* Desktop Navigation with Smooth Sliding Pill */}
 				<div className="hidden md:flex items-center gap-4">

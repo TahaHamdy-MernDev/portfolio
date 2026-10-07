@@ -6,9 +6,9 @@ export function JsonLd() {
 				"@type": "Person",
 				"@id": "https://taha-hamdy.vercel.app/#person",
 				name: "Taha Hamdy",
-				url: "https://taha-hamdy.vercel.app",
+				url: "https://taha-hamdy.vercel.app/en",
 				image: "https://taha-hamdy.vercel.app/avatar.jpg",
-				jobTitle: "Full-Stack Developer ",
+				jobTitle: "Full-Stack Developer",
 				description:
 					"Full-Stack Developer with 3+ years delivering high-throughput SaaS platforms, e-commerce infrastructure, and enterprise business workflows with Next.js, NestJS, and PostgreSQL.",
 				email: "mailto:tahahamdy.dev@gmail.com",
@@ -38,12 +38,24 @@ export function JsonLd() {
 				],
 			},
 			{
-				"@type": "ProfilePage",
-				"@id": "https://taha-hamdy.vercel.app/#webpage",
-				url: "https://taha-hamdy.vercel.app",
-				name: "Taha Hamdy — Full-Stack Developer ",
+				"@type": "WebSite",
+				"@id": "https://taha-hamdy.vercel.app/#website",
+				url: "https://taha-hamdy.vercel.app/en",
+				name: "Taha Hamdy — Full-Stack Developer",
 				description:
-					"Portfolio and case studies of Taha Hamdy, Full-Stack Developer .",
+					"Portfolio and case studies of Taha Hamdy, Full-Stack Developer & Systems Architect.",
+				inLanguage: "en-US",
+				publisher: {
+					"@id": "https://taha-hamdy.vercel.app/#person",
+				},
+			},
+			{
+				"@type": "ProfilePage",
+				"@id": "https://taha-hamdy.vercel.app/en#profilepage",
+				url: "https://taha-hamdy.vercel.app/en",
+				name: "Taha Hamdy — Full-Stack Developer",
+				description:
+					"Portfolio and case studies of Taha Hamdy, Full-Stack Developer.",
 				inLanguage: "en-US",
 				mainEntity: {
 					"@id": "https://taha-hamdy.vercel.app/#person",

@@ -15,11 +15,11 @@ import {
 	X,
 } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { useMemo, useState } from "react";
 import { Footer } from "@/components/sections/footer";
 import { ALL_PROJECTS } from "@/data/projects-data";
+import { Link } from "@/i18n/navigation";
 
 const POPULAR_STACK_FILTERS = [
 	"NestJS",

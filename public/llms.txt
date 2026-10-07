@@ -7,7 +7,7 @@
 Taha Hamdy is a full-stack engineer and systems architect based in Alexandria, Egypt. He specializes in TypeScript, Next.js, React, Node.js, NestJS, PostgreSQL, Redis, and distributed backend architectures.
 
 - [Home Page](https://taha-hamdy.vercel.app/en): Interactive portfolio showcasing engineering projects, technical telemetry, architecture topologies, and system capabilities.
-- [Arabic Edition](https://taha-hamdy.vercel.app/ar): Complete localized portfolio with bidirectional RTL layout and native typography.
+- [Systems Directory](https://taha-hamdy.vercel.app/en/projects): Comprehensive architecture catalog of production platforms, distributed systems, and SaaS platforms.
 
 ## Featured Projects & Case Studies
 
